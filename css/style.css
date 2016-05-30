@@ -1,0 +1,19 @@
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-size: 1.3rem;
+}
+
+.container {
+  width: 40rem;
+}
+
+input {
+  display: block;
+}
+
+.hidden {
+  display: none;
+}
