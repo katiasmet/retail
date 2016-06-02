@@ -9,6 +9,7 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "array.from": "^1.0.1",
     "babel-core": "^6.7.7",
     "babel-eslint": "^6.0.4",
     "babel-loader": "^6.2.4",
@@ -36,5 +37,6 @@
     "sass-loader": "^3.2.0",
     "style-loader": "^0.13.1",
     "webpack": "^1.13.0"
+
   }
 }

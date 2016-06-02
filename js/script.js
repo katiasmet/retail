@@ -44,7 +44,7 @@
 /* 0 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("__webpack_require__(1);\nmodule.exports = __webpack_require__(237);\n\n\n/*****************\n ** WEBPACK FOOTER\n ** multi main\n ** module id = 0\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///multi_main?");
+	eval("__webpack_require__(1);\nmodule.exports = __webpack_require__(238);\n\n\n/*****************\n ** WEBPACK FOOTER\n ** multi main\n ** module id = 0\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///multi_main?");
 
 /***/ },
 /* 1 */
@@ -1052,7 +1052,7 @@
 /* 168 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(162);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouter = __webpack_require__(169);\n\nvar _history = __webpack_require__(230);\n\nvar _pages = __webpack_require__(234);\n\nvar _globals = __webpack_require__(236);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = function () {\n  return _react2.default.createElement(\n    _reactRouter.Router,\n    { history: (0, _reactRouter.useRouterHistory)(_history.createHistory)({ basename: _globals.basename }) },\n    _react2.default.createElement(_reactRouter.Route, { path: '/', component: _pages.App })\n  );\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/routers/index.js\n ** module id = 168\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/routers/index.js?");
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(162);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _reactRouter = __webpack_require__(169);\n\nvar _history = __webpack_require__(230);\n\nvar _pages = __webpack_require__(234);\n\nvar _globals = __webpack_require__(237);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.default = function () {\n  return _react2.default.createElement(\n    _reactRouter.Router,\n    { history: (0, _reactRouter.useRouterHistory)(_history.createHistory)({ basename: _globals.basename }) },\n    _react2.default.createElement(\n      _reactRouter.Route,\n      { path: '/', component: _pages.App },\n      _react2.default.createElement(_reactRouter.IndexRedirect, { to: 'home' }),\n      _react2.default.createElement(_reactRouter.Route, { path: 'home', component: _pages.Home }),\n      _react2.default.createElement(_reactRouter.Route, { path: 'social', component: _pages.Social })\n    )\n  );\n};\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/routers/index.js\n ** module id = 168\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/routers/index.js?");
 
 /***/ },
 /* 169 */
@@ -1448,25 +1448,115 @@
 /* 234 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.App = undefined;\n\nvar _App2 = __webpack_require__(235);\n\nvar _App3 = _interopRequireDefault(_App2);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.App = _App3.default;\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/pages/index.js\n ** module id = 234\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/pages/index.js?");
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.Home = exports.App = undefined;\n\nvar _App2 = __webpack_require__(235);\n\nvar _App3 = _interopRequireDefault(_App2);\n\nvar _Home2 = __webpack_require__(236);\n\nvar _Home3 = _interopRequireDefault(_Home2);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.App = _App3.default;\nexports.Home = _Home3.default;\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/pages/index.js\n ** module id = 234\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/pages/index.js?");
 
 /***/ },
 /* 235 */
 /***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(162);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar App = function App(_ref) {\n  var children = _ref.children;\n\n  return _react2.default.createElement(\n    'section',\n    { className: 'container' },\n    _react2.default.createElement(\n      'header',\n      null,\n      _react2.default.createElement(\n        'h1',\n        null,\n        'Offline.'\n      )\n    ),\n    _react2.default.createElement(\n      'main',\n      null,\n      children\n    )\n  );\n};\n\nApp.propTypes = {\n  children: _react.PropTypes.node // of element\n};\n\nexports.default = App;\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/pages/App.jsx\n ** module id = 235\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/pages/App.jsx?");
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(162);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar App = function App(_ref) {\n  var children = _ref.children;\n\n\n  return _react2.default.createElement(\n    'div',\n    { className: 'container' },\n    _react2.default.createElement(\n      'main',\n      null,\n      children\n    )\n  );\n};\n\nApp.propTypes = {\n  children: _react.PropTypes.node\n};\n\nexports.default = App;\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/pages/App.jsx\n ** module id = 235\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/pages/App.jsx?");
 
 /***/ },
 /* 236 */
-/***/ function(module, exports) {
+/***/ function(module, exports, __webpack_require__) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar basename = exports.basename = function () {\n  return window.app.basename;\n}();\n\nvar clientId = exports.clientId = 'retail-web';\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/globals/index.js\n ** module id = 236\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/globals/index.js?");
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _createClass = function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if (\"value\" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; }();\n\nvar _react = __webpack_require__(162);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _components = __webpack_require__(240);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nfunction _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError(\"Cannot call a class as a function\"); } }\n\nfunction _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError(\"this hasn't been initialised - super() hasn't been called\"); } return call && (typeof call === \"object\" || typeof call === \"function\") ? call : self; }\n\nfunction _inherits(subClass, superClass) { if (typeof superClass !== \"function\" && superClass !== null) { throw new TypeError(\"Super expression must either be null or a function, not \" + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }\n\nvar Home = function (_Component) {\n  _inherits(Home, _Component);\n\n  function Home(props, context) {\n    _classCallCheck(this, Home);\n\n    return _possibleConstructorReturn(this, Object.getPrototypeOf(Home).call(this, props, context));\n  }\n\n  _createClass(Home, [{\n    key: 'componentDidMount',\n    value: function componentDidMount() {\n      //this.getTweets();\n    }\n  }, {\n    key: 'getTweets',\n    value: function getTweets() {\n      var _this2 = this;\n\n      selectByTag('howest', 3).then(function (tweets) {\n        return _this2.setState({ tweets: tweets['statuses'] });\n      });\n    }\n  }, {\n    key: 'render',\n    value: function render() {\n\n      return _react2.default.createElement(\n        'section',\n        { className: 'window' },\n        _react2.default.createElement('section', { className: 'left_screen' }),\n        _react2.default.createElement('section', { className: 'right_screen' })\n      );\n    }\n  }]);\n\n  return Home;\n}(_react.Component);\n\nexports.default = Home;\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/pages/Home.jsx\n ** module id = 236\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/pages/Home.jsx?");
 
 /***/ },
 /* 237 */
 /***/ function(module, exports) {
 
-	eval("// removed by extract-text-webpack-plugin\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_scss/style.scss\n ** module id = 237\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_scss/style.scss?");
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar basename = exports.basename = function () {\n  return window.app.basename;\n}();\n\nvar clientId = exports.clientId = 'retail-web';\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/globals/index.js\n ** module id = 237\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/globals/index.js?");
+
+/***/ },
+/* 238 */
+/***/ function(module, exports) {
+
+	eval("// removed by extract-text-webpack-plugin\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_scss/style.scss\n ** module id = 238\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_scss/style.scss?");
+
+/***/ },
+/* 239 */,
+/* 240 */
+/***/ function(module, exports, __webpack_require__) {
+
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nexports.Tweet = exports.Tweets = undefined;\n\nvar _Tweets2 = __webpack_require__(241);\n\nvar _Tweets3 = _interopRequireDefault(_Tweets2);\n\nvar _Tweet2 = __webpack_require__(307);\n\nvar _Tweet3 = _interopRequireDefault(_Tweet2);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nexports.Tweets = _Tweets3.default;\nexports.Tweet = _Tweet3.default;\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/components/index.js\n ** module id = 240\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/components/index.js?");
+
+/***/ },
+/* 241 */
+/***/ function(module, exports, __webpack_require__) {
+
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(162);\n\nvar _react2 = _interopRequireDefault(_react);\n\nvar _ = __webpack_require__(240);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Tweets = function Tweets(_ref) {\n  var tweets = _ref.tweets;\n\n\n  console.log(tweets);\n\n  return _react2.default.createElement(\n    'section',\n    { className: 'tweets' },\n    _react2.default.createElement(\n      'p',\n      null,\n      'Howest TwitterFeed'\n    ),\n    _react2.default.createElement(\n      'ul',\n      null,\n      tweets.map(function (tweet) {\n        return _react2.default.createElement(_.Tweet, { key: tweet.id, image: tweet.user.profile_image_url, name: tweet.user.name, screenname: tweet.user.screen_name, text: tweet.text });\n      })\n    )\n  );\n};\n\nexports.default = Tweets;\n\n/*\n\n{\n  tweets.map((tweet, i) => (\n    <Tweet key={i} {...tweet}/>\n  ))\n}\n\n*/\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/components/Tweets.jsx\n ** module id = 241\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/components/Tweets.jsx?");
+
+/***/ },
+/* 242 */,
+/* 243 */,
+/* 244 */,
+/* 245 */,
+/* 246 */,
+/* 247 */,
+/* 248 */,
+/* 249 */,
+/* 250 */,
+/* 251 */,
+/* 252 */,
+/* 253 */,
+/* 254 */,
+/* 255 */,
+/* 256 */,
+/* 257 */,
+/* 258 */,
+/* 259 */,
+/* 260 */,
+/* 261 */,
+/* 262 */,
+/* 263 */,
+/* 264 */,
+/* 265 */,
+/* 266 */,
+/* 267 */,
+/* 268 */,
+/* 269 */,
+/* 270 */,
+/* 271 */,
+/* 272 */,
+/* 273 */,
+/* 274 */,
+/* 275 */,
+/* 276 */,
+/* 277 */,
+/* 278 */,
+/* 279 */,
+/* 280 */,
+/* 281 */,
+/* 282 */,
+/* 283 */,
+/* 284 */,
+/* 285 */,
+/* 286 */,
+/* 287 */,
+/* 288 */,
+/* 289 */,
+/* 290 */,
+/* 291 */,
+/* 292 */,
+/* 293 */,
+/* 294 */,
+/* 295 */,
+/* 296 */,
+/* 297 */,
+/* 298 */,
+/* 299 */,
+/* 300 */,
+/* 301 */,
+/* 302 */,
+/* 303 */,
+/* 304 */,
+/* 305 */,
+/* 306 */,
+/* 307 */
+/***/ function(module, exports, __webpack_require__) {
+
+	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\n\nvar _react = __webpack_require__(162);\n\nvar _react2 = _interopRequireDefault(_react);\n\nfunction _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }\n\nvar Tweet = function Tweet(_ref) {\n  var id = _ref.id;\n  var text = _ref.text;\n  var image = _ref.image;\n  var name = _ref.name;\n  var screenname = _ref.screenname;\n\n\n  return _react2.default.createElement(\n    'li',\n    null,\n    _react2.default.createElement(\n      'figure',\n      { className: 'profile_pic' },\n      _react2.default.createElement('img', { src: image, alt: name })\n    ),\n    _react2.default.createElement(\n      'span',\n      { className: 'tweet_info' },\n      _react2.default.createElement(\n        'span',\n        { className: 'user' },\n        _react2.default.createElement(\n          'span',\n          { className: 'user_name' },\n          name\n        ),\n        _react2.default.createElement(\n          'span',\n          { className: 'user_handler' },\n          '@',\n          screenname\n        )\n      ),\n      _react2.default.createElement('br', null),\n      _react2.default.createElement(\n        'span',\n        { className: 'tweet' },\n        text\n      )\n    )\n  );\n};\n\nexports.default = Tweet;\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/components/Tweet.jsx\n ** module id = 307\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/components/Tweet.jsx?");
 
 /***/ }
 /******/ ]);

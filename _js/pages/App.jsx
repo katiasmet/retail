@@ -1,20 +1,19 @@
 import React, {PropTypes} from 'react';
 
 const App = ({children}) => {
+
   return (
-    <section className='container'>
-      <header>
-        <h1>Offline.</h1>
-      </header>
+    <div className='container'>
       <main>
         {children}
       </main>
-    </section>
+    </div>
   );
+
 };
 
 App.propTypes = {
-  children: PropTypes.node // of element
+  children: PropTypes.node
 };
 
 export default App;
