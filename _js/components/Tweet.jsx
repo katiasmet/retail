@@ -25,4 +25,13 @@ const Tweet = ({id, text, image, name, screenname}) =>  {
 
 };
 
+Tweet.propTypes = {
+  id: PropTypes.number,
+  text: PropTypes.string,
+  image: PropTypes.string,
+  name: PropTypes.string,
+  screenname: PropTypes.string
+
+};
+
 export default Tweet;

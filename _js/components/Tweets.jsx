@@ -25,14 +25,9 @@ const Tweets = ({tweets}) =>  {
 
 };
 
+
+Tweets.propTypes = {
+  tweets: PropTypes.array
+};
+
 export default Tweets;
-
-/*
-
-{
-  tweets.map((tweet, i) => (
-    <Tweet key={i} {...tweet}/>
-  ))
-}
-
-*/
