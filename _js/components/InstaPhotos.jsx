@@ -16,7 +16,7 @@ class InstaPhotos extends Component {
 
         {
           photos.map((photo, i) => {
-            return <InstaPhoto key={i} id={i} image={photo.img} caption={photo.caption} ref={`instaPhoto${i}`} clickHandler={clickHandler} />;
+            return <InstaPhoto key={i} image={photo.img} caption={photo.caption} ref={`instaPhoto${i}`} clickHandler={clickHandler} />;
           })
         }
 

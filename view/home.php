@@ -12,8 +12,6 @@
   <div class="react-app">
 
   </div>
-
-
   <script>
   window.app = window.app || {};
   window.app.basename = '<?php echo $basePath;?>';

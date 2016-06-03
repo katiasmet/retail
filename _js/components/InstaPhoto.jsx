@@ -9,7 +9,7 @@ class InstaPhoto extends Component {
   }
 
   render() {
-    let {id, image, caption, clickHandler} = this.props;
+    let {image, caption, clickHandler} = this.props;
 
     return (
 

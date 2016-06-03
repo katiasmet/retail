@@ -9,7 +9,7 @@ export default () => (
 
   <Router history={useRouterHistory(createHistory)({basename})}>
 
-    <Route path='/' component={App}>
+    <Route path='/' component={App} >
       <IndexRedirect to='home' />
       <Route path='home' component={Home} />
       <Route path='madebyme' component={MadeByMe} />

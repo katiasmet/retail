@@ -1,0 +1,4 @@
+@keyframes motionPath {
+  from { transform: rotate(0deg) translateX(15rem) rotate(0deg); }
+  to   { transform: rotate(360deg) translateX(15rem) rotate(-360deg); }
+}

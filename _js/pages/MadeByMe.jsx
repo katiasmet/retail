@@ -64,7 +64,7 @@ class MadeByMe extends Component {
     for (let ref in this.refs.instaPhoto.refs) {
       let photo = this.refs.instaPhoto.refs[ref].refs.figure;
 
-      if(photo != this.active) { //alle elementen waar niet op geklikt is, zweven verder.
+      if(photo !== this.active) { //alle elementen waar niet op geklikt is, zweven verder.
         let size = photo.getBoundingClientRect().width / photo.offsetWidth ;
         let rndPos = this.rndPos(photo);
 
