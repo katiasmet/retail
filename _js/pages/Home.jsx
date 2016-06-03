@@ -1,7 +1,4 @@
-import React, {PropTypes, Component} from 'react';
-
-import {selectByTag} from '../api/instagram_photos';
-import {InstaPhotos} from '../components/';
+import React, {Component} from 'react';
 
 class Home extends Component {
 
@@ -9,95 +6,31 @@ class Home extends Component {
 
     super(props, context);
 
-    this.state = {
-      photos: []
-    };
 
-    this.instaPhotoClickHandler = ::this.instaPhotoClickHandler;
 
   }
 
   componentDidMount() {
-    this.getInstaPhotos();
-  }
-
-  getInstaPhotos() {
-
-    selectByTag()
-      .then(photos => this.setState({photos: photos}))
-      .then(() => this.initInstaPhotos());
 
   }
 
-  initInstaPhotos() {
-
-    let $insta_photos = document.querySelectorAll('.insta_photo');
-
-    //Random XY pos for photos
-    //Random Size
-    $insta_photos.forEach(photo => {
-
-      let rndSize = Math.random() + 0.2;
-      photo.style.transform = `scale(${rndSize}, ${rndSize})`;
-
-      let rndPos = this.rndPos(photo);
-      photo.style.transform = `translate(${rndPos[0]}px, ${rndPos[1]}px) scale(${rndSize}, ${rndSize})`;
-
-      this.floatInstaPhotos();
-    });
-
-  }
-
-  rndPos(el) {
-    let screen_width = (0.375 * window.innerWidth) - el.getBoundingClientRect().width;
-
-    let rndX = Math.floor(Math.random() * screen_width);
-    let rndY = Math.floor(Math.random() * (window.innerHeight - el.getBoundingClientRect().height));
-
-    return [rndX, rndY];
-  }
-
-  floatInstaPhotos() {
-    let $insta_photos = document.querySelectorAll('.insta_photo');
-
-    $insta_photos.forEach(photo => {
-      let size = photo.getBoundingClientRect().width / photo.offsetWidth ;
-      let rndPos = this.rndPos(photo);
-
-      photo.style.transition = 'transform 10s linear';
-      photo.style.transform = `translate(${rndPos[0]}px, ${rndPos[1]}px) scale(${size}, ${size})`;
-
-    });
-
-
-    setTimeout(
-      () => { this.floatInstaPhotos();},
-       10050);
-  }
-
-  instaPhotoClickHandler(e) {
-
-    console.log('instafamous');
-
-  }
+  
 
   render() {
 
-    let {photos} = this.state;
-
     return (
-      <section className='window'>
-          <section className='left_screen'>
 
-            <InstaPhotos photos={photos} />
+      <section className='home'>
 
-          </section>
+      <svg x='0px' y='0px' width='195.5px' height='200px' viewBox='0 0 195.5 200'>
 
-          <section className='right_screen'>
+        <path id='shape' className='morphing_nav_item'
+          d='M109.2,199.8c18.7-2.1,79.3-36,85.7-92C201.2,51.7,160.5,0,105.4,0S3.6,43.3,0.2,86.5S34.6,204.8,109.2,199.8z'>
+        </path>
+      </svg>
 
-
-          </section>
       </section>
+
     );
 
   }

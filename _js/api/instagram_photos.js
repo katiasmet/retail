@@ -1,7 +1,7 @@
 import fetch from 'isomorphic-fetch';
 import {checkStatus} from '../util';
 
-let base = '/api/instagram_photos';
+//let base = '/api/instagram_photos';
 
 export const selectByTag = () => {
 

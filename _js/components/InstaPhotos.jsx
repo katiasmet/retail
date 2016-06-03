@@ -1,25 +1,33 @@
-import React, {PropTypes} from 'react';
+import React, {PropTypes, Component} from 'react';
 
 import {InstaPhoto} from './';
 
-const InstaPhotos = ({photos}) =>  {
+class InstaPhotos extends Component {
 
-  return (
-    <section className='insta_photos'>
+  constructor(props, context){
+    super(props, context);
+  }
 
-      {
-        photos.map((photo, i) => {
-          return <InstaPhoto key={i} image={photo.img} caption={photo.caption} />;
-        })
-      }
+  render() {
+    let {photos, clickHandler} = this.props;
 
-    </section>
-  );
+    return (
+      <section className='insta_photos' >
 
-};
+        {
+          photos.map((photo, i) => {
+            return <InstaPhoto key={i} id={i} image={photo.img} caption={photo.caption} ref={`instaPhoto${i}`} clickHandler={clickHandler} />;
+          })
+        }
+
+      </section>
+    );
+  }
+}
 
 InstaPhotos.propTypes = {
-  photos: PropTypes.array
+  photos: PropTypes.array,
+  clickHandler: PropTypes.func
 };
 
 export default InstaPhotos;

@@ -105,14 +105,39 @@ main {
 /* ----------------------------------
   INSTAGRAM PHOTOS
 ---------------------------------- */
+.insta_photos {
+  width: 100%;
+  height: 100%;
+}
+
 .insta_photo {
   width: 20rem;
   position: absolute;
   top: 0;
   left: 0;
   transform-origin: 0 0;
+  display: block;
 }
 
 .insta_photo img {
   border: 0.5rem solid white;
 }
+
+/* ----------------------------------
+  MORPHING NAVIGATION
+---------------------------------- */
+.morphing_nav_item {
+  fill: #FCCD02;
+}
+
+/*@keyframes morph {
+    0% {
+      motion-path: path('M109.2,199.8c18.7-2.1,79.3-36,85.7-92C201.2,51.7,160.5,0,105.4,0S3.6,43.3,0.2,86.5S34.6,204.8,109.2,199.8z');
+    }
+    50% {
+      motion-path: path('M93.9,0.3C59.5,5.2,8,35.6,0.5,98.4S65.1,200.3,105,195.9c25.4-2.8,88.7-34,95-97.7S146.3-4,93.9,0.3z');
+    }
+    100% {
+      motion-path: path('M109.2,199.8c18.7-2.1,79.3-36,85.7-92C201.2,51.7,160.5,0,105.4,0S3.6,43.3,0.2,86.5S34.6,204.8,109.2,199.8z');
+    }
+}*/

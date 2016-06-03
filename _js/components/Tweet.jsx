@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-const Tweet = ({id, text, image, name, screenname}) =>  {
+const Tweet = ({text, image, name, screenname}) =>  {
 
   return (
     <li>
@@ -26,7 +26,6 @@ const Tweet = ({id, text, image, name, screenname}) =>  {
 };
 
 Tweet.propTypes = {
-  id: PropTypes.number,
   text: PropTypes.string,
   image: PropTypes.string,
   name: PropTypes.string,
