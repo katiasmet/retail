@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 
 import {InstaPhoto} from './';
 
-class InstaPhotos extends Component {
+class InstaPhotos extends Component { //statecomponent om ref te kunnen leggen voor virtual dom manipulation
 
   constructor(props, context){
     super(props, context);
@@ -12,7 +12,7 @@ class InstaPhotos extends Component {
     let {photos, clickHandler} = this.props;
 
     return (
-      <section className='insta_photos' >
+      <section className='insta-photos' >
 
         {
           photos.map((photo, i) => {

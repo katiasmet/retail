@@ -1,3 +1,8 @@
 export App from './App';
-export Home from './Home';
-export MadeByMe from './MadeByMe';
+export LeftScreen from './LeftScreen';
+export RightScreen from './RightScreen';
+
+//Subpages
+export AboutMe from './subpages/AboutMe';
+export MadeForMe from './subpages/MadeForMe';
+export MadeByMe from './subpages/MadeByMe';

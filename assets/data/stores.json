@@ -1,0 +1,53 @@
+[
+  {
+    "name": "Babita Versluis",
+    "store_name": "Nugi",
+    "craft": "Parfumerie",
+    "icon": "perfume.svg",
+    "tags": ["luxe", "parfum", "verzorging"],
+    "location": {
+      "address": "Hoogstraat 1, 3111 HD Schiedam",
+      "coordinates": {
+        "latitude": 51.916523,
+  			"longitude": 4.3951067
+      }
+    },
+    "opening_hours": {
+      "ma-vrij": "10 tot 18u"
+    }
+  },
+  {
+    "name": "Michael Boekholt",
+    "store_name": "Schiedams gebrand",
+    "craft": "Koffie branderij",
+    "icon": "coffee.svg",
+    "tags": ["gezelligheid", "koffie", "warmte"],
+    "location": {
+      "address": "Hoogstraat 150, 3111 HD Schiedam",
+      "coordinates": {
+        "latitude": 51.9167852,
+  			"longitude": 4.3951639
+      }
+    },
+    "opening_hours": {
+      "ma-vrij": "10 tot 18u"
+    }
+  },
+  {
+    "name": "Herman Jansen",
+    "store_name": "Herman Jansen",
+    "craft": "Distellerie",
+    "icon": "distillery.svg",
+    "tags": ["luxe", "Distellerie", "dranken"],
+    "location": {
+      "address": "Hoogstraat 80, 3111 HD Schiedam",
+      "coordinates": {
+        "latitude": 51.9152698,
+  			"longitude": 4.3963989
+      }
+    },
+    "opening_hours": {
+      "ma-vrij": "10 tot 18u"
+    }
+  }
+]

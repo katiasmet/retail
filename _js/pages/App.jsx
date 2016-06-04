@@ -1,13 +1,13 @@
 import React, {PropTypes} from 'react';
 
+//import {LeftScreen, RightScreen} from './';
+
 const App = ({children}) => {
 
   return (
-    <div className='container'>
-      <main>
-        {children}
-      </main>
-    </div>
+    <main className='window'>
+      {children}
+    </main>
   );
 
 };

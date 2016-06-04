@@ -27,7 +27,6 @@ $data = $instagram->getOAuthToken($code);
 echo 'Your username is: ' . $data->user->username;*/
 
 require_once 'routes/tweets.php';
-//require_once 'routes/instagram_photos.php';
 
 $app->get('/{anything:.*}', function ($request, $response, $args) {
   $view = new \Slim\Views\PhpRenderer('view/');

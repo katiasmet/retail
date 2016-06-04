@@ -1,8 +1,8 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 
-import {selectByTag} from '../api/instagram_photos';
-import {InstaPhotos} from '../components/';
+import {selectByTag} from '../../api/instagram_photos';
+import {InstaPhotos} from '../../components/';
 
 class MadeByMe extends Component {
 
@@ -115,15 +115,7 @@ class MadeByMe extends Component {
     let {photos} = this.state;
 
     return (
-      <section className='window'>
-          <section className='left_screen'>
-            <InstaPhotos photos={photos} closeHandler={this.closeHandler} clickHandler={this.clickHandler} ref='instaPhoto'/>
-          </section>
-
-          <section className='right_screen'>
-
-          </section>
-      </section>
+      <InstaPhotos photos={photos} closeHandler={this.closeHandler} clickHandler={this.clickHandler} ref='instaPhoto'/>
     );
 
   }

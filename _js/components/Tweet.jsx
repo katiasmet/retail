@@ -5,14 +5,14 @@ const Tweet = ({text, image, name, screenname}) =>  {
   return (
     <li>
 
-      <figure className='profile_pic'>
+      <figure className='profile-pic'>
           <img src={image} alt={name}/>
       </figure>
 
-      <span className='tweet_info'>
+      <span className='tweet-info'>
         <span className='user'>
-          <span className='user_name'>{name}</span>
-          <span className='user_handler'>@{screenname}</span>
+          <span className='user-name'>{name}</span>
+          <span className='user-handler'>@{screenname}</span>
         </span><br/>
 
         <span className='tweet'>

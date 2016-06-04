@@ -1,11 +1,9 @@
 import React, {PropTypes, Component} from 'react';
 
-class InstaPhoto extends Component {
+class InstaPhoto extends Component { //statecomponent om ref te kunnen leggen voor virtual dom manipulation
 
   constructor(props, context){
-
     super(props, context);
-
   }
 
   render() {
@@ -13,7 +11,7 @@ class InstaPhoto extends Component {
 
     return (
 
-      <figure className='insta_photo' onClick={clickHandler} ref={'figure'} >
+      <figure className='insta-photo' onClick={clickHandler} ref={'figure'} >
           <img src={`/assets/img/${image}`} alt={caption}/>
       </figure>
 

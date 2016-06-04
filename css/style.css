@@ -111,7 +111,7 @@ main {
       justify-content: space-between;
 }
 
-.left_screen, .right_screen {
+.left-screen, .right-screen {
   background: #FFF3E0;
   width: 37.5%;
   height: 100%;
@@ -120,12 +120,12 @@ main {
 /* ----------------------------------
   INSTAGRAM PHOTOS
 ---------------------------------- */
-.insta_photos {
+.insta-photos {
   width: 100%;
   height: 100%;
 }
 
-.insta_photo {
+.insta-photo {
   width: 20rem;
   position: absolute;
   top: 0;
@@ -134,20 +134,20 @@ main {
   display: block;
 }
 
-.insta_photo img {
+.insta-photo img {
   border: 0.5rem solid white;
 }
 
 /* ----------------------------------
   MORPHING NAVIGATION
 ---------------------------------- */
-.morph_btns {
+.morph-btns {
   position: relative;
   margin-top: 20rem;
   margin-left: 20rem;
 }
 
-.morph_btn {
+.morph-btn {
   width: 7vh;
   height: 7vh;
   animation: motionPath 60s linear infinite;
@@ -165,14 +165,14 @@ canvas {
   z-index: -1;
 }
 
-#morph_btn1 {
+#morph-btn1 {
   animation-delay: -15s;
 }
 
-#morph_btn2 {
+#morph-btn2 {
   animation-delay: -30s;
 }
 
-#morph_btn3 {
+#morph-btn3 {
   animation-delay: -45s;
 }

@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import paper, {Point} from 'paper';
 
-class Home extends Component {
+class MadeForMe extends Component {
 
   constructor(props, context){
     super(props, context);
@@ -84,13 +84,13 @@ class Home extends Component {
 
     return (
 
-      <section className='morph_btns'>
+      <section className='morph-btns'>
 
         {
           menuItems.map((menuItem, i) => {
             return (
-              <button key={i} className='morph_btn' id={`morph_btn${i}`}>
-                <span className='morph_btn_content'>{menuItem}</span>
+              <button key={i} className='morph-btn' id={`morph-btn${i}`}>
+                <span className='morph-btn-content'>{menuItem}</span>
                 <canvas id={`canvas${menuItem}`} className='canvas' data-paper-resize />
               </button>
             );
@@ -105,4 +105,4 @@ class Home extends Component {
 
 }
 
-export default Home;
+export default MadeForMe;

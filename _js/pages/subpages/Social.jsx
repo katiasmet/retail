@@ -1,7 +1,7 @@
 import React, {PropTypes, Component} from 'react';
 
-import {Tweets} from '../components';
-import {selectByTag} from '../api/tweets';
+import {Tweets} from '../../components';
+import {selectByTag} from '../../api/tweets';
 
 class Home extends Component {
 
