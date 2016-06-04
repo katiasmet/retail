@@ -15,7 +15,7 @@ class LeftScreen extends Component  {
       tags: [],
       portrait: '',
       quote: '',
-      creationProces: [],
+      creationSteps: [],
       stores: []
     };
   }
@@ -52,7 +52,7 @@ class LeftScreen extends Component  {
       tags: currentStore.tags,
       portrait: currentStore.portrait,
       quote: currentStore.quote,
-      creationProces: currentStore.creation_proces,
+      creationSteps: currentStore.creation_steps,
       stores: nearbyStores
     });
 
@@ -60,7 +60,7 @@ class LeftScreen extends Component  {
 
   render() {
 
-    let {name, craft, icon, tags, stores, portrait, quote, creationProces} = this.state;
+    let {name, craft, icon, tags, stores, portrait, quote, creationSteps} = this.state;
     let {children} = this.props;
     let {pathname} = this.props.location;
 
@@ -76,7 +76,7 @@ class LeftScreen extends Component  {
         {cloneElement(children, {
           portrait: portrait,
           quote: quote,
-          creationProces: creationProces
+          creationSteps: creationSteps
         })}
 
         <NearbyStores stores={stores} />
@@ -89,7 +89,7 @@ class LeftScreen extends Component  {
 
 LeftScreen.propTypes = {
   children: PropTypes.node,
-  pathname: PropTypes.string
+  location: PropTypes.object
 };
 
 

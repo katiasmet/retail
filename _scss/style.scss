@@ -26,6 +26,12 @@ img {
   width: 100%;
 }
 
+button {
+  background: none;
+  box-shadow: none;
+  border: none;
+}
+
 h1 {
   font-size: 7rem;
   text-transform: uppercase;
@@ -63,9 +69,6 @@ header {
 
 .icon {
   width: 3rem;
-  img {
-    fill: $sub-color;
-  }
 }
 
 .nearby-stores, .nearby-store {
@@ -134,9 +137,7 @@ header {
 ---------------------------------- */
 .morph-btns {
   position: relative;
-
-  margin-top: 20rem;
-  margin-left: 20rem;
+  width:100%;
 }
 
 .morph-btn {

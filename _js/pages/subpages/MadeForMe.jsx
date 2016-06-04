@@ -1,21 +1,19 @@
-import React, {Component} from 'react';
+import React, {PropTypes, Component} from 'react';
 import paper, {Point} from 'paper';
+
+import {CreationStep} from '../../components';
 
 class MadeForMe extends Component {
 
   constructor(props, context){
     super(props, context);
-
-    this.state = {
-      menuItems: [1, 2, 3, 4]
-    };
   }
 
   componentWillMount() {
     paper.install(window);
   }
 
-  componentDidMount() {
+  componentDidUpdate() {
     this.paperTest();
   }
 
@@ -23,21 +21,22 @@ class MadeForMe extends Component {
 
     this.r = (0.034 * window.innerHeight); //responsive size
 
-    let {menuItems} = this.state;
-    let menuItemsPapers = []; //create a paper js scope for every canvas element
+    let {creationSteps} = this.props;
+    let creationStepsPapers = []; //create a paper js scope for every canvas element
     this.circles = [];
 
-    for(let i = 1; i < (menuItems.length + 1); i++) {
-      menuItemsPapers[i] = new paper.PaperScope();
-      menuItemsPapers[i].setup(`canvas${i}`);
+    for(let i = 0; i < creationSteps.length; i++) {
 
-      this.circles[i] = new menuItemsPapers[i].Path.Circle(new Point(this.r, this.r), this.r);
+      creationStepsPapers[i] = new paper.PaperScope();
+      creationStepsPapers[i].setup(`canvas${i}`);
+
+      this.circles[i] = new creationStepsPapers[i].Path.Circle(new Point(this.r, this.r), this.r);
       this.circles[i].fillColor = '#FCCD02';
 
       this.circles[i].rndPos = [];
       this.generateRndPoints(i);
 
-      this.draw(i, menuItemsPapers);
+      this.draw(i, creationStepsPapers);
     }
 
   }
@@ -54,10 +53,10 @@ class MadeForMe extends Component {
     this.circles[i].rndPos[3] = [this.rndPoint((0.4 * diameter), (0.6 * diameter)) , this.rndPoint((0.8 * diameter), (1 * diameter))];
   }
 
-  draw(canvas, menuItemsPapers) {
+  draw(canvas, creationStepsPapers) {
     let speed = 100;
 
-    menuItemsPapers[canvas].view.onFrame = () => {
+    creationStepsPapers[canvas].view.onFrame = () => {
 
       for (let i = 0; i < 4; i++) { //animation every segment / anchorpoint of the circle
 
@@ -74,35 +73,46 @@ class MadeForMe extends Component {
       }
 
     };
-    menuItemsPapers[canvas].view.draw();
+    creationStepsPapers[canvas].view.draw();
   }
 
 
   render() {
 
-    let {menuItems} = this.state;
+    let {creationSteps} = this.props;
 
     return (
+      <section className='made-for-me'>
+        <section className='morph-btns'>
 
-      <section className='morph-btns'>
+          {
+            creationSteps.map((step, i) => {
+              return (
+                <button key={i} className='morph-btn' id={`morph-btn${i}`}>
+                  <span className='morph-btn-content'>{i + 1}</span>
+                  <canvas id={`canvas${i}`} className='canvas' data-paper-resize />
+                </button>
+              );
+            })
+          }
 
-        {
-          menuItems.map((menuItem, i) => {
-            return (
-              <button key={i} className='morph-btn' id={`morph-btn${i}`}>
-                <span className='morph-btn-content'>{menuItem}</span>
-                <canvas id={`canvas${menuItem}`} className='canvas' data-paper-resize />
-              </button>
-            );
-          })
-        }
+        </section>
 
+        <section className='creation-steps'>
+            {
+              creationSteps.map((step, i) => {
+                return <CreationStep key={i} id={i} info={step}/>;
+              })
+            }
+        </section>
       </section>
 
     );
-
   }
-
 }
+
+MadeForMe.propTypes = {
+  creationSteps: PropTypes.array
+};
 
 export default MadeForMe;
