@@ -4,7 +4,7 @@ const StoreHeader = ({name, craft, tags, icon}) =>  {
 
   return (
     <header>
-      <figure>
+      <figure className='icon'>
         <img src={`/assets/svg/${icon}`} alt={craft}/>
       </figure>
       <h2>

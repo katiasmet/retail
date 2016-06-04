@@ -3,51 +3,112 @@
 @import 'mixins';
 @import 'animations';
 
-body {
-  font-size: 1.3rem;
-}
-
-body, html, .react-app, .container {
+body, html, main, .react-app, .window {
   width: 100%;
   height:100%;
 }
 
-button {
-  border: none;
-  background: none;
-  padding: 0;
-}
-
-input {
-  display: block;
+body {
+  font-size: 1.3rem;
+  font-family: 'gotham', sans-serif;
+  font-weight: 300;
 }
 
 .hidden {
   display: none;
 }
 
-main {
+span {
+  display: block;
+}
+
+img {
   width: 100%;
-  height:100%;
+}
+
+h1 {
+  font-size: 7rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .window {
-  background: #e1fcff;
-  width: 100%;
-  height:100%;
-
   display: flex;
   justify-content:space-between;
 }
 
 .left-screen, .right-screen{
-  background: #FFF3E0;
   width: 37.5%;
   height: 100%;
 }
 
 /* ----------------------------------
-  INSTAGRAM PHOTOS
+  LEFTSCREEN GENERAL
+---------------------------------- */
+.left-screen {
+  background: $main-color;
+  color: $sub-color;
+}
+
+header {
+  @include center;
+  flex-direction: column;
+}
+
+.icon {
+  width: 3rem;
+  img {
+    fill: $sub-color;
+  }
+}
+
+.nearby-stores, .nearby-store {
+  @include center;
+}
+
+.nearby-store {
+  justify-content: space-between;
+  width: 50%;
+
+  span, figure {
+    order: 0;
+  }
+}
+
+.nearby-store:last-child {
+  figure {
+    order: -1;
+  }
+  .distance {
+    order: 1;
+  }
+}
+
+
+/* ----------------------------------
+  ABOUT ME
+---------------------------------- */
+.about-me {
+  @include center;
+  flex-direction: column;
+}
+.portrait {
+  width: 30rem;
+  display:block;
+}
+
+/* ----------------------------------
+  MADE FOR ME
+---------------------------------- */
+
+/* ----------------------------------
+  MADE BY ME
 ---------------------------------- */
 .insta-photos {
   width: 100%;

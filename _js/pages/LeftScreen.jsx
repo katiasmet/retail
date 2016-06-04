@@ -1,4 +1,4 @@
-import React, {PropTypes, Component} from 'react';
+import React, {PropTypes, Component, cloneElement} from 'react';
 
 import {selectAll} from '../api/stores';
 import {StoreHeader, Navigation, NearbyStores} from '../components';
@@ -13,6 +13,9 @@ class LeftScreen extends Component  {
       craft: '',
       icon: '',
       tags: [],
+      portrait: '',
+      quote: '',
+      creationProces: [],
       stores: []
     };
   }
@@ -47,6 +50,9 @@ class LeftScreen extends Component  {
       craft: currentStore.craft,
       icon: currentStore.icon,
       tags: currentStore.tags,
+      portrait: currentStore.portrait,
+      quote: currentStore.quote,
+      creationProces: currentStore.creation_proces,
       stores: nearbyStores
     });
 
@@ -54,7 +60,7 @@ class LeftScreen extends Component  {
 
   render() {
 
-    let {name, craft, icon, tags, stores} = this.state;
+    let {name, craft, icon, tags, stores, portrait, quote, creationProces} = this.state;
     let {children} = this.props;
     let {pathname} = this.props.location;
 
@@ -67,7 +73,11 @@ class LeftScreen extends Component  {
 
         </figure>
 
-        {children}
+        {cloneElement(children, {
+          portrait: portrait,
+          quote: quote,
+          creationProces: creationProces
+        })}
 
         <NearbyStores stores={stores} />
 

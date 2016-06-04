@@ -1,19 +1,22 @@
 import React, {PropTypes} from 'react';
 
-const AboutMe = () => {
+const AboutMe = ({portrait, quote}) => {
 
   return (
     <section className='about-me'>
-      <figure className='portrait'>
+      <picture className='portrait'>
+        <img src={`/assets/img/${portrait}`} alt={portrait}/>
+      </picture>
 
-      </figure>
-
-      <p className='quote'>
-        Honderden, misschien wel duizende parfumformulles in mijn hoofd. Graag had ik dit de wereld laten ruiken
-      </p>
+      <p className='quote'>{`"${quote}"`}</p>
     </section>
   );
 
+};
+
+AboutMe.propTypes = {
+  portrait: PropTypes.string,
+  quote: PropTypes.string
 };
 
 export default AboutMe;

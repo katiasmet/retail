@@ -73,38 +73,42 @@ html {
   }
 }
 
-body {
-  font-size: 1.3rem;
-}
-
-body, html, .react-app, .container {
+body, html, main, .react-app, .window {
   width: 100%;
   height: 100%;
 }
 
-button {
-  border: none;
-  background: none;
-  padding: 0;
-}
-
-input {
-  display: block;
+body {
+  font-size: 1.3rem;
+  font-family: 'gotham', sans-serif;
+  font-weight: 300;
 }
 
 .hidden {
   display: none;
 }
 
-main {
+span {
+  display: block;
+}
+
+img {
   width: 100%;
-  height: 100%;
+}
+
+h1 {
+  font-size: 7rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+}
+
+h2 {
+  font-size: 1rem;
+  font-weight: 500;
 }
 
 .window {
-  background: #e1fcff;
-  width: 100%;
-  height: 100%;
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: justify;
@@ -112,13 +116,91 @@ main {
 }
 
 .left-screen, .right-screen {
-  background: #FFF3E0;
   width: 37.5%;
   height: 100%;
 }
 
 /* ----------------------------------
-  INSTAGRAM PHOTOS
+  LEFTSCREEN GENERAL
+---------------------------------- */
+.left-screen {
+  background: #8FBEBE;
+  color: #EEFCEB;
+}
+
+header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
+
+.icon {
+  width: 3rem;
+}
+
+.icon img {
+  fill: #EEFCEB;
+}
+
+.nearby-stores, .nearby-store {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.nearby-store {
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  width: 50%;
+}
+
+.nearby-store span, .nearby-store figure {
+  -ms-flex-order: 0;
+      order: 0;
+}
+
+.nearby-store:last-child figure {
+  -ms-flex-order: -1;
+      order: -1;
+}
+
+.nearby-store:last-child .distance {
+  -ms-flex-order: 1;
+      order: 1;
+}
+
+/* ----------------------------------
+  ABOUT ME
+---------------------------------- */
+.about-me {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+}
+
+.portrait {
+  width: 30rem;
+  display: block;
+}
+
+/* ----------------------------------
+  MADE FOR ME
+---------------------------------- */
+/* ----------------------------------
+  MADE BY ME
 ---------------------------------- */
 .insta-photos {
   width: 100%;

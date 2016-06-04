@@ -14,7 +14,15 @@
     },
     "opening_hours": {
       "ma-vrij": "10 tot 18u"
-    }
+    },
+    "portrait": "babitaversluis.gif",
+    "quote": "Honderden, misschien wel duizenden parfum formules in mijn hoofd. Graag had ik dit de wereld laten ruiken.",
+    "creation_proces": [
+      "Bestelling komt binnen.",
+      "Product wordt samengesteld met natuurlijke producten.",
+      "Ons nieuw product ondergaat een microbiologische test.",
+      "Product wordt gelabeled en bezorgt aan de klant."
+    ]
   },
   {
     "name": "Michael Boekholt",

@@ -31,6 +31,8 @@ Als je git branch doet zou develop op groen moeten staan. Zoniet doe je nog een 
 Alle teksten worden automatisch ingeladen en worden opgeladen in een json-file in de map assets/data/stores.json
 Hierin kunnen tekstuele aanpasssingen worden gedaan.
 
+Gelieve de json te testen en valideren: http://jsonlint.com/
+
 ## 3. Aanpassingen online plaatsen
 Als je de aanpassingen niet online plaatst, staat het enkel op jouw computer.
 
