@@ -36,7 +36,7 @@ class LeftScreen extends Component  {
 
     stores.forEach(store => {
 
-      if(store.location.coordinates.latitude === 51.916523 && store.location.coordinates.longitude ===  4.3951067) {
+      if(store.location.coordinates.latitude === 51.9144769 && store.location.coordinates.longitude ===  4.4014781) {
         //Afhankelijk van de locatie van het bord wordt bepaalde info ingeladen
         currentStore = store;
       } else {
@@ -63,6 +63,8 @@ class LeftScreen extends Component  {
     let {name, craft, icon, tags, portrait, quote, creationSteps, stores} = this.state;
     let {children} = this.props;
     let {pathname} = this.props.location;
+
+    console.log(tags);
 
     return (
       <section className='left-screen'>

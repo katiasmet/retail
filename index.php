@@ -12,8 +12,8 @@ use Slim\App;
 
 $app = new App(['settings' => ['displayErrorDetails' => true]]);
 
-
 require_once 'routes/tweets.php';
+require_once 'routes/locations.php';
 
 $app->get('/{anything:.*}', function ($request, $response, $args) {
   $view = new \Slim\Views\PhpRenderer('view/');
