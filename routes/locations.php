@@ -8,11 +8,11 @@ $app->get($base, function($request, $response, $args){
   $query = $request->getQueryParams();
 
   $data = file_get_contents('https://maps.googleapis.com/maps/api/distancematrix/json?units=metric&origins='
-   . $query['origLat'] . ','
-   . $query['origLong'] .
+   . $query['lat1'] . ','
+   . $query['long1'] .
    '&destinations='
-   . $query['destLat'] . ','
-   . $query['destLong']
+   . $query['lat2'] . ','
+   . $query['long2']
    . '&mode=walking&key='
    . $key);
 

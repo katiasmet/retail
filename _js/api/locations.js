@@ -3,11 +3,11 @@ import {checkStatus} from '../util';
 
 let base = '/api/locations';
 
-export const getDistance = (origLat, origLong, destLat, destLong) => {
+export const getDistance = (lat1, long1, lat2, long2) => {
 
   let method = 'GET';
 
-  return fetch(`${base}?origLat=${origLat}&origLong=${origLong}&destLat=${destLat}&destLong=${destLong}`, {method})
+  return fetch(`${base}?lat1=${lat1}&long1=${long2}&lat2=${lat2}&long2=${long2}`, {method})
     .then(checkStatus);
 
 };
