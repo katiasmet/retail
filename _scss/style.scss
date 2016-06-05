@@ -38,6 +38,7 @@ h1 {
   text-transform: uppercase;
   font-weight: 700;
   text-align: center;
+  color: $accent-color;
 }
 
 h2 {
@@ -59,8 +60,8 @@ h2 {
   LEFTSCREEN GENERAL
 ---------------------------------- */
 .left-screen {
-  background: $main-color;
-  color: $sub-color;
+  background: $background-color;
+  color: $main-color;
 }
 
 header {
@@ -127,7 +128,7 @@ header {
   height: 30rem;
   border-radius: 50%;
 
-  background: $accent-color;
+  background: $background-color;
 }
 
 .morph-btns {
@@ -169,21 +170,35 @@ canvas {
 ---------------------------------- */
 .photos {
   width: 100%;
-  //height: 100%;
+  height: 60vh;
 
+  border: 1px solid red;
   position: relative;
 }
-.photo {
+
+.photo-container {
   width: 20rem;
 
   position: absolute;
   top: 0;
   left: 0;
 
-  transform-origin: 0 0;
+  transform-origin: bottom right;
   display:block;
 
-  img {
-    border: 0.5rem solid white;
-  }
+  background: $broken-white;
+  border: 0.5rem solid $broken-white;
+}
+
+.photo-container .photo-info {
+  display: none;
+}
+
+.photo-container.inactive {
+  filter: blur(0.25rem);
+  opacity: 0.8;
+}
+
+.photo-container.active .photo-info {
+  display: block;
 }

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {selectByTag} from '../../api/instagram_photos';
+import {selectByTag} from '../../api/tweets';
 import {Photo} from '../../components/';
 
 class MadeByMe extends Component {
@@ -13,23 +13,46 @@ class MadeByMe extends Component {
       photos: []
     };
 
-    this.clickHandler = ::this.clickHandler;
     this.active = false;
 
   }
 
   componentDidMount() {
-    this.getInstaPhotos();
+    this.getPhotos();
     this.timer = setInterval(() => this.floatHandler(), 10050);
   }
 
-  getInstaPhotos() {
+  getPhotos() {
 
-    selectByTag()
-      .then(photos => this.setState({photos: photos}))
+    selectByTag('perfume filter:images', 10, 'popular') //normally you get most recent ones, but popular ones are nicer to present to client.
+      .then(tweets => this.filterPhotos(tweets.statuses))
       .then(() => this.initHandler());
+
+    /*selectByPhotos(['#perfume','#diy'], 10, 'popular') //normally you get most recent ones, but popular ones are nicer to present to client.
+      .then(tweets => this.filterPhotos(tweets.statuses))
+      .then(() => this.initHandler());*/
   }
 
+  filterPhotos(tweets) {
+
+    let photos = [];
+
+    tweets.forEach(tweet => {
+
+      let photo = {
+        'name': tweet.user.name,
+        'screen_name': tweet.user.screen_name,
+        'text': tweet.text,
+        'image': tweet.entities.media[0].media_url, //get one / first photo of tweet
+        'active': ''
+      };
+
+      photos.push(photo);
+    });
+
+    this.setState({photos: photos});
+
+  }
 
   initHandler() {
 
@@ -38,7 +61,7 @@ class MadeByMe extends Component {
       if( ref !== 'photo-container') { //parent container ref needed to calculate width / height of it
         let photo = this.refs[ref].refs.figure;
 
-        let rndSize = Math.random() + 0.2;
+        let rndSize = Math.random() - 0.5;
         photo.style.transform = `scale(${rndSize}, ${rndSize})`;
 
         let rndPos = this.rndPos(photo);
@@ -54,8 +77,12 @@ class MadeByMe extends Component {
   rndPos(el) {
 
     let container = this.refs['photo-container'];
+
     let containerWidth = container.getBoundingClientRect().width - el.getBoundingClientRect().width;
     let containerHeight = container.getBoundingClientRect().height - el.getBoundingClientRect().height;
+
+    console.log(containerWidth);
+    console.log(containerHeight);
 
     let rndX = Math.floor(Math.random() * containerWidth);
     let rndY = Math.floor(Math.random() * containerHeight);
@@ -64,6 +91,9 @@ class MadeByMe extends Component {
   }
 
   floatHandler() {
+
+    console.log('float handler');
+
     for (let ref in this.refs) {
       if( ref !== 'photo-container') {
         let photo = this.refs[ref].refs.figure;
@@ -72,6 +102,7 @@ class MadeByMe extends Component {
           let size = photo.getBoundingClientRect().width / photo.offsetWidth ;
           let rndPos = this.rndPos(photo);
 
+          photo.style.transform = `translate(0px, 0px) scale(${size}, ${size})`;
           photo.style.transition = 'transform 10s linear';
           photo.style.transform = `translate(${rndPos[0]}px, ${rndPos[1]}px) scale(${size}, ${size})`;
         }
@@ -79,28 +110,48 @@ class MadeByMe extends Component {
     }
   }
 
-  clickHandler(e) {
+  clickHandler(e, id) {
     if(this.active) {
+
+      this.activeHandler(true, id);
       this.closeHandler(this.active);
       this.active = false;
+
     } else {
-      this.active = true;
+
       this.active = e.currentTarget;
+      this.activeHandler(false, id);
       this.openHandler(e.currentTarget);
+
     }
   }
 
   openHandler(photo) {
-    //andere items: filter: blur(0.25rem); opacity: 0.8;
-
     let container = this.refs['photo-container'];
 
-    let centerX = (container.getBoundingClientRect().width / 2) - ((200 * 1.5) / 2); //containerwidth / 2 - imagesize * scalefactor /2
-    let centerY = (container.getBoundingClientRect().height / 2) - ((200 * 1.5) / 2);
+    let centerX = (container.getBoundingClientRect().width / 2) - (200 / 2); //containerwidth / 2 - imagesize /2
+    let centerY = (container.getBoundingClientRect().height / 2) - (200 / 2);
 
     photo.style.zIndex = '100';
     photo.style.transition = 'transform 0.5s ease-in';
-    photo.style.transform = `translate(${centerX}px, ${centerY}px) scale(1.5, 1.5)`;
+    photo.style.transform = `translate(${centerX}px, ${centerY}px) scale(1, 1)`;
+  }
+
+  activeHandler(close, id) {
+    let {photos} = this.state;
+    let activePhotos = photos; //change state of one photo
+
+    for(let i = 0; i < photos.length; i++) {
+      if(close) {
+        activePhotos[i].active = '';
+      } else if(i === id) {
+        activePhotos[i].active = 'active';
+      } else {
+        activePhotos[i].active = 'inactive';
+      }
+    }
+
+    this.setState({photos: activePhotos});
   }
 
   closeHandler(photo){
@@ -127,7 +178,14 @@ class MadeByMe extends Component {
 
         {
           photos.map((photo, i) => {
-            return <Photo key={i} image={photo.img} caption={photo.caption} ref={`photo${i}`} clickHandler={this.clickHandler} />;
+            return <Photo key={i}
+              image={photo.image}
+              caption={photo.text}
+              name={photo.name}
+              screenName={photo.screen_name}
+              ref={`photo${i}`}
+              activeClass={photo.active}
+              clickHandler={e => this.clickHandler(e, i)} />;
           })
         }
 

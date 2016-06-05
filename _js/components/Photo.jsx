@@ -7,13 +7,18 @@ class Photo extends Component { //statecomponent om ref te kunnen leggen voor vi
   }
 
   render() {
-    let {image, caption, clickHandler} = this.props;
+    let {image, caption, name, screenName, activeClass, clickHandler} = this.props;
 
     return (
-
-      <figure className='photo' onClick={clickHandler} ref={'figure'} >
-          <img src={`/assets/img/${image}`} alt={caption}/>
-      </figure>
+      <div className={`photo-container ${ activeClass ? activeClass : ''}`} ref={'figure'} onClick={clickHandler}>
+        <figure className='photo'>
+            <img src={image} alt={caption}/>
+        </figure>
+        <div className='photo-info'>
+          <h4 className='name'>{name}<span className='screen-name'>@{screenName}</span></h4>
+          <p>{caption}</p>
+        </div>
+      </div>
 
     );
   }
@@ -22,6 +27,9 @@ class Photo extends Component { //statecomponent om ref te kunnen leggen voor vi
 Photo.propTypes = {
   image: PropTypes.string,
   caption: PropTypes.string,
+  name: PropTypes.string,
+  screenName: PropTypes.string,
+  activeClass: PropTypes.string,
   clickHandler: PropTypes.func
 };
 

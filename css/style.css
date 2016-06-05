@@ -108,6 +108,7 @@ h1 {
   text-transform: uppercase;
   font-weight: 700;
   text-align: center;
+  color: #b53471;
 }
 
 h2 {
@@ -131,8 +132,8 @@ h2 {
   LEFTSCREEN GENERAL
 ---------------------------------- */
 .left-screen {
-  background: #8FBEBE;
-  color: #EEFCEB;
+  background: #c4a56f;
+  color: #4d1034;
 }
 
 header {
@@ -227,7 +228,7 @@ header {
   width: 30rem;
   height: 30rem;
   border-radius: 50%;
-  background: #AA6934;
+  background: #c4a56f;
 }
 
 .morph-btns {
@@ -273,18 +274,33 @@ canvas {
 ---------------------------------- */
 .photos {
   width: 100%;
+  height: 60vh;
+  border: 1px solid red;
   position: relative;
 }
 
-.photo {
+.photo-container {
   width: 20rem;
   position: absolute;
   top: 0;
   left: 0;
-  transform-origin: 0 0;
+  transform-origin: bottom right;
   display: block;
+  background: #fbf1cd;
+  border: 0.5rem solid #fbf1cd;
 }
 
-.photo img {
-  border: 0.5rem solid white;
+.photo-container .photo-info {
+  display: none;
+}
+
+.photo-container.inactive {
+  filter: url('data:image/svg+xml;charset=utf-8,<svg xmlns="http://www.w3.org/2000/svg"><filter id="filter"><feGaussianBlur stdDeviation="4" /></filter></svg>#filter');
+  -webkit-filter: blur(0.25rem);
+          filter: blur(0.25rem);
+  opacity: 0.8;
+}
+
+.photo-container.active .photo-info {
+  display: block;
 }
