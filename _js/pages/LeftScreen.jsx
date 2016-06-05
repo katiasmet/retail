@@ -1,7 +1,7 @@
 import React, {PropTypes, Component, cloneElement} from 'react';
 
 import {selectAll} from '../api/stores';
-import {StoreHeader, Navigation, NearbyStores} from '../components';
+import {StoreHeader, Navigation, RelatedStores} from '../components';
 
 class LeftScreen extends Component  {
 
@@ -31,7 +31,7 @@ class LeftScreen extends Component  {
 
   filterStores(stores) {
 
-    let nearbyStores = [];
+    let relatedStores = [];
     let currentStore = {};
 
     stores.forEach(store => {
@@ -41,7 +41,7 @@ class LeftScreen extends Component  {
         currentStore = store;
       } else {
         //2 random stores uithalen
-        nearbyStores.push(store);
+        relatedStores.push(store);
       }
     });
 
@@ -53,14 +53,14 @@ class LeftScreen extends Component  {
       portrait: currentStore.portrait,
       quote: currentStore.quote,
       creationSteps: currentStore.creation_steps,
-      stores: nearbyStores
+      stores: relatedStores
     });
 
   }
 
   render() {
 
-    let {name, craft, icon, tags, stores, portrait, quote, creationSteps} = this.state;
+    let {name, craft, icon, tags, portrait, quote, creationSteps, stores} = this.state;
     let {children} = this.props;
     let {pathname} = this.props.location;
 
@@ -79,7 +79,7 @@ class LeftScreen extends Component  {
           creationSteps: creationSteps
         })}
 
-        <NearbyStores stores={stores} />
+        <RelatedStores stores={stores} />
 
       </section>
     );

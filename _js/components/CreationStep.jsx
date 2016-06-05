@@ -3,10 +3,10 @@ import React, {PropTypes} from 'react';
 const CreationStep = ({id, info}) =>  {
 
   return (
-    <div className='creation-step'>
-      <h3>Stap {id +1}</h3>
+    <section className='creation-step'>
+      <h3>Stap {id + 1}</h3>
       <p>{info}</p>
-    </div>
+    </section>
   );
 
 };

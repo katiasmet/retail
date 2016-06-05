@@ -1,6 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 
-class InstaPhoto extends Component { //statecomponent om ref te kunnen leggen voor virtual dom manipulation
+class Photo extends Component { //statecomponent om ref te kunnen leggen voor virtual dom manipulation
 
   constructor(props, context){
     super(props, context);
@@ -11,7 +11,7 @@ class InstaPhoto extends Component { //statecomponent om ref te kunnen leggen vo
 
     return (
 
-      <figure className='insta-photo' onClick={clickHandler} ref={'figure'} >
+      <figure className='photo' onClick={clickHandler} ref={'figure'} >
           <img src={`/assets/img/${image}`} alt={caption}/>
       </figure>
 
@@ -19,10 +19,10 @@ class InstaPhoto extends Component { //statecomponent om ref te kunnen leggen vo
   }
 }
 
-InstaPhoto.propTypes = {
+Photo.propTypes = {
   image: PropTypes.string,
   caption: PropTypes.string,
   clickHandler: PropTypes.func
 };
 
-export default InstaPhoto;
+export default Photo;

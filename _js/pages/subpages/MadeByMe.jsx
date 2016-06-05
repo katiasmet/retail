@@ -1,8 +1,7 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 
 import {selectByTag} from '../../api/instagram_photos';
-import {InstaPhotos} from '../../components/';
+import {Photo} from '../../components/';
 
 class MadeByMe extends Component {
 
@@ -33,24 +32,28 @@ class MadeByMe extends Component {
 
 
   initHandler() {
-    for (let ref in this.refs.instaPhoto.refs) {
 
-      let photo = this.refs.instaPhoto.refs[ref].refs.figure;
+    for (let ref in this.refs) {
 
-      let rndSize = Math.random() + 0.2;
-      photo.style.transform = `scale(${rndSize}, ${rndSize})`;
+      if( ref !== 'photo-container') { //parent container ref needed to calculate width / height of it
+        let photo = this.refs[ref].refs.figure;
 
-      let rndPos = this.rndPos(photo);
-      photo.style.transform = `translate(${rndPos[0]}px, ${rndPos[1]}px) scale(${rndSize}, ${rndSize})`;
+        let rndSize = Math.random() + 0.2;
+        photo.style.transform = `scale(${rndSize}, ${rndSize})`;
 
-      this.floatHandler();
+        let rndPos = this.rndPos(photo);
+        photo.style.transform = `translate(${rndPos[0]}px, ${rndPos[1]}px) scale(${rndSize}, ${rndSize})`;
+
+        this.floatHandler();
+      }
+
     }
 
   }
 
   rndPos(el) {
-    let container = ReactDOM.findDOMNode(this.refs.instaPhoto);
 
+    let container = this.refs['photo-container'];
     let containerWidth = container.getBoundingClientRect().width - el.getBoundingClientRect().width;
     let containerHeight = container.getBoundingClientRect().height - el.getBoundingClientRect().height;
 
@@ -61,15 +64,17 @@ class MadeByMe extends Component {
   }
 
   floatHandler() {
-    for (let ref in this.refs.instaPhoto.refs) {
-      let photo = this.refs.instaPhoto.refs[ref].refs.figure;
+    for (let ref in this.refs) {
+      if( ref !== 'photo-container') {
+        let photo = this.refs[ref].refs.figure;
 
-      if(photo !== this.active) { //alle elementen waar niet op geklikt is, zweven verder.
-        let size = photo.getBoundingClientRect().width / photo.offsetWidth ;
-        let rndPos = this.rndPos(photo);
+        if(photo !== this.active) { //alle elementen waar niet op geklikt is, zweven verder.
+          let size = photo.getBoundingClientRect().width / photo.offsetWidth ;
+          let rndPos = this.rndPos(photo);
 
-        photo.style.transition = 'transform 10s linear';
-        photo.style.transform = `translate(${rndPos[0]}px, ${rndPos[1]}px) scale(${size}, ${size})`;
+          photo.style.transition = 'transform 10s linear';
+          photo.style.transform = `translate(${rndPos[0]}px, ${rndPos[1]}px) scale(${size}, ${size})`;
+        }
       }
     }
   }
@@ -86,7 +91,9 @@ class MadeByMe extends Component {
   }
 
   openHandler(photo) {
-    let container = ReactDOM.findDOMNode(this.refs.instaPhoto);
+    //andere items: filter: blur(0.25rem); opacity: 0.8;
+
+    let container = this.refs['photo-container'];
 
     let centerX = (container.getBoundingClientRect().width / 2) - ((200 * 1.5) / 2); //containerwidth / 2 - imagesize * scalefactor /2
     let centerY = (container.getBoundingClientRect().height / 2) - ((200 * 1.5) / 2);
@@ -115,7 +122,16 @@ class MadeByMe extends Component {
     let {photos} = this.state;
 
     return (
-      <InstaPhotos photos={photos} closeHandler={this.closeHandler} clickHandler={this.clickHandler} ref='instaPhoto'/>
+
+      <section className='photos' ref='photo-container'>
+
+        {
+          photos.map((photo, i) => {
+            return <Photo key={i} image={photo.img} caption={photo.caption} ref={`photo${i}`} clickHandler={this.clickHandler} />;
+          })
+        }
+
+      </section>
     );
 
   }

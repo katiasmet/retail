@@ -30,6 +30,7 @@ button {
   background: none;
   box-shadow: none;
   border: none;
+  outline: none;
 }
 
 h1 {
@@ -71,11 +72,11 @@ header {
   width: 3rem;
 }
 
-.nearby-stores, .nearby-store {
+.related-stores, .related-store {
   @include center;
 }
 
-.nearby-store {
+.related-store {
   justify-content: space-between;
   width: 50%;
 
@@ -84,7 +85,7 @@ header {
   }
 }
 
-.nearby-store:last-child {
+.related-store:last-child {
   figure {
     order: -1;
   }
@@ -109,35 +110,33 @@ header {
 /* ----------------------------------
   MADE FOR ME
 ---------------------------------- */
-
-/* ----------------------------------
-  MADE BY ME
----------------------------------- */
-.insta-photos {
+.made-for-me {
+  @include center;
   width: 100%;
-  height: 100%;
-}
-.insta-photo {
-  width: 20rem;
+  height: 40rem;
 
-  position: absolute;
-  top: 0;
-  left:0;
-
-  transform-origin: 0 0;
-  display:block;
-
-  img {
-    border: 0.5rem solid white;
-  }
-}
-
-/* ----------------------------------
-  MORPHING NAVIGATION
----------------------------------- */
-.morph-btns {
   position: relative;
+}
+
+.creation-step {
+  @include center;
+  flex-direction: column;
+  text-align: center;
+
+  width: 30rem;
+  height: 30rem;
+  border-radius: 50%;
+
+  background: $accent-color;
+}
+
+.morph-btns {
+  position: absolute;
   width:100%;
+  display: block;
+
+  top: 45%;
+  left: 45%;
 }
 
 .morph-btn {
@@ -164,3 +163,27 @@ canvas {
 #morph-btn1 { animation-delay: -15s; }
 #morph-btn2 { animation-delay: -30s; }
 #morph-btn3 { animation-delay: -45s; }
+
+/* ----------------------------------
+  MADE BY ME
+---------------------------------- */
+.photos {
+  width: 100%;
+  //height: 100%;
+
+  position: relative;
+}
+.photo {
+  width: 20rem;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transform-origin: 0 0;
+  display:block;
+
+  img {
+    border: 0.5rem solid white;
+  }
+}

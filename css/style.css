@@ -100,6 +100,7 @@ button {
   background: none;
   box-shadow: none;
   border: none;
+  outline: none;
 }
 
 h1 {
@@ -149,7 +150,7 @@ header {
   width: 3rem;
 }
 
-.nearby-stores, .nearby-store {
+.related-stores, .related-store {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
@@ -158,23 +159,23 @@ header {
       align-items: center;
 }
 
-.nearby-store {
+.related-store {
   -ms-flex-pack: justify;
       justify-content: space-between;
   width: 50%;
 }
 
-.nearby-store span, .nearby-store figure {
+.related-store span, .related-store figure {
   -ms-flex-order: 0;
       order: 0;
 }
 
-.nearby-store:last-child figure {
+.related-store:last-child figure {
   -ms-flex-order: -1;
       order: -1;
 }
 
-.nearby-store:last-child .distance {
+.related-store:last-child .distance {
   -ms-flex-order: 1;
       order: 1;
 }
@@ -201,33 +202,40 @@ header {
 /* ----------------------------------
   MADE FOR ME
 ---------------------------------- */
-/* ----------------------------------
-  MADE BY ME
----------------------------------- */
-.insta-photos {
+.made-for-me {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
   width: 100%;
-  height: 100%;
-}
-
-.insta-photo {
-  width: 20rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  transform-origin: 0 0;
-  display: block;
-}
-
-.insta-photo img {
-  border: 0.5rem solid white;
-}
-
-/* ----------------------------------
-  MORPHING NAVIGATION
----------------------------------- */
-.morph-btns {
+  height: 40rem;
   position: relative;
+}
+
+.creation-step {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  text-align: center;
+  width: 30rem;
+  height: 30rem;
+  border-radius: 50%;
+  background: #AA6934;
+}
+
+.morph-btns {
+  position: absolute;
   width: 100%;
+  display: block;
+  top: 45%;
+  left: 45%;
 }
 
 .morph-btn {
@@ -258,4 +266,25 @@ canvas {
 
 #morph-btn3 {
   animation-delay: -45s;
+}
+
+/* ----------------------------------
+  MADE BY ME
+---------------------------------- */
+.photos {
+  width: 100%;
+  position: relative;
+}
+
+.photo {
+  width: 20rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform-origin: 0 0;
+  display: block;
+}
+
+.photo img {
+  border: 0.5rem solid white;
 }

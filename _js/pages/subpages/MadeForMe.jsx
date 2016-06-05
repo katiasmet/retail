@@ -1,5 +1,6 @@
 import React, {PropTypes, Component} from 'react';
 import paper, {Point} from 'paper';
+import {isEmpty} from 'lodash';
 
 import {CreationStep} from '../../components';
 
@@ -7,6 +8,10 @@ class MadeForMe extends Component {
 
   constructor(props, context){
     super(props, context);
+
+    this.state = {
+      active: ''
+    };
   }
 
   componentWillMount() {
@@ -54,7 +59,7 @@ class MadeForMe extends Component {
   }
 
   draw(canvas, creationStepsPapers) {
-    let speed = 100;
+    let speed = 150;
 
     creationStepsPapers[canvas].view.onFrame = () => {
 
@@ -76,6 +81,34 @@ class MadeForMe extends Component {
     creationStepsPapers[canvas].view.draw();
   }
 
+  clickHandler(i) {
+    console.log('click handler');
+    console.log(i);
+    let {creationSteps} = this.props;
+
+    this.setState({
+      active: {
+        id: i,
+        info: creationSteps[i]
+      }
+    });
+  }
+
+  renderCreationStep() {
+
+    let {active} = this.state;
+    let {creationSteps} = this.props;
+
+    console.log(creationSteps);
+
+    if(isEmpty(active)) { //default first step
+      return <CreationStep id={0} info={creationSteps[0]} />;
+    } else {
+      console.log('nieuwe step');
+      return <CreationStep id={active.id} info={active.info} />;
+    }
+  }
+
 
   render() {
 
@@ -88,7 +121,7 @@ class MadeForMe extends Component {
           {
             creationSteps.map((step, i) => {
               return (
-                <button key={i} className='morph-btn' id={`morph-btn${i}`}>
+                <button key={i} className='morph-btn' id={`morph-btn${i}`} onClick={() => this.clickHandler(i)}>
                   <span className='morph-btn-content'>{i + 1}</span>
                   <canvas id={`canvas${i}`} className='canvas' data-paper-resize />
                 </button>
@@ -98,13 +131,7 @@ class MadeForMe extends Component {
 
         </section>
 
-        <section className='creation-steps'>
-            {
-              creationSteps.map((step, i) => {
-                return <CreationStep key={i} id={i} info={step}/>;
-              })
-            }
-        </section>
+        { this.renderCreationStep() }
       </section>
 
     );

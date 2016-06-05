@@ -1,9 +1,9 @@
 import React, {PropTypes} from 'react';
 
-const NearbyStore = ({name, craft, icon}) =>  {
+const RelatedStore = ({name, craft, icon}) =>  {
 
   return (
-    <li className='nearby-store'>
+    <li className='related-store'>
       <span className='distance'>5 min</span>
       <span className='crafter'>
         <span className='crafter-name'>{name}</span>
@@ -17,10 +17,10 @@ const NearbyStore = ({name, craft, icon}) =>  {
 
 };
 
-NearbyStore.propTypes = {
+RelatedStore.propTypes = {
   name: PropTypes.string,
   craft: PropTypes.string,
   icon: PropTypes.string
 };
 
-export default NearbyStore;
+export default RelatedStore;
