@@ -82,16 +82,23 @@ class MadeForMe extends Component {
   }
 
   clickHandler(i) {
-    console.log('click handler');
-    console.log(i);
+
     let {creationSteps} = this.props;
+    let content = '';
+
+    creationSteps.forEach(creationStep => {
+      if(i === creationStep.step) {
+        content = creationStep.content;
+      }
+    });
 
     this.setState({
       active: {
         id: i,
-        info: creationSteps[i]
+        content: content
       }
     });
+
   }
 
   renderCreationStep() {
@@ -99,14 +106,16 @@ class MadeForMe extends Component {
     let {active} = this.state;
     let {creationSteps} = this.props;
 
-    console.log(creationSteps);
-
-    if(isEmpty(active)) { //default first step
-      return <CreationStep id={0} info={creationSteps[0]} />;
+    if(isEmpty(active)) { //render first step when no step is active
+      for(let i = 0; i < creationSteps.length; i++) { //return doesn't work that well with foreach
+        if(creationSteps[i].step === 1) {
+          return <CreationStep id={creationSteps[i].step} info={creationSteps[i].content} />;
+        }
+      }
     } else {
-      console.log('nieuwe step');
-      return <CreationStep id={active.id} info={active.info} />;
+      return <CreationStep id={active.id} info={active.content} />;
     }
+
   }
 
 
@@ -121,7 +130,7 @@ class MadeForMe extends Component {
           {
             creationSteps.map((step, i) => {
               return (
-                <button key={i} className='morph-btn' id={`morph-btn${i}`} onClick={() => this.clickHandler(i)}>
+                <button key={i} className='morph-btn' id={`morph-btn${i}`} onClick={() => this.clickHandler(i + 1)}>
                   <span className='morph-btn-content'>{i + 1}</span>
                   <canvas id={`canvas${i}`} className='canvas' data-paper-resize />
                 </button>

@@ -4,43 +4,37 @@ import {checkStatus} from '../util';
 let base = '/api/stores';
 
 export const selectAllExceptCurrent = (id) => {
-  let method = 'GET';
-  return fetch(`${base}`, {method})
+  return fetch(`${base}?current=${id}`)
     .then(checkStatus);
 };
 
 export const selectById = (id) => {
-  let method = 'GET';
-  return fetch(`${base}/${id}`, {method})
+  return fetch(`${base}/${id}`)
     .then(checkStatus);
 };
 
 export const selectByLocation = (latitude, longitude) => {
-  let method = 'GET';
-  return fetch(`${base}?latitude=${latitude}&longitude=${longitude}`, {method})
+  return fetch(`${base}?latitude=${latitude}&longitude=${longitude}`)
     .then(checkStatus);
 };
 
 export const selectOpeningHoursByStoreId = (id) => {
-  let method = 'GET';
-  return fetch(`${base}/${id}?opening_hours=true`, {method})
+  return fetch(`${base}/${id}?opening_hours=true`)
     .then(checkStatus);
 };
 
 export const selectTagsByStoreId = (id) => {
-  let method = 'GET';
-  return fetch(`${base}/${id}?tags=true`, {method})
+  return fetch(`${base}/${id}?tags=true`)
     .then(checkStatus);
 };
 
 export const selectCreationStepsByStoreId = (id) => {
-  let method = 'GET';
-  return fetch(`${base}/${id}?creation_steps=true`, {method})
+  return fetch(`${base}/${id}?creation_steps=true`)
     .then(checkStatus);
 };
 
 export default {
-  selectAll,
+  selectAllExceptCurrent,
   selectById,
   selectByLocation,
   selectOpeningHoursByStoreId,

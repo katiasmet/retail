@@ -1,6 +1,6 @@
 import React, {PropTypes, Component, cloneElement} from 'react';
 
-import {selectAll} from '../api/stores';
+import {selectAllExceptCurrent, selectByLocation, selectTagsByStoreId, selectCreationStepsByStoreId} from '../api/stores';
 import {getDistance} from '../api/locations';
 import {StoreHeader, Navigation, RelatedStores} from '../components';
 
@@ -12,6 +12,7 @@ class LeftScreen extends Component  {
     super(props, context);
 
     this.state = {
+      id: '',
       name: '',
       craft: '',
       icon: '',
@@ -24,33 +25,59 @@ class LeftScreen extends Component  {
   }
 
   componentWillMount() {
-    this.getStores();
+    this.getCurrentStore();
+  }
+
+  getCurrentStore() {
+    selectByLocation(51.9145, 4.40148)
+      .then(store => this.setState({
+        id: store.id,
+        name: store.name,
+        craft: store.craft,
+        icon: store.icon,
+        portrait: store.portrait,
+        quote: store.quote
+      }))
+      .then(() => this.getCurrentStoreDetails())
+      .then(() => this.getStores());
+  }
+
+  getCurrentStoreDetails() {
+    let {id} = this.state;
+
+    selectTagsByStoreId(id)
+      .then(storeTags => {
+        let tags = [];
+        storeTags.forEach(storeTag => {
+          tags.push(storeTag.content);
+        });
+        this.setState({tags: tags});
+      });
+
+    selectCreationStepsByStoreId(id)
+      .then(creationSteps => this.setState({creationSteps: creationSteps}));
+
   }
 
   getStores() {
-    selectAll()
-      .then(stores => this.filterStores(stores));
+    let {id} = this.state;
+
+    selectAllExceptCurrent(id)
+      .then(stores => this.setState({stores: stores}));
   }
 
-  filterStores(stores) {
+  /*filterStores(stores) {
 
     let relatedStores = [];
-    let currentStore = {};
 
     stores.forEach(store => {
-      if(store.location.coordinates.latitude === 51.9144769 && store.location.coordinates.longitude ===  4.4014781) {
-        //Afhankelijk van de locatie van het bord wordt bepaalde info ingeladen
-        currentStore = store;
-      } else {
-        relatedStores.push(store);
-      }
-    });
+
 
     relatedStores.forEach(relatedStore => {
-      /*getCardinalDirection(
+      getCardinalDirection(
         currentStore.location.coordinates.latitude, currentStore.location.coordinates.longitude,
         relatedStore.location.coordinates.latitude, relatedStore.location.coordinates.longitude
-      );*/
+      );
 
       getDistance(currentStore.location.coordinates.latitude, currentStore.location.coordinates.longitude,
         relatedStore.location.coordinates.latitude, relatedStore.location.coordinates.longitude)
@@ -58,25 +85,14 @@ class LeftScreen extends Component  {
       //.rows[0].elements[0].duration.text
     });
 
-    /*stores.forEach(store => {
+    stores.forEach(store => {
         //2 random stores uithalen
         //stores east and west of currentstore
       relatedStores.push(store);
 
-    });*/
-
-    this.setState({
-      name: currentStore.name,
-      craft: currentStore.craft,
-      icon: currentStore.icon,
-      tags: currentStore.tags,
-      portrait: currentStore.portrait,
-      quote: currentStore.quote,
-      creationSteps: currentStore.creation_steps,
-      stores: relatedStores
     });
 
-  }
+  }*/
 
   render() {
 

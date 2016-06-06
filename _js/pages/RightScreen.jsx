@@ -1,9 +1,9 @@
 export default RightScreen;
 
-import React, {PropTypes, Component} from 'react';
+import React, {Component} from 'react';
 
 import {Tweets} from '../components';
-import {selectAll} from '../api/stores';
+import {selectByLocation, selectOpeningHoursByStoreId} from '../api/stores';
 import {selectByTag} from '../api/tweets';
 
 import moment from 'moment';
@@ -35,47 +35,46 @@ class RightScreen extends Component {
   }
 
   getCurrentStore() {
-    selectAll()
-      .then(stores => this.filterStores(stores))
-      .then(() => this.openingHoursHandler());
+    selectByLocation(51.9145, 4.40148)
+      .then(store => selectOpeningHoursByStoreId(store.id))
+      .then(openingHours => this.handleOpeningHours(openingHours));
   }
 
-  filterStores(stores) {
-    let currentStore = {};
+  handleOpeningHours(openingHours) {
 
-    stores.forEach(store => {
-      if(store.location.coordinates.latitude === 51.9144769 && store.location.coordinates.longitude ===  4.4014781) {
-        currentStore = store;
-      }
+    let setOpeningHours = {};
+
+    openingHours.forEach(openingHour => {
+      setOpeningHours[openingHour.day] = [openingHour.opening_time, openingHour.closing_time];
     });
 
-    this.setState({openingHours: currentStore.opening_hours});
+    this.setState({
+      openingHours: setOpeningHours
+    });
   }
 
-  openingHoursHandler() {
+  renderToday() {
     moment.locale('nl');
 
     let {openingHours} = this.state;
-    let otherOpeningHours = {};
 
-    let opened = false;
     for(let openingHour in openingHours) {
-      if(openingHour === moment().format('dddd')) {
+      if(openingHour === moment().format('dddd')) { //today's openingshours
+
         this.day = openingHours[openingHour];
         let start = moment(openingHours[openingHour][0], 'HH:mm');
         let end = moment(openingHours[openingHour][1], 'HH:mm');
 
-        if(moment().isBetween(start, end)) {
-          opened = true;
+        if(moment().isBetween(start, end)) { //store opened at this moment
           this.timer = setInterval(() => this.isOpened(), 60000); //rerender every minute
-          this.isOpened();
+          let isOpened = this.isOpened();
+          return <p>{isOpened[0]}u {isOpened[1]}min vandaag geopened</p>;
         }
-      }else {
-        otherOpeningHours.openingHour = openingHours[openingHour];
+
+      } else {
+        return <p>Gesloten</p>;
       }
     }
-
-    console.log(otherOpeningHours);
   }
 
   isOpened() {
@@ -87,17 +86,49 @@ class RightScreen extends Component {
       clearInterval(this.timer);
     }
 
-    this.setState({timeToClose: [toClose.hours(), toClose.minutes()]});
+    return [toClose.hours(), toClose.minutes()];
   }
 
+  renderNext() { //get next 3 opening hours
+
+    let {openingHours} = this.state;
+    let nextDays = [];
+
+    moment.updateLocale('nl', {
+      weekdaysShort: [
+        'Zon', 'Maa', 'Din', 'Woe', 'Don', 'Vrij', 'Zat'
+      ]
+    });
+
+    for(let openingHour in openingHours) {
+      for(let i = 1; i < 4; i++) {
+        if(openingHour === moment().add(i, 'd').format('dddd')) {
+          nextDays.push(<p>{moment().add(i, 'd').format('ddd')} {openingHours[openingHour][0]} - {openingHours[openingHour][1]} </p>);
+        }
+      }
+    }
+
+    return (
+      <div className='next-days'>
+        {nextDays.map((nextDay) => {
+          return nextDay;
+        })}
+      </div>
+    );
+
+  }
 
   render() {
 
-    let {timeToClose, tweets} = this.state;
+    let {tweets} = this.state;
 
     return (
       <section className='right-screen'>
-          <p>Nog {timeToClose[0]}u en {timeToClose[1]}min geopened vandaag.</p>
+
+          <section className='opening-hours'>
+            { this.renderToday() }
+            { this.renderNext() }
+          </section>
           <Tweets tweets={tweets}/>
       </section>
     );
