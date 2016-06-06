@@ -15,15 +15,17 @@ function getConnectionWithAccessToken($oauth_token, $oauth_token_secret) {
   return $connection;
 }
 
-//tweets ophalen met bepaalde #
-//tweets ophalen van bepaalde user
-
 $app->get($base, function($request, $response, $args){
 
   $query = $request->getQueryParams();
 
   $connection = getConnectionWithAccessToken("1608412375-uhvmddZ0CcIo5r3iiH4BUQBMh2S9OUfW6aNYWHb",  "2m2AhbyqM1IaVM8ZkRokZoo14NG4rvY6UQTCO25LY7LH4");
-  $data = $connection->get("search/tweets", ["q" => $query['search'], "count" => $query['count'], "result_type" => $query['result_type']]);
+  
+  if(!empty($query['screen_name'])) { //from specific user
+    $data = $connection->get("statuses/user_timeline", ["screen_name" => $query['screen_name'], "count" => $query['count'], "exclude_replies" => true]);
+  } else {
+    $data = $connection->get("search/tweets", ["q" => $query['search'], "count" => $query['count'], "result_type" => $query['result_type']]);
+  }
 
   $response->getBody()->write(json_encode($data));
   return $response->withHeader('Content-Type','application/json');

@@ -4,7 +4,7 @@ import React, {Component} from 'react';
 
 import {Tweets} from '../components';
 import {selectByLocation, selectOpeningHoursByStoreId} from '../api/stores';
-import {selectByTag} from '../api/tweets';
+import {selectByUser} from '../api/tweets';
 
 import moment from 'moment';
 
@@ -23,14 +23,14 @@ class RightScreen extends Component {
   }
 
   componentDidMount() {
-    //this.getTweets();
+    this.getTweets();
     this.getCurrentStore();
   }
 
   getTweets() {
 
-    selectByTag('howest', 3, 'recent')
-      .then(tweets => this.setState({tweets: tweets['statuses']}));
+    selectByUser('bibouskincare', 2)
+      .then(tweets => this.setState({tweets: tweets}));
 
   }
 
@@ -103,16 +103,22 @@ class RightScreen extends Component {
     for(let openingHour in openingHours) {
       for(let i = 1; i < 4; i++) {
         if(openingHour === moment().add(i, 'd').format('dddd')) {
-          nextDays.push(<p>{moment().add(i, 'd').format('ddd')} {openingHours[openingHour][0]} - {openingHours[openingHour][1]} </p>);
+          nextDays.push({
+            'day': moment().add(i, 'd').format('ddd'),
+            'opened': openingHours[openingHour][0],
+            'closed': openingHours[openingHour][1]
+          });
         }
       }
     }
 
     return (
       <div className='next-days'>
-        {nextDays.map((nextDay) => {
-          return nextDay;
-        })}
+        {
+          nextDays.map((nextDay, i) => {
+            return <p key={i}>{nextDay.day} {nextDay.opened} - {nextDay.closed} </p>;
+          })
+        }
       </div>
     );
 
@@ -124,7 +130,6 @@ class RightScreen extends Component {
 
     return (
       <section className='right-screen'>
-
           <section className='opening-hours'>
             { this.renderToday() }
             { this.renderNext() }

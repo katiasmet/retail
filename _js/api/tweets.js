@@ -3,18 +3,22 @@ import {checkStatus} from '../util';
 
 let base = '/api/tweets';
 
-export const selectByTag = (searchString, count, resultType) => {
+export const selectBySearch = (searchString, count, resultType) => {
 
-  let method = 'GET';
-
-  return fetch(`${base}?search=${encodeURIComponent(searchString)}&count=${count}&result_type=${resultType}`, {method})
+  return fetch(`${base}?search=${encodeURIComponent(searchString)}&count=${count}&result_type=${resultType}`)
     .then(checkStatus);
 
 };
 
-export const selectByPhotos = (searchStrings, count, resultType) => {
+export const selectByUser = (screenName, count) => {
 
-  let method = 'GET';
+  return fetch(`${base}?screen_name=${encodeURIComponent(screenName)}&count=${count}`)
+    .then(checkStatus);
+
+};
+
+
+export const selectByPhotos = (searchStrings, count, resultType) => {
 
   let encodedSearchStrings = [];
 
@@ -23,14 +27,14 @@ export const selectByPhotos = (searchStrings, count, resultType) => {
   });
 
   let query = encodedSearchStrings.join('+');
-  console.log(query);
 
-  return fetch(`${base}?search=${query}%20filter:images&count=${count}&result_type=${resultType}`, {method})
+  return fetch(`${base}?search=${query}%20filter:images&count=${count}&result_type=${resultType}`)
     .then(checkStatus);
 
 };
 
 export default {
-  selectByTag,
+  selectBySearch,
+  selectByUser,
   selectByPhotos
 };

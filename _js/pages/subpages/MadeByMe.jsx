@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-import {selectByTag} from '../../api/tweets';
+import {selectBySearch} from '../../api/tweets';
 import {Photo} from '../../components/';
 
 class MadeByMe extends Component {
@@ -24,7 +24,7 @@ class MadeByMe extends Component {
 
   getPhotos() {
 
-    selectByTag('perfume filter:images', 10, 'popular') //normally you get most recent ones, but popular ones are nicer to present to client.
+    selectBySearch('perfume filter:images', 10, 'popular') //normally you get most recent ones, but popular ones are nicer to present to client.
       .then(tweets => this.filterPhotos(tweets.statuses))
       .then(() => this.initHandler());
 

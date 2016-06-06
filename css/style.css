@@ -304,3 +304,50 @@ canvas {
 .photo-container.active .photo-info {
   display: block;
 }
+
+/* ----------------------------------
+  RIGHT SCREEN
+---------------------------------- */
+.right-screen {
+  color: #ffffff;
+  background: #c4a56f;
+}
+
+.tweets {
+  background: #819F8C;
+}
+
+.tweet {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.profile-pic img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+
+.user-name {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.user-handler {
+  text-transform: lowercase;
+  display: inline-block;
+  color: #cbc8c8;
+  font-weight: 300;
+}
+
+.created-at {
+  color: #cbc8c8;
+}

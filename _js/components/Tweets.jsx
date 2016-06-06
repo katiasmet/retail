@@ -6,17 +6,12 @@ const Tweets = ({tweets}) =>  {
 
   return (
     <section className='tweets'>
-      <p>Howest TwitterFeed</p>
-
-      <ul>
 
         {
           tweets.map(tweet => {
-            return <Tweet key={tweet.id} image={tweet.user.profile_image_url} name={tweet.user.name} screenname={tweet.user.screen_name} text={tweet.text}/>;
+            return <Tweet key={tweet.id} image={tweet.user.profile_image_url} name={tweet.user.name} screenname={tweet.user.screen_name} text={tweet.text} created={tweet.created_at}/>;
           })
         }
-
-      </ul>
 
     </section>
   );
