@@ -12,6 +12,7 @@ use Slim\App;
 
 $app = new App(['settings' => ['displayErrorDetails' => true]]);
 
+require_once 'routes/stores.php';
 require_once 'routes/tweets.php';
 require_once 'routes/locations.php';
 
