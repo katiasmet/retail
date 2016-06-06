@@ -4,8 +4,6 @@ import {Tweet} from './';
 
 const Tweets = ({tweets}) =>  {
 
-  console.log(tweets);
-
   return (
     <section className='tweets'>
       <p>Howest TwitterFeed</p>

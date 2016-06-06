@@ -13,11 +13,11 @@
       }
     },
     "opening_hours": {
-      "ma": ["8:30","19:30"],
-      "di": ["8:30","19:30"],
-      "woe": ["8:30","19:30"],
-      "do": ["8:30","19:30"],
-      "vrij": ["8:30","19:30"]
+      "maandag": ["08:30","19:30"],
+      "dinsdag": ["08:30","19:30"],
+      "woensdag": ["08:30","19:30"],
+      "donderdag": ["08:30","19:30"],
+      "vrijdag": ["08:30","19:30"]
     },
     "portrait": "babitaversluis.gif",
     "quote": "Honderden, misschien wel duizenden parfum formules in mijn hoofd. Graag had ik dit de wereld laten ruiken.",

@@ -47,17 +47,15 @@ class LeftScreen extends Component  {
     });
 
     relatedStores.forEach(relatedStore => {
-      getCardinalDirection(
+      /*getCardinalDirection(
         currentStore.location.coordinates.latitude, currentStore.location.coordinates.longitude,
         relatedStore.location.coordinates.latitude, relatedStore.location.coordinates.longitude
-      );
+      );*/
 
-      getDistance(
-        currentStore.location.coordinates.latitude, currentStore.location.coordinates.longitude,
-        relatedStore.location.coordinates.latitude, relatedStore.location.coordinates.longitude
-      )
-        .then(distance => console.log(distance.rows[0].elements[0].duration.text));
-
+      getDistance(currentStore.location.coordinates.latitude, currentStore.location.coordinates.longitude,
+        relatedStore.location.coordinates.latitude, relatedStore.location.coordinates.longitude)
+        .then(distance => console.log(distance.rows));
+      //.rows[0].elements[0].duration.text
     });
 
     /*stores.forEach(store => {
