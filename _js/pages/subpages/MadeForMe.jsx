@@ -88,13 +88,6 @@ class MadeForMe extends Component {
   clickHandler(i) {
 
     let {creationSteps} = this.props;
-    let content = '';
-
-    creationSteps.forEach(creationStep => {
-      if(i === creationStep.step) {
-        content = creationStep.content;
-      }
-    });
 
     this.setState({active: i});
 
@@ -104,6 +97,14 @@ class MadeForMe extends Component {
 
     let {active} = this.state;
     let {creationSteps} = this.props;
+
+
+
+    //let $creationStep = document.querySelector('.creation-step');
+    //creationStep.style.animationPlayState='paused';
+    //creationStep.style.animationPlayState='running';
+
+
 
     if(isEmpty(creationSteps)) {
       return false;

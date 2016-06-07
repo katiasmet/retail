@@ -133,10 +133,49 @@ class RightScreen extends Component {
 
     return (
       <section className='right-screen'>
-          <section className='opening-hours'>
-            { this.renderToday() }
-            { this.renderNext() }
+
+          <section className='header'>
+
+            <div className='store-info'>
+
+              <div className='waiting-line'>
+                <h3>Babita's Projecten</h3>
+                <p className='tags'>#madeforme #workinprogress</p>
+                <p>nieuwe fruitige parfum</p>
+              </div>
+
+              <div className='upcoming-events'>
+                <h3>Komende evenementen</h3>
+                <div className='tags'>#madebyme</div>
+
+                <dl className='event-list'>
+                  <span className='event'>
+                    <dt>woe 5 jun</dt>
+                    <dd>samenstellen geuren</dd>
+                  </span>
+
+                  <span className='event'>
+                    <dt>vr 23 jun</dt>
+                    <dd>geurenquiz</dd>
+                  </span>
+
+                </dl>
+              </div>
+
+            </div>
+
+
+            <div className='opening-hours'>
+
+              <className className='today'>
+                { this.renderToday() }
+              </className>
+              
+              { this.renderNext() }
+            </div>
+
           </section>
+
           <Tweets tweets={tweets}/>
       </section>
     );

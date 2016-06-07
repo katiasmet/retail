@@ -70,13 +70,6 @@ h2 {
   justify-content: space-between;
   align-items: stretch;
 
-  position: relative;
-}
-
-/* ----------------------------------
-  LEFTSCREEN GENERAL
----------------------------------- */
-.left-screen {
   color: $main-color-about;
   background: url('/assets/img/bg_bv_about.jpg');
   background-blend-mode: multiply;
@@ -96,6 +89,9 @@ h2 {
   }
 }
 
+/* ----------------------------------
+  LEFTSCREEN GENERAL
+---------------------------------- */
 //header
 .left-screen header {
   @include center;
@@ -163,11 +159,6 @@ h2 {
 .nav-item.active {
   opacity: 0;
   transform: scale(0) translateY(0rem);
-
-  /*.pointer {
-    opacity: 0;
-    transform: translateY(-100rem);
-  }*/
 }
 
 .nav-byme {
@@ -413,23 +404,29 @@ h1, h2 {
   width: 30rem;
 }
 
-.creation-step {
-
-  h3, .step-count {
+.creation-step h3, .step-count {
     text-transform: uppercase;
     font-weight: 500;
     line-height: 2.1rem;
-  }
 
-  h3 {
-    color: rgba(255, 255, 255, 0.2);
-    font-size: 3rem;
-  }
+    opacity: 0;
+    transform: translateY(2rem);
+    animation: flowIn 0.6s ease-in forwards;
+}
 
-  .step-count {
-    color: rgba(255, 255, 255, 0.1);
-    font-size: 2.5rem;
-  }
+.creation-step h3 {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 3rem;
+}
+
+.step-count {
+  color: rgba(255, 255, 255, 0.1);
+  font-size: 2.5rem;
+}
+
+.creation-info {
+  opacity: 0;
+  animation: flowIn 0.6s 0.2s ease-in forwards;
 }
 
 /* ----------------------------------
@@ -480,32 +477,121 @@ h1, h2 {
 ---------------------------------- */
 .right-screen {
   color: $white;
-  background: $background-color-about;
 }
+
+h3, .user-name {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+h3.user-name {
+  opacity: 1;
+}
+
+//header
+.right-screen .header {
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.store-info {
+  flex: 3;
+}
+
+.waiting-line {
+  background: rgba(55, 121, 90, 0.5);
+  padding: 2rem 3rem;
+  font-size: 1rem;
+}
+
+.upcoming-events {
+  background: rgba(191, 171, 120, 0.8);
+  padding: 2rem 3rem;
+  font-size: 1rem;
+}
+
+.opening-hours {
+  background: rgba(148, 43, 101, 0.5);
+  padding: 2rem 1rem;
+
+  font-size: 1.2rem;
+
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  flex: 1;
+}
+
+.tags {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.event {
+  display: flex;
+
+  dt {
+    flex: 1;
+  }
+
+  dd {
+    flex: 2;
+  }
+}
+
+.event:first-child {
+  margin-bottom: 0.7rem;
+}
+
+.today {
+  width: 8rem;
+  height: 8rem;
+
+  @include center;
+}
+
+.next-days p {
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+//products
+
+//tweets
 .tweets {
   background: #819F8C;
+  padding: 3rem;
+}
+
+.tweet:first-child {
+  margin-bottom: 1.5rem;
 }
 
 .tweet {
-  display: flex;
-
+  @include center;
+  justify-content: space-between;
+  font-size: 1rem;
+  line-height: 1.3rem;
 }
 
 .profile-pic img {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   overflow: hidden;
+  margin-right: 1rem;
 }
 
 .user {
   display: flex;
   justify-content: space-between;
-}
-
-.user-name {
-  text-transform: uppercase;
-  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 .user-handler {

@@ -84,6 +84,17 @@ html {
   }
 }
 
+@keyframes flowIn {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
 body, html, .react-app, .window {
   width: 100%;
   height: 100%;
@@ -155,20 +166,13 @@ h2 {
       justify-content: space-between;
   -ms-flex-align: stretch;
       align-items: stretch;
-  position: relative;
-}
-
-/* ----------------------------------
-  LEFTSCREEN GENERAL
----------------------------------- */
-.left-screen {
   color: #4d1034;
   background: url("/assets/img/bg_bv_about.jpg");
   background-blend-mode: multiply;
   position: relative;
 }
 
-.left-screen:before {
+.left-screen:before, .right-screen:before {
   content: '';
   position: absolute;
   top: 0;
@@ -182,6 +186,9 @@ h2 {
   transform: skewX(45deg) translate(-40rem, 32rem);
 }
 
+/* ----------------------------------
+  LEFTSCREEN GENERAL
+---------------------------------- */
 .left-screen header {
   display: -ms-flexbox;
   display: flex;
@@ -267,10 +274,6 @@ h2 {
 .nav-item.active {
   opacity: 0;
   transform: scale(0) translateY(0rem);
-  /*.pointer {
-    opacity: 0;
-    transform: translateY(-100rem);
-  }*/
 }
 
 .nav-byme {
@@ -548,10 +551,13 @@ h1, h2 {
   width: 30rem;
 }
 
-.creation-step h3, .creation-step .step-count {
+.creation-step h3, .step-count {
   text-transform: uppercase;
   font-weight: 500;
   line-height: 2.1rem;
+  opacity: 0;
+  transform: translateY(2rem);
+  animation: flowIn 0.6s ease-in forwards;
 }
 
 .creation-step h3 {
@@ -559,9 +565,14 @@ h1, h2 {
   font-size: 3rem;
 }
 
-.creation-step .step-count {
+.step-count {
   color: rgba(255, 255, 255, 0.1);
   font-size: 2.5rem;
+}
+
+.creation-info {
+  opacity: 0;
+  animation: flowIn 0.6s 0.2s ease-in forwards;
 }
 
 /* ----------------------------------
@@ -609,23 +620,130 @@ h1, h2 {
 ---------------------------------- */
 .right-screen {
   color: #ffffff;
-  background: #c4a56f;
+}
+
+h3, .user-name {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+h3.user-name {
+  opacity: 1;
+}
+
+.right-screen .header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: stretch;
+      align-items: stretch;
+  -ms-flex-line-pack: stretch;
+      align-content: stretch;
+}
+
+.store-info {
+  -ms-flex: 3;
+      flex: 3;
+}
+
+.waiting-line {
+  background: rgba(55, 121, 90, 0.5);
+  padding: 2rem 3rem;
+  font-size: 1rem;
+}
+
+.upcoming-events {
+  background: rgba(191, 171, 120, 0.8);
+  padding: 2rem 3rem;
+  font-size: 1rem;
+}
+
+.opening-hours {
+  background: rgba(148, 43, 101, 0.5);
+  padding: 2rem 1rem;
+  font-size: 1.2rem;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex: 1;
+      flex: 1;
+}
+
+.tags {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.event {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.event dt {
+  -ms-flex: 1;
+      flex: 1;
+}
+
+.event dd {
+  -ms-flex: 2;
+      flex: 2;
+}
+
+.event:first-child {
+  margin-bottom: 0.7rem;
+}
+
+.today {
+  width: 8rem;
+  height: 8rem;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.next-days p {
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-top: 1rem;
 }
 
 .tweets {
   background: #819F8C;
+  padding: 3rem;
+}
+
+.tweet:first-child {
+  margin-bottom: 1.5rem;
 }
 
 .tweet {
   display: -ms-flexbox;
   display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  font-size: 1rem;
+  line-height: 1.3rem;
 }
 
 .profile-pic img {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   overflow: hidden;
+  margin-right: 1rem;
 }
 
 .user {
@@ -633,11 +751,7 @@ h1, h2 {
   display: flex;
   -ms-flex-pack: justify;
       justify-content: space-between;
-}
-
-.user-name {
-  text-transform: uppercase;
-  font-weight: 500;
+  margin-bottom: 0.5rem;
 }
 
 .user-handler {

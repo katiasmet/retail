@@ -17,3 +17,14 @@
     opacity: 0;
   }
 }
+
+@keyframes flowIn {
+  0% {
+    transform: translateY(2rem);
+    opacity: 0;
+  }
+  100%   {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}

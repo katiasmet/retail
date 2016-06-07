@@ -19,7 +19,7 @@ const Tweet = ({text, image, name, screenname, created}) =>  {
           <span className='created-at'>{createdAt}</span>
         </div>
 
-        <p className='tweet'>
+        <p>
           {text}
         </p>
       </div>
