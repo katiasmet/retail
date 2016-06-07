@@ -3,16 +3,21 @@ import React, {PropTypes} from 'react';
 const RelatedStore = ({name, craft, icon, distance}) =>  {
 
   return (
-    <li className='related-store'>
-      <span className='distance'>{distance}</span>
-      <span className='crafter'>
+    <div className='related-store'>
+      <div className='distance'>
+        <figure className='arrow'>
+          <img src='/assets/svg/arrow.svg' alt='arrow'/>
+        </figure>
+        {distance}&#39;min
+      </div>
+      <p className='crafter'>
         <span className='crafter-name'>{name}</span>
         <span className='craft'>{craft}</span>
-      </span>
+      </p>
       <figure className='icon'>
         <img src={`/assets/svg/${icon}`} alt={craft}/>
       </figure>
-    </li>
+    </div>
   );
 
 };

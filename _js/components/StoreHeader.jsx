@@ -7,13 +7,13 @@ const StoreHeader = ({name, craft, tags, icon}) =>  {
       <figure className='icon'>
         <img src={`/assets/svg/${icon}`} alt={craft}/>
       </figure>
-      <h2>
+      <p className='tags'>
         {
           tags.map(tag => {
             return `#${tag} `;
           })
         }
-      </h2>
+      </p>
       <h1>{name}</h1>
     </header>
   );

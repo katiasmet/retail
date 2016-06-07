@@ -19,30 +19,36 @@ class MadeForMe extends Component {
   }
 
   componentDidUpdate() {
-    this.paperTest();
+    this.setMorphingBg();
   }
 
-  paperTest() {
+  setMorphingBg() {
 
-    this.r = (0.034 * window.innerHeight); //responsive size
+    this.r = (0.25 * window.innerHeight); //responsive size
 
-    let {creationSteps} = this.props;
-    let creationStepsPapers = []; //create a paper js scope for every canvas element
+    let morphingPapers = []; //create a paper js scope for every canvas element
     this.circles = [];
+    let fillColors = ['#668198', '#21252B', '#282C34'];
 
-    for(let i = 0; i < creationSteps.length; i++) {
+    for(let i = 0; i < 3; i++) {
 
-      creationStepsPapers[i] = new paper.PaperScope();
-      creationStepsPapers[i].setup(`canvas${i}`);
+      morphingPapers[i] = new paper.PaperScope();
+      morphingPapers[i].setup(`canvas${i}`);
 
-      this.circles[i] = new creationStepsPapers[i].Path.Circle(new Point(this.r, this.r), this.r);
-      this.circles[i].fillColor = '#FCCD02';
+      this.circles[i] = new morphingPapers[i].Path.Circle(new Point(this.r, this.r), this.r);
+
+      console.log('init');
+      //different colors
+      this.circles[i].fillColor = fillColors[i];
+
 
       this.circles[i].rndPos = [];
       this.generateRndPoints(i);
 
-      this.draw(i, creationStepsPapers);
+      this.draw(i, morphingPapers);
     }
+
+    console.log(this.circles);
 
   }
 
@@ -58,10 +64,10 @@ class MadeForMe extends Component {
     this.circles[i].rndPos[3] = [this.rndPoint((0.4 * diameter), (0.6 * diameter)) , this.rndPoint((0.8 * diameter), (1 * diameter))];
   }
 
-  draw(canvas, creationStepsPapers) {
+  draw(canvas, morphingPapers) {
     let speed = 150;
 
-    creationStepsPapers[canvas].view.onFrame = () => {
+    morphingPapers[canvas].view.onFrame = () => {
 
       for (let i = 0; i < 4; i++) { //animation every segment / anchorpoint of the circle
 
@@ -78,7 +84,7 @@ class MadeForMe extends Component {
       }
 
     };
-    creationStepsPapers[canvas].view.draw();
+    morphingPapers[canvas].view.draw();
   }
 
   clickHandler(i) {
@@ -123,20 +129,36 @@ class MadeForMe extends Component {
 
     let {creationSteps} = this.props;
 
+    //3 morphing circles
+    //voor elke stap een button
+    // per stap ook tekst
+
+    /*{
+      creationSteps.map((step, i) => {
+        return (
+          <button key={i} className='morph-btn' id={`morph-btn${i}`} onClick={() => this.clickHandler(i + 1)}>
+            <span className='morph-btn-content'>{i + 1}</span>
+
+          </button>
+        );
+      })
+    }*/
+
     return (
       <section className='made-for-me'>
-        <section className='morph-btns'>
+        <section className='morph-bg'>
 
           {
-            creationSteps.map((step, i) => {
-              return (
-                <button key={i} className='morph-btn' id={`morph-btn${i}`} onClick={() => this.clickHandler(i + 1)}>
-                  <span className='morph-btn-content'>{i + 1}</span>
-                  <canvas id={`canvas${i}`} className='canvas' data-paper-resize />
-                </button>
-              );
-            })
+            [...Array(3)].map((x, i) =>
+              <canvas key={i} id={`canvas${i}`} className='canvas' data-paper-resize />
+            )
           }
+
+        </section>
+
+        <section className='step-btns'>
+
+
 
         </section>
 

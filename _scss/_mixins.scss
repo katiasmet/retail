@@ -3,3 +3,10 @@
   justify-content: center;
   align-items: center;
 }
+
+@mixin before-after() {
+  content:'';
+  position:absolute;
+  top:0;
+  left:0;
+}

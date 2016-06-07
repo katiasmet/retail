@@ -65,27 +65,44 @@ html {
 }
 
 @keyframes motionPath {
-  from {
+  0% {
     transform: rotate(0deg) translateX(15rem) rotate(0deg);
   }
-  to {
+  100% {
     transform: rotate(360deg) translateX(15rem) rotate(-360deg);
   }
 }
 
-body, html, main, .react-app, .window {
+@keyframes navPointer {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}
+
+body, html, .react-app, .window {
   width: 100%;
   height: 100%;
 }
 
 body {
-  font-size: 1.3rem;
+  font-size: 1.4rem;
   font-family: 'gotham', sans-serif;
   font-weight: 300;
 }
 
 .hidden {
   display: none;
+}
+
+a {
+  color: #ffffff;
+  text-decoration: none;
+  display: block;
 }
 
 span {
@@ -104,11 +121,12 @@ button {
 }
 
 h1 {
-  font-size: 7rem;
+  font-size: 6rem;
   text-transform: uppercase;
   font-weight: 700;
   text-align: center;
   color: #b53471;
+  line-height: 6rem;
 }
 
 h2 {
@@ -126,17 +144,44 @@ h2 {
 .left-screen, .right-screen {
   width: 60vh;
   height: 100vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: stretch;
+      align-items: stretch;
+  position: relative;
 }
 
 /* ----------------------------------
   LEFTSCREEN GENERAL
 ---------------------------------- */
 .left-screen {
-  background: #c4a56f;
   color: #4d1034;
+  background: url("/assets/img/bg_bv_about.jpg");
+  background-blend-mode: multiply;
+  position: relative;
+  z-index: -10;
 }
 
-header {
+.left-screen:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #ffae00;
+  mix-blend-mode: color-burn;
+  opacity: 0.2;
+  transform: skewX(45deg) translate(-400px, 320px);
+  transform: skewX(45deg) translate(-40rem, 32rem);
+  z-index: -5;
+}
+
+.left-screen header {
   display: -ms-flexbox;
   display: flex;
   -ms-flex-pack: center;
@@ -145,10 +190,128 @@ header {
       align-items: center;
   -ms-flex-direction: column;
       flex-direction: column;
+  margin-top: 4rem;
+}
+
+.tags {
+  font-weight: 500;
+  margin: 0.5rem 0 0.5rem 0;
 }
 
 .icon {
   width: 3rem;
+}
+
+.left-nav {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1.5rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+  z-index: 999;
+}
+
+.nav-item {
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease-in;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-pack: start;
+      justify-content: flex-start;
+}
+
+.pointer {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-top: -0.3rem;
+  position: relative;
+  z-index: 900;
+}
+
+.pointer:before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 11px;
+  width: 1.1rem;
+  height: 11px;
+  height: 1.1rem;
+  border-radius: 50%;
+  top: -3px;
+  top: -0.3rem;
+  left: -3px;
+  left: -0.3rem;
+  border: 1px solid #ffffff;
+  border: 0.1rem solid #ffffff;
+  animation: navPointer 1.5s ease-in infinite;
+}
+
+.nav-item.active {
+  opacity: 0;
+  transform: scale(0) translateY(0rem);
+  /*.pointer {
+    opacity: 0;
+    transform: translateY(-100rem);
+  }*/
+}
+
+.nav-byme {
+  color: #e5d9a1;
+}
+
+.nav-byme .pointer {
+  background: #e5d9a1;
+}
+
+.nav-byme .pointer:before {
+  border-color: #e5d9a1;
+}
+
+.nav-forme {
+  color: #205d45;
+}
+
+.nav-forme .pointer {
+  background: #205d45;
+}
+
+.nav-forme .pointer:before {
+  border-color: #205d45;
+}
+
+.nav-about {
+  color: #4d1034;
+}
+
+.nav-about.transform {
+  transform: translateY(-1.6rem);
+}
+
+.nav-about .pointer {
+  background: #4d1034;
+}
+
+.nav-about .pointer:before {
+  border-color: #4d1034;
 }
 
 .related-stores, .related-store {
@@ -158,17 +321,62 @@ header {
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
+  -ms-flex-align: end;
+      align-items: flex-end;
+}
+
+.related-stores {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
 }
 
 .related-store {
-  -ms-flex-pack: justify;
-      justify-content: space-between;
+  -ms-flex-align: end;
+      -ms-grid-row-align: flex-end;
+      align-items: flex-end;
   width: 50%;
 }
 
 .related-store span, .related-store figure {
   -ms-flex-order: 0;
       order: 0;
+}
+
+.related-store .icon {
+  max-width: 2rem;
+}
+
+.crafter-name {
+  font-weight: 500;
+  line-height: 2rem;
+}
+
+.distance {
+  font-size: 1rem;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.arrow {
+  width: 1rem;
+  margin-left: 0.5rem;
+  -ms-flex-order: 0;
+      order: 0;
+}
+
+.related-store:first-child .crafter {
+  text-align: right;
+  margin: 0 1rem 0 2rem;
+}
+
+.related-store:first-child .distance .arrow {
+  transform: scaleX(-1);
+  margin-left: 0;
+  margin-right: 0.5rem;
 }
 
 .related-store:last-child figure {
@@ -181,9 +389,22 @@ header {
       order: 1;
 }
 
+.related-store:last-child .distance .arrow {
+  -ms-flex-order: 1;
+      order: 1;
+}
+
+.related-store:last-child .crafter {
+  margin: 0 2rem 0 1rem;
+}
+
 /* ----------------------------------
   ABOUT ME
 ---------------------------------- */
+.about-me-container {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(148, 91, 159, 0.7) 150%), url("/assets/img/bg_bv_about.jpg");
+}
+
 .about-me {
   display: -ms-flexbox;
   display: flex;
@@ -193,16 +414,29 @@ header {
       align-items: center;
   -ms-flex-direction: column;
       flex-direction: column;
+  text-align: center;
+  color: #ffffff;
+  line-height: 2rem;
+  margin-top: -10vh;
 }
 
 .portrait {
   width: 30rem;
   display: block;
+  margin-bottom: 0.5rem;
+}
+
+.quote {
+  max-width: 32rem;
 }
 
 /* ----------------------------------
   MADE FOR ME
 ---------------------------------- */
+.made-for-me-container {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(28, 226, 218, 0.7) 150%), url("/assets/img/bg_bv_about.jpg");
+}
+
 .made-for-me {
   display: -ms-flexbox;
   display: flex;
@@ -228,7 +462,6 @@ header {
   width: 30rem;
   height: 30rem;
   border-radius: 50%;
-  background: #c4a56f;
 }
 
 .morph-btns {
@@ -272,6 +505,10 @@ canvas {
 /* ----------------------------------
   MADE BY ME
 ---------------------------------- */
+.made-by-me-container {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(229, 216, 164, 0.7) 150%), url("/assets/img/bg_bv_about.jpg");
+}
+
 .photos {
   width: 100%;
   height: 60vh;

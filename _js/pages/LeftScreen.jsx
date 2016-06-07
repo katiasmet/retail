@@ -43,6 +43,7 @@ class LeftScreen extends Component  {
   }
 
   getCurrentStoreDetails() {
+
     let {id} = this.state;
 
     selectTagsByStoreId(id)
@@ -59,6 +60,7 @@ class LeftScreen extends Component  {
   }
 
   getStores() {
+
     let {id} = this.state;
 
     selectAllExceptCurrent(id)
@@ -85,32 +87,50 @@ class LeftScreen extends Component  {
 
     });
 
-    this.getRandomStores(northStores, southStores);
+    let randomStores = this.getRandomStores(northStores, southStores);
+    this.getStoreDistances(randomStores);
 
   }
 
   getRandomStores(northStores, southStores) { //get 2 random stores, one south, one north
-    let nearbyStores = [];
 
-    nearbyStores.push(northStores[this.rndNumber(northStores.length)]); //push random north store
-    nearbyStores.push(southStores[this.rndNumber(southStores.length)]); //push random south store
+    let randomStores = [];
 
-    this.getStoreDistances(nearbyStores);
-  }
+    randomStores[0] = northStores[this.rndNumber(northStores.length)]; //push random north store
+    randomStores[1] = southStores[this.rndNumber(southStores.length)]; //push random south store
 
-  getStoreDistances(nearbyStores) { //get distance of store
-    nearbyStores.forEach(nearbyStore => {
+    return randomStores;
 
-      getDistance( 51.9152698, 4.3963989, nearbyStore.latitude, nearbyStore.longitude)
-        .then(distance => {
-          nearbyStore.distance = distance.rows[0].elements[0].duration.text;
-          this.setState({stores: nearbyStores});
-        });
-    });
   }
 
   rndNumber(max) {
-    return Math.floor(Math.random() * (max + 1));
+    return Math.floor(Math.random() * (max));
+  }
+
+  getStoreDistances(randomStores) { //get distance of store
+
+    let stores = [];
+
+    for(let i = 0; i < randomStores.length; i++) { //full control over north (0) and south (0)
+      getDistance( 51.9152698, 4.3963989, randomStores[i].latitude, randomStores[i].longitude)
+        .then(distance => {
+          let distanceToStore = distance.rows[0].elements[0].duration.text;
+          randomStores[i].distance = distanceToStore.match(/\d+/g)[0]; //get only number
+          stores[i] = randomStores[i];
+        })
+        .then(() => this.setState({stores: stores}));
+    }
+
+  }
+
+  setPageClass(pathname) {
+    if(pathname === '/leftscreen/madebyme') {
+      return 'made-by-me-container';
+    } else if (pathname === '/leftscreen/madeforme') {
+      return 'made-for-me-container';
+    } else {
+      return 'about-me-container';
+    }
   }
 
   render() {
@@ -120,19 +140,18 @@ class LeftScreen extends Component  {
     let {pathname} = this.props.location;
 
     return (
-      <section className='left-screen'>
+      <section className={`left-screen ${this.setPageClass(pathname)}`}>
 
         <StoreHeader name={name} craft={craft} tags={tags} icon={icon} />
         <Navigation pathname={pathname} />
-        <figure className='label'>
 
-        </figure>
-
-        {cloneElement(children, {
-          portrait: portrait,
-          quote: quote,
-          creationSteps: creationSteps
-        })}
+        {
+          cloneElement(children, {
+            portrait: portrait,
+            quote: quote,
+            creationSteps: creationSteps
+          })
+        }
 
         <RelatedStores stores={stores} />
 

@@ -5,14 +5,35 @@ const setActive = (pathname, name) => {
   return (`/leftscreen/${name}` === pathname) ? 'active' : '';
 };
 
+const setTransformY = (pathname, name) => { //if made for me is active, add transform
+  return (`/leftscreen/${name}` === pathname) ? 'transform' : '';
+};
+
 const Navigation = ({pathname}) => {
 
   return (
-      <nav>
+      <nav className='left-nav'>
         <ul>
-          <li><Link className={`nav-item ${setActive(pathname, 'madebyme')}`} to='/leftscreen/madebyme'>#madebyme</Link></li>
-          <li><Link className={`nav-item ${setActive(pathname, 'madeforme')}`} to='/leftscreen/madeforme'>#madeforme</Link></li>
-          <li><Link className={`nav-item ${setActive(pathname, 'aboutme')}`} to='/leftscreen/aboutme'>aboutme</Link></li>
+          <li>
+            <Link className={`nav-item nav-byme ${setActive(pathname, 'madebyme')}`} to='/leftscreen/madebyme'>
+              <span className='pointer'></span>
+              #madebyme
+            </Link>
+          </li>
+
+          <li>
+            <Link className={`nav-item nav-forme ${setActive(pathname, 'madeforme')}`} to='/leftscreen/madeforme'>
+              <span className='pointer'></span>
+              #madeforme
+            </Link>
+          </li>
+
+          <li>
+            <Link className={`nav-item nav-about ${setTransformY(pathname, 'madeforme')} ${setActive(pathname, 'aboutme')}`} to='/leftscreen/aboutme'>
+              <span className='pointer'></span>
+              aboutme
+            </Link>
+          </li>
         </ul>
       </nav>
     );
