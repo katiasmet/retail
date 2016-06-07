@@ -49,8 +49,11 @@ h1 {
 }
 
 h2 {
-  font-size: 1rem;
+  font-size: 2.8rem;
   font-weight: 500;
+  opacity: 0.3;
+  color: $accent-color-about;
+  margin-bottom: 2.5rem;
 }
 
 .window {
@@ -79,8 +82,6 @@ h2 {
   background-blend-mode: multiply;
   position: relative;
 
-  z-index: -10;
-
   &:before {
     @include before-after;
 
@@ -92,7 +93,6 @@ h2 {
     opacity: 0.2;
 
     transform: skewX(45deg) translate(-40rem, 32rem);
-    z-index: -5;
   }
 }
 
@@ -124,8 +124,6 @@ h2 {
   height: 100vh;
   @include center;
   justify-content: flex-start;
-
-  z-index: 999;
 }
 
 .nav-item {
@@ -146,7 +144,6 @@ h2 {
   margin-top: -0.3rem;
 
   position: relative;
-  z-index: 900;
 
   &:before {
     @include before-after;
@@ -319,17 +316,85 @@ h2 {
 .made-for-me-container {
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(28, 226, 218, 0.70) 150%),
               url('/assets/img/bg_bv_about.jpg');
+  color: $main-color-forme;
+}
+
+h1, h2 {
+  color: $accent-color-forme;
 }
 
 .made-for-me {
   @include center;
-  width: 100%;
-  height: 40rem;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
+.step-container {
+  position: relative;
+  width: 27rem;
+  height: 27rem;
+
+  @include center;
+}
+
+.morph-bg {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+
+  width: 100%;
+  height: 100%;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left:0;
+}
+
+.step-circle {
+  width: 21rem;
+  height: 21rem;
+  border: 0.3rem solid rgba(230, 247, 230, 0.6);
+  border-radius: 50%;
+
+  font-weight: 500;
   position: relative;
 }
 
-.creation-step {
+.step-btn {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0;
+
+  font-size: 1rem;
+
+  position: absolute;
+  left: 9.5rem;
+  top: 9.5rem;
+
+  transition: all 0.3s ease-in;
+  animation: motionPath 60s linear infinite;
+}
+
+.step-btn-1 { animation-delay: -15s; }
+.step-btn-2 { animation-delay: -30s; }
+.step-btn-3 { animation-delay: -45s; }
+
+.step-btn.active {
+  background: rgba(255, 255, 255, 1);
+  width: 2rem; //with this animation, scalen not possible
+  height: 2rem;
+  left: 9.2rem;
+  top: 9.2rem
+}
+
+/*.creation-step {
   @include center;
   flex-direction: column;
   text-align: center;
@@ -337,41 +402,35 @@ h2 {
   width: 30rem;
   height: 30rem;
   border-radius: 50%;
+}*/
+
+.creation-step {
+  @include center;
+  flex-direction: column;
+
+  text-align: center;
+  color: $white;
+  width: 30rem;
 }
 
-.morph-btns {
-  position: absolute;
-  width:100%;
-  display: block;
+.creation-step {
 
-  top: 45%;
-  left: 45%;
+  h3, .step-count {
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 2.1rem;
+  }
+
+  h3 {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 3rem;
+  }
+
+  .step-count {
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 2.5rem;
+  }
 }
-
-.morph-btn {
-  width: 7vh;
-  height: 7vh;
-
-  animation: motionPath 60s linear infinite;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-}
-
-canvas {
-  width: 100%;
-  height: 100%;
-
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-#morph-btn1 { animation-delay: -15s; }
-#morph-btn2 { animation-delay: -30s; }
-#morph-btn3 { animation-delay: -45s; }
 
 /* ----------------------------------
   MADE BY ME

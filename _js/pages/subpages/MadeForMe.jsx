@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import paper, {Point} from 'paper';
 import {isEmpty} from 'lodash';
 
-import {CreationStep} from '../../components';
+import {StepButtons, CreationStep} from '../../components';
 
 class MadeForMe extends Component {
 
@@ -10,8 +10,10 @@ class MadeForMe extends Component {
     super(props, context);
 
     this.state = {
-      active: ''
+      active: 1
     };
+
+    this.clickHandler = ::this.clickHandler;
   }
 
   componentWillMount() {
@@ -24,11 +26,11 @@ class MadeForMe extends Component {
 
   setMorphingBg() {
 
-    this.r = (0.25 * window.innerHeight); //responsive size
+    this.r = (0.18 * window.innerHeight); //responsive size
 
     let morphingPapers = []; //create a paper js scope for every canvas element
     this.circles = [];
-    let fillColors = ['#668198', '#21252B', '#282C34'];
+    let fillColors = ['#668198', '#531339', '#377b62'];
 
     for(let i = 0; i < 3; i++) {
 
@@ -37,19 +39,15 @@ class MadeForMe extends Component {
 
       this.circles[i] = new morphingPapers[i].Path.Circle(new Point(this.r, this.r), this.r);
 
-      console.log('init');
       //different colors
       this.circles[i].fillColor = fillColors[i];
-
+      this.circles[i].fillColor.alpha = 0.6;
 
       this.circles[i].rndPos = [];
       this.generateRndPoints(i);
 
       this.draw(i, morphingPapers);
     }
-
-    console.log(this.circles);
-
   }
 
   rndPoint(min, max) {
@@ -58,14 +56,14 @@ class MadeForMe extends Component {
 
   generateRndPoints(i) { //afhankelijk van de grootte van de cirkel
     let diameter = this.r * 2;
-    this.circles[i].rndPos[0] = [this.rndPoint(0, (0.2 * diameter)) , this.rndPoint((0.4 * diameter), (0.6 * diameter))];
-    this.circles[i].rndPos[1] = [this.rndPoint((0.4 * diameter), (0.6 * diameter)) , this.rndPoint(0, (0.2 * diameter))];
-    this.circles[i].rndPos[2] = [this.rndPoint((0.8 * diameter), (1 * diameter)) , this.rndPoint((0.4 * diameter), (0.6 * diameter))];
-    this.circles[i].rndPos[3] = [this.rndPoint((0.4 * diameter), (0.6 * diameter)) , this.rndPoint((0.8 * diameter), (1 * diameter))];
+    this.circles[i].rndPos[0] = [this.rndPoint(0, (0.1 * diameter)) , this.rndPoint((0.45 * diameter), (0.55 * diameter))];
+    this.circles[i].rndPos[1] = [this.rndPoint((0.45 * diameter), (0.55 * diameter)) , this.rndPoint(0, (0.1 * diameter))];
+    this.circles[i].rndPos[2] = [this.rndPoint((0.9 * diameter), (1 * diameter)) , this.rndPoint((0.45 * diameter), (0.55 * diameter))];
+    this.circles[i].rndPos[3] = [this.rndPoint((0.45 * diameter), (0.55 * diameter)) , this.rndPoint((0.9 * diameter), (1 * diameter))];
   }
 
   draw(canvas, morphingPapers) {
-    let speed = 150;
+    let speed = 200;
 
     morphingPapers[canvas].view.onFrame = () => {
 
@@ -98,12 +96,7 @@ class MadeForMe extends Component {
       }
     });
 
-    this.setState({
-      active: {
-        id: i,
-        content: content
-      }
-    });
+    this.setState({active: i});
 
   }
 
@@ -112,57 +105,44 @@ class MadeForMe extends Component {
     let {active} = this.state;
     let {creationSteps} = this.props;
 
-    if(isEmpty(active)) { //render first step when no step is active
-      for(let i = 0; i < creationSteps.length; i++) { //return doesn't work that well with foreach
-        if(creationSteps[i].step === 1) {
-          return <CreationStep id={creationSteps[i].step} info={creationSteps[i].content} />;
-        }
-      }
+    if(isEmpty(creationSteps)) {
+      return false;
     } else {
-      return <CreationStep id={active.id} info={active.content} />;
+      return <CreationStep id={active} info={creationSteps[active].content} />;
     }
 
   }
 
-
   render() {
 
     let {creationSteps} = this.props;
-
-    //3 morphing circles
-    //voor elke stap een button
-    // per stap ook tekst
-
-    /*{
-      creationSteps.map((step, i) => {
-        return (
-          <button key={i} className='morph-btn' id={`morph-btn${i}`} onClick={() => this.clickHandler(i + 1)}>
-            <span className='morph-btn-content'>{i + 1}</span>
-
-          </button>
-        );
-      })
-    }*/
+    let {active} = this.state;
 
     return (
       <section className='made-for-me'>
-        <section className='morph-bg'>
 
-          {
-            [...Array(3)].map((x, i) =>
-              <canvas key={i} id={`canvas${i}`} className='canvas' data-paper-resize />
-            )
-          }
+        <h2>#madeforme</h2>
 
-        </section>
+        <section className='step-container'>
 
-        <section className='step-btns'>
+          <div className='morph-bg'>
 
+            {
+              [...Array(3)].map((x, i) =>
+                <canvas key={i} id={`canvas${i}`} className='canvas' data-paper-resize />
+              )
+            }
 
+          </div>
+
+          <section className='step-circle'>
+            <StepButtons creationSteps={creationSteps} clickHandler={this.clickHandler} active={active}/>
+          </section>
 
         </section>
 
         { this.renderCreationStep() }
+
       </section>
 
     );

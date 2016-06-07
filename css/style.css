@@ -66,10 +66,10 @@ html {
 
 @keyframes motionPath {
   0% {
-    transform: rotate(0deg) translateX(15rem) rotate(0deg);
+    transform: rotate(0deg) translateX(10.3rem) rotate(0deg);
   }
   100% {
-    transform: rotate(360deg) translateX(15rem) rotate(-360deg);
+    transform: rotate(360deg) translateX(10.3rem) rotate(-360deg);
   }
 }
 
@@ -130,8 +130,11 @@ h1 {
 }
 
 h2 {
-  font-size: 1rem;
+  font-size: 2.8rem;
   font-weight: 500;
+  opacity: 0.3;
+  color: #b53471;
+  margin-bottom: 2.5rem;
 }
 
 .window {
@@ -163,7 +166,6 @@ h2 {
   background: url("/assets/img/bg_bv_about.jpg");
   background-blend-mode: multiply;
   position: relative;
-  z-index: -10;
 }
 
 .left-screen:before {
@@ -178,7 +180,6 @@ h2 {
   opacity: 0.2;
   transform: skewX(45deg) translate(-400px, 320px);
   transform: skewX(45deg) translate(-40rem, 32rem);
-  z-index: -5;
 }
 
 .left-screen header {
@@ -218,7 +219,6 @@ h2 {
       align-items: center;
   -ms-flex-pack: start;
       justify-content: flex-start;
-  z-index: 999;
 }
 
 .nav-item {
@@ -242,7 +242,6 @@ h2 {
   margin-right: 0.5rem;
   margin-top: -0.3rem;
   position: relative;
-  z-index: 900;
 }
 
 .pointer:before {
@@ -435,6 +434,11 @@ h2 {
 ---------------------------------- */
 .made-for-me-container {
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(28, 226, 218, 0.7) 150%), url("/assets/img/bg_bv_about.jpg");
+  color: #205d45;
+}
+
+h1, h2 {
+  color: #31855c;
 }
 
 .made-for-me {
@@ -444,11 +448,92 @@ h2 {
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
+  -ms-flex-direction: column;
+      flex-direction: column;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+}
+
+.step-container {
+  position: relative;
+  width: 27rem;
+  height: 27rem;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: center;
+      justify-content: center;
+  -ms-flex-align: center;
+      align-items: center;
+}
+
+.morph-bg {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
   width: 100%;
-  height: 40rem;
+  height: 100%;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.step-circle {
+  width: 21rem;
+  height: 21rem;
+  border: 0.3rem solid rgba(230, 247, 230, 0.6);
+  border-radius: 50%;
+  font-weight: 500;
   position: relative;
 }
 
+.step-btn {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0;
+  font-size: 1rem;
+  position: absolute;
+  left: 9.5rem;
+  top: 9.5rem;
+  transition: all 0.3s ease-in;
+  animation: motionPath 60s linear infinite;
+}
+
+.step-btn-1 {
+  animation-delay: -15s;
+}
+
+.step-btn-2 {
+  animation-delay: -30s;
+}
+
+.step-btn-3 {
+  animation-delay: -45s;
+}
+
+.step-btn.active {
+  background: white;
+  width: 2rem;
+  height: 2rem;
+  left: 9.2rem;
+  top: 9.2rem;
+}
+
+/*.creation-step {
+  @include center;
+  flex-direction: column;
+  text-align: center;
+
+  width: 30rem;
+  height: 30rem;
+  border-radius: 50%;
+}*/
 .creation-step {
   display: -ms-flexbox;
   display: flex;
@@ -459,47 +544,24 @@ h2 {
   -ms-flex-direction: column;
       flex-direction: column;
   text-align: center;
+  color: #ffffff;
   width: 30rem;
-  height: 30rem;
-  border-radius: 50%;
 }
 
-.morph-btns {
-  position: absolute;
-  width: 100%;
-  display: block;
-  top: 45%;
-  left: 45%;
+.creation-step h3, .creation-step .step-count {
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 2.1rem;
 }
 
-.morph-btn {
-  width: 7vh;
-  height: 7vh;
-  animation: motionPath 60s linear infinite;
-  position: absolute;
-  top: 0;
-  left: 0;
+.creation-step h3 {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 3rem;
 }
 
-canvas {
-  width: 100%;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: -1;
-}
-
-#morph-btn1 {
-  animation-delay: -15s;
-}
-
-#morph-btn2 {
-  animation-delay: -30s;
-}
-
-#morph-btn3 {
-  animation-delay: -45s;
+.creation-step .step-count {
+  color: rgba(255, 255, 255, 0.1);
+  font-size: 2.5rem;
 }
 
 /* ----------------------------------
