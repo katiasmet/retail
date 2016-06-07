@@ -18,7 +18,7 @@ $app->get($base, function($request, $response, $args){
      . $key);
   }
 
-  $response->getBody()->write(json_encode($data));
+  $response->getBody()->write($data);
   return $response->withHeader('Content-Type','application/json');
 
 });

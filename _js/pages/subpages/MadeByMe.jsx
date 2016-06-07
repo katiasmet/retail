@@ -78,9 +78,13 @@ class MadeByMe extends Component {
 
     let container = this.refs['photo-container'];
 
+    console.log(container.getBoundingClientRect().width );
+    console.log(container.getBoundingClientRect().height );
+
     let containerWidth = container.getBoundingClientRect().width - el.getBoundingClientRect().width;
     let containerHeight = container.getBoundingClientRect().height - el.getBoundingClientRect().height;
 
+    console.log('random punt');
     console.log(containerWidth);
     console.log(containerHeight);
 

@@ -8,7 +8,7 @@ const RelatedStores = ({stores}) =>  {
     <ul className='related-stores'>
       {
         stores.map((store, i) => {
-          return <RelatedStore key={i} name={store.name} craft={store.craft} icon={store.icon} />;
+          return <RelatedStore key={i} name={store.name} craft={store.craft} icon={store.icon} distance={store.distance}/>;
         })
       }
     </ul>

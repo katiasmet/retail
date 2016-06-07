@@ -23,20 +23,23 @@ class RightScreen extends Component {
   }
 
   componentDidMount() {
-    this.getTweets();
     this.getCurrentStore();
   }
 
-  getTweets() {
+  getTweets(twitterHandler) {
 
-    selectByUser('bibouskincare', 2)
+    selectByUser(twitterHandler, 2)
       .then(tweets => this.setState({tweets: tweets}));
 
   }
 
   getCurrentStore() {
-    selectByLocation(51.9145, 4.40148)
-      .then(store => selectOpeningHoursByStoreId(store.id))
+    selectByLocation(51.9152698, 4.3963989)
+      .then(store => {
+        this.getTweets(store.twitter_handler);
+        return store.id;
+      })
+      .then(id => selectOpeningHoursByStoreId(id))
       .then(openingHours => this.handleOpeningHours(openingHours));
   }
 

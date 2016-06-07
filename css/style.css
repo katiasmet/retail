@@ -284,7 +284,7 @@ canvas {
   position: absolute;
   top: 0;
   left: 0;
-  transform-origin: bottom right;
+  transform-origin: top left;
   display: block;
   background: #fbf1cd;
   border: 0.5rem solid #fbf1cd;

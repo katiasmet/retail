@@ -29,7 +29,7 @@ class LeftScreen extends Component  {
   }
 
   getCurrentStore() {
-    selectByLocation(51.9145, 4.40148)
+    selectByLocation(51.9152698, 4.3963989)
       .then(store => this.setState({
         id: store.id,
         name: store.name,
@@ -56,43 +56,62 @@ class LeftScreen extends Component  {
 
     selectCreationStepsByStoreId(id)
       .then(creationSteps => this.setState({creationSteps: creationSteps}));
-
   }
 
   getStores() {
     let {id} = this.state;
 
     selectAllExceptCurrent(id)
-      .then(stores => this.setState({stores: stores}));
+      .then(stores => this.setState({stores: stores}))
+      .then(() => this.filterStores());
   }
 
-  /*filterStores(stores) {
+  filterStores() { //get position towards current store
 
-    let relatedStores = [];
+    let {stores} = this.state;
 
-    stores.forEach(store => {
-
-
-    relatedStores.forEach(relatedStore => {
-      getCardinalDirection(
-        currentStore.location.coordinates.latitude, currentStore.location.coordinates.longitude,
-        relatedStore.location.coordinates.latitude, relatedStore.location.coordinates.longitude
-      );
-
-      getDistance(currentStore.location.coordinates.latitude, currentStore.location.coordinates.longitude,
-        relatedStore.location.coordinates.latitude, relatedStore.location.coordinates.longitude)
-        .then(distance => console.log(distance.rows));
-      //.rows[0].elements[0].duration.text
-    });
+    let northStores = [];
+    let southStores =[];
 
     stores.forEach(store => {
-        //2 random stores uithalen
-        //stores east and west of currentstore
-      relatedStores.push(store);
+
+      let position = getCardinalDirection( 51.9152698, store.latitude);
+
+      if(position === 'north') {
+        northStores.push(store);
+      } else {
+        southStores.push(store);
+      }
 
     });
 
-  }*/
+    this.getRandomStores(northStores, southStores);
+
+  }
+
+  getRandomStores(northStores, southStores) { //get 2 random stores, one south, one north
+    let nearbyStores = [];
+
+    nearbyStores.push(northStores[this.rndNumber(northStores.length)]); //push random north store
+    nearbyStores.push(southStores[this.rndNumber(southStores.length)]); //push random south store
+
+    this.getStoreDistances(nearbyStores);
+  }
+
+  getStoreDistances(nearbyStores) { //get distance of store
+    nearbyStores.forEach(nearbyStore => {
+
+      getDistance( 51.9152698, 4.3963989, nearbyStore.latitude, nearbyStore.longitude)
+        .then(distance => {
+          nearbyStore.distance = distance.rows[0].elements[0].duration.text;
+          this.setState({stores: nearbyStores});
+        });
+    });
+  }
+
+  rndNumber(max) {
+    return Math.floor(Math.random() * (max + 1));
+  }
 
   render() {
 
