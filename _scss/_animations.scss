@@ -1,0 +1,19 @@
+@keyframes motionPath {
+  0% {
+    transform: rotate(0deg) translateX(10.3rem) rotate(0deg);
+  }
+  100%   {
+    transform: rotate(360deg) translateX(10.3rem) rotate(-360deg);
+  }
+}
+
+@keyframes navPointer {
+  0% {
+    transform: scale(0);
+    opacity: 1;
+  }
+  100%   {
+    transform: scale(1.2);
+    opacity: 0;
+  }
+}

@@ -2,7 +2,7 @@
   "require": {
     "slim/slim": "^3.0",
     "slim/php-view": "^2.0",
-    "lcobucci/jwt": "^3.1",
-    "rych/phpass": "3.0.*@beta"
+    "abraham/twitteroauth": "^0.6.4",
+    "cosenary/instagram": "^2.3"
   }
 }

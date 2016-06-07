@@ -1,0 +1,23 @@
+@font-face {
+  font-family: 'gotham';
+  font-style: normal;
+  font-weight: 300;
+  src:  url('GothamLight.woff2') format('woff2'),
+        url('GothamLight.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'gotham';
+  font-style: normal;
+  font-weight: 500;
+  src:  url('GothamMedium.woff2') format('woff2'),
+        url('GothamMedium.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'gotham';
+  font-style: normal;
+  font-weight: 700;
+  src:  url('GothamUltra.woff2') format('woff2'),
+        url('GothamUltra.woff') format('woff');
+}

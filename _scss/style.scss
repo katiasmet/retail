@@ -1,19 +1,520 @@
-html {
-  font-size: 62.5%;
+@import 'reset';
+@import 'variables';
+@import 'mixins';
+@import 'animations';
+
+body, html, .react-app, .window {
+  width: 100%;
+  height:100%;
 }
 
 body {
-  font-size: 1.3rem;
-}
-
-.container {
-  width: 40rem;
-}
-
-input {
-  display: block;
+  font-size: 1.4rem;
+  font-family: 'gotham', sans-serif;
+  font-weight: 300;
 }
 
 .hidden {
   display: none;
+}
+
+a {
+  color: $white;
+  text-decoration: none;
+  display: block;
+}
+
+span {
+  display: block;
+}
+
+img {
+  width: 100%;
+}
+
+button {
+  background: none;
+  box-shadow: none;
+  border: none;
+  outline: none;
+}
+
+h1 {
+  font-size: 6rem;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center;
+  color: $accent-color-about;
+  line-height: 6rem;
+}
+
+h2 {
+  font-size: 2.8rem;
+  font-weight: 500;
+  opacity: 0.3;
+  color: $accent-color-about;
+  margin-bottom: 2.5rem;
+}
+
+.window {
+  display: flex;
+  justify-content:space-between;
+}
+
+.left-screen, .right-screen{
+  width: 60vh;
+  height: 100vh;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: stretch;
+
+  position: relative;
+}
+
+/* ----------------------------------
+  LEFTSCREEN GENERAL
+---------------------------------- */
+.left-screen {
+  color: $main-color-about;
+  background: url('/assets/img/bg_bv_about.jpg');
+  background-blend-mode: multiply;
+  position: relative;
+
+  &:before {
+    @include before-after;
+
+    width: 100%;
+    height: 100%;
+
+    background: $yellow;
+    mix-blend-mode: color-burn;
+    opacity: 0.2;
+
+    transform: skewX(45deg) translate(-40rem, 32rem);
+  }
+}
+
+//header
+.left-screen header {
+  @include center;
+  flex-direction: column;
+  margin-top: 4rem;
+}
+
+.tags {
+  font-weight: 500;
+  margin: 0.5rem 0 0.5rem 0;
+}
+
+.icon {
+  width: 3rem;
+}
+
+//navigation
+.left-nav {
+  font-size: 1rem;
+  font-weight: 500;
+  margin-left: 1.5rem;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  @include center;
+  justify-content: flex-start;
+}
+
+.nav-item {
+  margin-bottom: 0.5rem;
+  transition: all 0.3s ease-in;
+
+  @include center;
+  justify-content: flex-start;
+}
+
+.pointer {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+
+  display: inline-block;
+  margin-right: 0.5rem;
+  margin-top: -0.3rem;
+
+  position: relative;
+
+  &:before {
+    @include before-after;
+    display: block;
+    width: 1.1rem;
+    height: 1.1rem;
+    border-radius: 50%;
+    top: -0.3rem;
+    left: -0.3rem;
+
+    border: 0.1rem solid $white;
+
+    animation: navPointer 1.5s ease-in infinite;
+  }
+}
+
+.nav-item.active {
+  opacity: 0;
+  transform: scale(0) translateY(0rem);
+
+  /*.pointer {
+    opacity: 0;
+    transform: translateY(-100rem);
+  }*/
+}
+
+.nav-byme {
+  color: $nav-color-byme;
+
+  .pointer {
+    background: $nav-color-byme;
+
+    &:before {
+      border-color: $nav-color-byme;
+    }
+  }
+}
+
+.nav-forme {
+  color: $main-color-forme;
+
+  .pointer {
+    background: $main-color-forme;
+
+    &:before {
+      border-color: $main-color-forme;
+    }
+  }
+}
+
+.nav-about {
+  color: $main-color-about;
+
+  &.transform {
+    transform: translateY(-1.6rem);
+  }
+
+  .pointer {
+    background: $main-color-about;
+
+    &:before {
+      border-color: $main-color-about;
+    }
+  }
+}
+
+//related stores
+.related-stores, .related-store {
+  @include center;
+  align-items: flex-end;
+}
+
+.related-stores {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
+
+.related-store {
+  align-items: flex-end;
+  width: 50%;
+
+  span, figure {
+    order: 0;
+  }
+
+  .icon {
+    max-width: 2rem;
+  }
+}
+
+.crafter-name {
+  font-weight: 500;
+  line-height: 2rem;
+}
+
+.distance {
+  font-size: 1rem;
+  @include center;
+}
+
+.arrow {
+  width: 1rem;
+  margin-left: 0.5rem;
+  order: 0;
+}
+
+.related-store:first-child {
+  .crafter {
+    text-align: right;
+    margin: 0 1rem 0 2rem;
+  }
+
+  .distance .arrow {
+    transform: scaleX(-1);
+    margin-left: 0;
+    margin-right: 0.5rem;
+  }
+}
+
+.related-store:last-child {
+  figure {
+    order: -1;
+  }
+  .distance {
+    order: 1;
+
+    .arrow {
+      order: 1;
+    }
+  }
+  .crafter {
+    margin: 0 2rem 0 1rem;
+  }
+}
+
+
+
+/* ----------------------------------
+  ABOUT ME
+---------------------------------- */
+.about-me-container {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(148, 91, 159, 0.70) 150%),
+              url('/assets/img/bg_bv_about.jpg');
+}
+
+.about-me {
+  @include center;
+  flex-direction: column;
+  text-align: center;
+  color: $white;
+  line-height: 2rem;
+
+  margin-top: -10vh;
+
+}
+
+.portrait {
+  width: 30rem;
+  display:block;
+  margin-bottom: 0.5rem;
+}
+
+.quote {
+  max-width: 32rem;
+}
+
+/* ----------------------------------
+  MADE FOR ME
+---------------------------------- */
+.made-for-me-container {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(28, 226, 218, 0.70) 150%),
+              url('/assets/img/bg_bv_about.jpg');
+  color: $main-color-forme;
+}
+
+h1, h2 {
+  color: $accent-color-forme;
+}
+
+.made-for-me {
+  @include center;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.step-container {
+  position: relative;
+  width: 27rem;
+  height: 27rem;
+
+  @include center;
+}
+
+.morph-bg {
+  position: absolute;
+  top: 0rem;
+  left: 0rem;
+
+  width: 100%;
+  height: 100%;
+}
+
+.canvas {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left:0;
+}
+
+.step-circle {
+  width: 21rem;
+  height: 21rem;
+  border: 0.3rem solid rgba(230, 247, 230, 0.6);
+  border-radius: 50%;
+
+  font-weight: 500;
+  position: relative;
+}
+
+.step-btn {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.8);
+  padding: 0;
+
+  font-size: 1rem;
+
+  position: absolute;
+  left: 9.5rem;
+  top: 9.5rem;
+
+  transition: all 0.3s ease-in;
+  animation: motionPath 60s linear infinite;
+}
+
+.step-btn-1 { animation-delay: -15s; }
+.step-btn-2 { animation-delay: -30s; }
+.step-btn-3 { animation-delay: -45s; }
+
+.step-btn.active {
+  background: rgba(255, 255, 255, 1);
+  width: 2rem; //with this animation, scalen not possible
+  height: 2rem;
+  left: 9.2rem;
+  top: 9.2rem
+}
+
+/*.creation-step {
+  @include center;
+  flex-direction: column;
+  text-align: center;
+
+  width: 30rem;
+  height: 30rem;
+  border-radius: 50%;
+}*/
+
+.creation-step {
+  @include center;
+  flex-direction: column;
+
+  text-align: center;
+  color: $white;
+  width: 30rem;
+}
+
+.creation-step {
+
+  h3, .step-count {
+    text-transform: uppercase;
+    font-weight: 500;
+    line-height: 2.1rem;
+  }
+
+  h3 {
+    color: rgba(255, 255, 255, 0.2);
+    font-size: 3rem;
+  }
+
+  .step-count {
+    color: rgba(255, 255, 255, 0.1);
+    font-size: 2.5rem;
+  }
+}
+
+/* ----------------------------------
+  MADE BY ME
+---------------------------------- */
+.made-by-me-container {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(229, 216, 164, 0.70) 150%),
+              url('/assets/img/bg_bv_about.jpg');
+}
+
+.photos {
+  width: 100%;
+  height: 60vh;
+
+  border: 1px solid red;
+  position: relative;
+}
+
+.photo-container {
+  width: 20rem;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+
+  transform-origin: top left;
+  display:block;
+
+  background: $broken-white;
+  border: 0.5rem solid $broken-white;
+}
+
+.photo-container .photo-info {
+  display: none;
+}
+
+.photo-container.inactive {
+  filter: blur(0.25rem);
+  opacity: 0.8;
+}
+
+.photo-container.active .photo-info {
+  display: block;
+}
+
+/* ----------------------------------
+  RIGHT SCREEN
+---------------------------------- */
+.right-screen {
+  color: $white;
+  background: $background-color-about;
+}
+.tweets {
+  background: #819F8C;
+}
+
+.tweet {
+  display: flex;
+
+}
+
+.profile-pic img {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+
+.user {
+  display: flex;
+  justify-content: space-between;
+}
+
+.user-name {
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.user-handler {
+  text-transform: lowercase;
+  display: inline-block;
+  color: $grey;
+  font-weight: 300;
+}
+
+.created-at {
+  color: $grey;
 }
