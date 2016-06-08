@@ -812,7 +812,6 @@ h3.user-name {
   font-weight: 500;
   line-height: 4rem;
   margin-left: 2rem;
-  margin-top: 2rem;
 }
 
 .products h2 {
@@ -881,7 +880,7 @@ h3.user-name {
 
 .tweets {
   background: #819F8C;
-  padding: 3rem;
+  padding: 1.5rem 3rem;
 }
 
 .tweet:first-child {

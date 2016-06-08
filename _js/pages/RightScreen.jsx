@@ -187,7 +187,7 @@ class RightScreen extends Component {
 
             <div className='opening-hours'>
 
-              <MorphingBg radius={0.06} fillColors={['#531339', '#531339']} amount={2} />
+              <MorphingBg id='canvas-right' radius={0.06} fillColors={['#531339', '#531339']} amount={2} />
               <className className='today'>
                 { this.renderToday() }
               </className>

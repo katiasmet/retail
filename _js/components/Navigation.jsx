@@ -2,11 +2,11 @@ import React, {PropTypes} from 'react';
 import {Link} from 'react-router';
 
 const setActive = (pathname, name) => {
-  return (`/leftscreen/${name}` === pathname) ? 'active' : '';
+  return (`/${name}` === pathname) ? 'active' : '';
 };
 
 const setTransformY = (pathname, name) => { //if made for me is active, add transform
-  return (`/leftscreen/${name}` === pathname) ? 'transform' : '';
+  return (`/${name}` === pathname) ? 'transform' : '';
 };
 
 const Navigation = ({pathname}) => {
@@ -15,21 +15,21 @@ const Navigation = ({pathname}) => {
       <nav className='left-nav'>
         <ul>
           <li>
-            <Link className={`nav-item nav-byme ${setActive(pathname, 'madebyme')}`} to='/leftscreen/madebyme'>
+            <Link className={`nav-item nav-byme ${setActive(pathname, 'madebyme')}`} to='/madebyme'>
               <span className='pointer'></span>
               #madebyme
             </Link>
           </li>
 
           <li>
-            <Link className={`nav-item nav-forme ${setActive(pathname, 'madeforme')}`} to='/leftscreen/madeforme'>
+            <Link className={`nav-item nav-forme ${setActive(pathname, 'madeforme')}`} to='/madeforme'>
               <span className='pointer'></span>
               #madeforme
             </Link>
           </li>
 
           <li>
-            <Link className={`nav-item nav-about ${setTransformY(pathname, 'madeforme')} ${setActive(pathname, 'aboutme')}`} to='/leftscreen/aboutme'>
+            <Link className={`nav-item nav-about ${setTransformY(pathname, 'madeforme')} ${setActive(pathname, 'aboutme')}`} to='/aboutme'>
               <span className='pointer'></span>
               aboutme
             </Link>

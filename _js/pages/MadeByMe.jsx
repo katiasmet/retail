@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component, PropTypes} from 'react';
 
-import {selectBySearch} from '../../api/tweets';
-import {Photo} from '../../components/';
+import {selectBySearch} from '../api/tweets';
+import {StoreHeader, Navigation, RelatedStores, Photo} from '../components';
 
 class MadeByMe extends Component {
 
@@ -174,30 +174,53 @@ class MadeByMe extends Component {
 
   render() {
 
+    let {name, craft, tags, icon, pathname, stores} = this.props;
     let {photos} = this.state;
 
     return (
+      <section className='left-screen about-me-container'>
 
-      <section className='photos' ref='photo-container'>
+        <StoreHeader name={name} craft={craft} tags={tags} icon={icon} />
+        <Navigation pathname={pathname} />
 
-        {
-          photos.map((photo, i) => {
-            return <Photo key={i}
-              image={photo.image}
-              caption={photo.text}
-              name={photo.name}
-              screenName={photo.screen_name}
-              ref={`photo${i}`}
-              activeClass={photo.active}
-              clickHandler={e => this.clickHandler(e, i)} />;
-          })
-        }
+        <section className='photos' ref='photo-container'>
+
+          {
+            photos.map((photo, i) => {
+              return <Photo key={i}
+                image={photo.image}
+                caption={photo.text}
+                name={photo.name}
+                screenName={photo.screen_name}
+                ref={`photo${i}`}
+                activeClass={photo.active}
+                clickHandler={e => this.clickHandler(e, i)} />;
+            })
+          }
+
+        </section>
+
+        <RelatedStores stores={stores} />
 
       </section>
+
+
     );
 
   }
 
 }
+
+MadeByMe.propTypes = {
+  id: PropTypes.number,
+  name: PropTypes.string,
+  craft: PropTypes.string,
+  tags: PropTypes.array,
+  icon: PropTypes.string,
+  pathname: PropTypes.string,
+  portrait: PropTypes.string,
+  quote: PropTypes.string,
+  stores: PropTypes.array
+};
 
 export default MadeByMe;

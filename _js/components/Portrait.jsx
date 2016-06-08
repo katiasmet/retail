@@ -1,6 +1,6 @@
 import React, {PropTypes} from 'react';
 
-import {basename} from '../../globals';
+import {basename} from '../globals';
 const AboutMe = ({portrait, quote}) => {
 
   return (

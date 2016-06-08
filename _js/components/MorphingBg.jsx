@@ -12,13 +12,13 @@ class MorphingBg extends Component {
 
   setMorphingBg() {
 
-    let {radius, fillColors, amount} = this.props;
+    let {id, radius, fillColors, amount} = this.props;
 
     this.r = (radius * window.innerHeight); //responsive size
     this.circles = [];
 
     let morphingPaper = new paper.PaperScope();
-    morphingPaper.setup('canvas');
+    morphingPaper.setup(id);
 
     for(let i = 0; i < amount; i++) {
 
@@ -67,19 +67,22 @@ class MorphingBg extends Component {
 
         }
       }
-    
+
     };
     morphingPaper.view.draw();
   }
 
   render() {
+    let {id} = this.props;
+
     return (
-      <canvas id='canvas' className='canvas' data-paper-resize  />
+      <canvas id={id} className='canvas' data-paper-resize  />
     );
   }
 }
 
 MorphingBg.propTypes = {
+  id: PropTypes.string,
   radius: PropTypes.number,
   fillColors: PropTypes.array,
   amount: PropTypes.number
