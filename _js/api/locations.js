@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import {checkStatus} from '../util';
+import {basename} from '../globals';
 
-let base = '/api/locations';
+let base = `${basename}/api/locations`;
 
 export const getDistance = (lat1, long1, lat2, long2) => {
 

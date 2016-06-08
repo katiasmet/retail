@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import {checkStatus} from '../util';
+import {basename} from '../globals';
 
-let base = '/api/stores';
+let base = `${basename}/api/stores`;
 
 export const selectAllExceptCurrent = (id) => {
   return fetch(`${base}?current=${id}`)

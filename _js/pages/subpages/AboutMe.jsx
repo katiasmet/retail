@@ -1,11 +1,12 @@
 import React, {PropTypes} from 'react';
 
+import {basename} from '../../globals';
 const AboutMe = ({portrait, quote}) => {
 
   return (
     <section className='about-me'>
       <picture className='portrait'>
-        <img src={`/assets/img/${portrait}`} alt={portrait}/>
+        <img src={`${basename}/assets/img/${portrait}`} alt={portrait}/>
       </picture>
 
       <p className='quote'>{`"${quote}"`}</p>

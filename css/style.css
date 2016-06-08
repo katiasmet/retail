@@ -196,6 +196,27 @@ h2 {
 }
 
 /* ----------------------------------
+  ICONS
+---------------------------------- */
+.icon {
+  overflow: hidden;
+  width: 2.5rem;
+}
+
+.icon img {
+  width: 300%;
+  transition: transform 0.3s ease-in;
+}
+
+.made-for-me-container .icon img, .made-for-me-container .arrow img {
+  transform: translateX(-33.5%);
+}
+
+.made-by-me-container .icon img, .made-by-me-container .arrow img {
+  transform: translateX(-67.5%);
+}
+
+/* ----------------------------------
   LEFTSCREEN GENERAL
 ---------------------------------- */
 .left-screen header {
@@ -213,10 +234,6 @@ h2 {
 .tags {
   font-weight: 500;
   margin: 0.5rem 0 0.5rem 0;
-}
-
-.icon {
-  width: 3rem;
 }
 
 .left-nav {
@@ -377,6 +394,11 @@ h2 {
   margin-left: 0.5rem;
   -ms-flex-order: 0;
       order: 0;
+  overflow: hidden;
+}
+
+.arrow img {
+  width: 300%;
 }
 
 .related-store:first-child .crafter {
@@ -446,6 +468,10 @@ h2 {
 ---------------------------------- */
 .made-for-me-container {
   color: #205d45;
+}
+
+.made-for-me-container h1 {
+  color: #31855c;
 }
 
 .made-for-me-container:after {
@@ -592,6 +618,14 @@ h2 {
 /* ----------------------------------
   MADE BY ME
 ---------------------------------- */
+.made-by-me-container {
+  color: #56472f;
+}
+
+.made-by-me-container h1 {
+  color: #98845b;
+}
+
 .made-by-me-container:after {
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(229, 216, 164, 0.7) 150%), url("/assets/img/bg_bv_about.jpg");
 }

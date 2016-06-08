@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {basename} from '../globals';
 
 const RelatedStore = ({name, craft, icon, distance}) =>  {
 
@@ -6,7 +7,7 @@ const RelatedStore = ({name, craft, icon, distance}) =>  {
     <div className='related-store'>
       <div className='distance'>
         <figure className='arrow'>
-          <img src='/assets/svg/arrow.svg' alt='arrow'/>
+          <img src={`${basename}/assets/img/arrow.png`} alt='arrow'/>
         </figure>
         {distance}&#39;min
       </div>
@@ -14,8 +15,8 @@ const RelatedStore = ({name, craft, icon, distance}) =>  {
         <span className='crafter-name'>{name}</span>
         <span className='craft'>{craft}</span>
       </p>
-      <figure className='icon'>
-        <img src={`/assets/svg/${icon}`} alt={craft}/>
+      <figure className={`icon icon-${craft}`}>
+        <img src={`${basename}/assets/img/${icon}`} alt={craft}/>
       </figure>
     </div>
   );

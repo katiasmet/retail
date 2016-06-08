@@ -1,4 +1,5 @@
 import React, {PropTypes} from 'react';
+import {basename} from '../globals';
 
 const Products = ({product, productsLength, clickHandler}) =>  {
 
@@ -8,7 +9,7 @@ const Products = ({product, productsLength, clickHandler}) =>  {
       <div className='product-mood'>
 
         <figure>
-          <img src={`/assets/img/${product.image}`} alt={product.product_type} />
+          <img src={`${basename}/assets/img/${product.image}`} alt={product.product_type} />
         </figure>
 
         <ul className='product-nav'>

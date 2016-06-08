@@ -31,9 +31,6 @@ class RightScreen extends Component {
 
   componentWillMount() {
     paper.install(window);
-  }
-
-  componentDidMount() {
     this.getCurrentStore();
   }
 

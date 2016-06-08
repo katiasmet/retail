@@ -1,7 +1,8 @@
 import fetch from 'isomorphic-fetch';
 import {checkStatus} from '../util';
+import {basename} from '../globals';
 
-let base = '/api/tweets';
+let base = `${basename}/api/tweets`;
 
 export const selectBySearch = (searchString, count, resultType) => {
 

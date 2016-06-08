@@ -1,12 +1,15 @@
 import React, {PropTypes} from 'react';
+import {basename} from '../globals';
 
 const StoreHeader = ({name, craft, tags, icon}) =>  {
 
   return (
     <header>
-      <figure className='icon'>
-        <img src={`/assets/svg/${icon}`} alt={craft}/>
+
+      <figure className={`icon icon-${craft}`}>
+        <img src={`${basename}/assets/img/${icon}`} alt={craft}/>
       </figure>
+
       <p className='tags'>
         {
           tags.map(tag => {
@@ -14,7 +17,9 @@ const StoreHeader = ({name, craft, tags, icon}) =>  {
           })
         }
       </p>
+
       <h1>{name}</h1>
+
     </header>
   );
 

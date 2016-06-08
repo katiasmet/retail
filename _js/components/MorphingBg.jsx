@@ -30,9 +30,9 @@ class MorphingBg extends Component {
 
       this.circles[i].rndPos = [];
       this.generateRndPoints(i);
-
-      this.draw(i, morphingPaper);
     }
+
+    this.draw(amount, morphingPaper);
   }
 
   rndPoint(min, max) {
@@ -47,25 +47,27 @@ class MorphingBg extends Component {
     this.circles[i].rndPos[3] = [this.rndPoint((0.45 * diameter), (0.55 * diameter)) , this.rndPoint((0.9 * diameter), (1 * diameter))];
   }
 
-  draw (circle, morphingPaper){
+  draw (amount, morphingPaper){
     let speed = 200;
 
     morphingPaper.view.onFrame = () => {
 
-      for (let i = 0; i < 4; i++) { //animation every segment / anchorpoint of the circle
+      for(let i = 0; i < amount; i++) {
+        for (let j = 0; j < 4; j++) { //animation every segment / anchorpoint of the circle
 
-        let dX1 = (this.circles[circle].rndPos[i][0] - this.circles[circle].segments[i].point.x) / (speed);
-        let dY1 = (this.circles[circle].rndPos[i][1] - this.circles[circle].segments[i].point.y) / (speed);
+          let dX1 = (this.circles[i].rndPos[j][0] - this.circles[i].segments[j].point.x) / (speed);
+          let dY1 = (this.circles[i].rndPos[j][1] - this.circles[i].segments[j].point.y) / (speed);
 
-        this.circles[circle].segments[i].point.x += dX1;
-        this.circles[circle].segments[i].point.y += dY1;
+          this.circles[i].segments[j].point.x += dX1;
+          this.circles[i].segments[j].point.y += dY1;
 
-        if(Math.floor(this.circles[circle].segments[i].point.x) === Math.floor(this.circles[circle].rndPos[i][0])){
-          this.generateRndPoints(circle);
+          if(Math.floor(this.circles[i].segments[j].point.x) === Math.floor(this.circles[i].rndPos[j][0])){
+            this.generateRndPoints(i);
+          }
+
         }
-
       }
-
+    
     };
     morphingPaper.view.draw();
   }

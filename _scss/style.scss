@@ -98,6 +98,33 @@ h2 {
 }
 
 /* ----------------------------------
+  ICONS
+---------------------------------- */
+.icon {
+  overflow:hidden;
+  width: 2.5rem;
+
+  img {
+    width: 300%;
+    transition: transform 0.3s ease-in;
+  }
+}
+
+.made-for-me-container {
+  .icon img, .arrow img {
+    transform: translateX(-33.5%);
+  }
+}
+
+.made-by-me-container {
+  .icon img, .arrow img {
+    transform: translateX(-67.5%);
+  }
+}
+
+
+
+/* ----------------------------------
   LEFTSCREEN GENERAL
 ---------------------------------- */
 //header
@@ -110,10 +137,6 @@ h2 {
 .tags {
   font-weight: 500;
   margin: 0.5rem 0 0.5rem 0;
-}
-
-.icon {
-  width: 3rem;
 }
 
 //navigation
@@ -247,6 +270,11 @@ h2 {
   width: 1rem;
   margin-left: 0.5rem;
   order: 0;
+  overflow:hidden;
+
+  img {
+    width: 300%;
+  }
 }
 
 .related-store:first-child {
@@ -313,6 +341,10 @@ h2 {
 ---------------------------------- */
 .made-for-me-container {
   color: $main-color-forme;
+
+  h1 {
+    color: $accent-color-forme;
+  }
 
   &:after {
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(28, 226, 218, 0.70) 150%),
@@ -444,9 +476,17 @@ h2 {
 /* ----------------------------------
   MADE BY ME
 ---------------------------------- */
-.made-by-me-container:after {
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(229, 216, 164, 0.70) 150%),
-              url('/assets/img/bg_bv_about.jpg');
+.made-by-me-container {
+  color: $main-color-byme;
+
+  h1 {
+    color: $accent-color-byme;
+  }
+
+  &:after {
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(229, 216, 164, 0.70) 150%),
+                url('/assets/img/bg_bv_about.jpg');
+  }
 }
 
 .photos {
