@@ -1,6 +1,6 @@
 import React, {PropTypes, Component, cloneElement} from 'react';
 
-import {selectAllExceptCurrent, selectByLocation, selectTagsByStoreId, selectCreationStepsByStoreId} from '../api/stores';
+import {selectAllExceptCurrent, selectByLocation, selectItemsByStoreId} from '../api/stores';
 import {getDistance} from '../api/locations';
 import {StoreHeader, Navigation, RelatedStores} from '../components';
 
@@ -46,7 +46,7 @@ class LeftScreen extends Component  {
 
     let {id} = this.state;
 
-    selectTagsByStoreId(id)
+    selectItemsByStoreId(id, 'tags')
       .then(storeTags => {
         let tags = [];
         storeTags.forEach(storeTag => {
@@ -55,7 +55,7 @@ class LeftScreen extends Component  {
         this.setState({tags: tags});
       });
 
-    selectCreationStepsByStoreId(id)
+    selectItemsByStoreId(id, 'creation_steps')
       .then(creationSteps => this.setState({creationSteps: creationSteps}));
   }
 

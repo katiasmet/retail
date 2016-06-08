@@ -167,23 +167,32 @@ h2 {
   -ms-flex-align: stretch;
       align-items: stretch;
   color: #4d1034;
-  background: url("/assets/img/bg_bv_about.jpg");
-  background-blend-mode: multiply;
   position: relative;
+  overflow: hidden;
 }
 
-.left-screen:before, .right-screen:before {
+.left-screen:before, .left-screen:after, .right-screen:before, .right-screen:after {
   content: '';
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
+}
+
+.left-screen:before, .right-screen:before {
   background: #ffae00;
   mix-blend-mode: color-burn;
   opacity: 0.2;
   transform: skewX(45deg) translate(-400px, 320px);
   transform: skewX(45deg) translate(-40rem, 32rem);
+  z-index: -5;
+}
+
+.left-screen:after, .right-screen:after {
+  background: url("/assets/img/bg_bv_about.jpg");
+  background-blend-mode: multiply;
+  z-index: -10;
 }
 
 /* ----------------------------------
@@ -403,7 +412,7 @@ h2 {
 /* ----------------------------------
   ABOUT ME
 ---------------------------------- */
-.about-me-container {
+.about-me-container:after {
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(148, 91, 159, 0.7) 150%), url("/assets/img/bg_bv_about.jpg");
 }
 
@@ -419,11 +428,11 @@ h2 {
   text-align: center;
   color: #ffffff;
   line-height: 2rem;
-  margin-top: -10vh;
+  margin-top: -15vh;
 }
 
 .portrait {
-  width: 30rem;
+  width: 40rem;
   display: block;
   margin-bottom: 0.5rem;
 }
@@ -436,11 +445,14 @@ h2 {
   MADE FOR ME
 ---------------------------------- */
 .made-for-me-container {
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(28, 226, 218, 0.7) 150%), url("/assets/img/bg_bv_about.jpg");
   color: #205d45;
 }
 
-h1, h2 {
+.made-for-me-container:after {
+  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(28, 226, 218, 0.7) 150%), url("/assets/img/bg_bv_about.jpg");
+}
+
+.made-for-me h1, .made-for-me h2 {
   color: #31855c;
 }
 
@@ -479,10 +491,12 @@ h1, h2 {
 
 .canvas {
   width: 100%;
-  height: 100%;
+  padding-bottom: 100%;
   position: absolute;
   top: 0;
+  bottom: 0;
   left: 0;
+  right: 0;
 }
 
 .step-circle {
@@ -578,7 +592,7 @@ h1, h2 {
 /* ----------------------------------
   MADE BY ME
 ---------------------------------- */
-.made-by-me-container {
+.made-by-me-container:after {
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.7) 0%, rgba(229, 216, 164, 0.7) 150%), url("/assets/img/bg_bv_about.jpg");
 }
 
@@ -671,8 +685,15 @@ h3.user-name {
       align-items: center;
   -ms-flex-direction: column;
       flex-direction: column;
+  position: relative;
+  z-index: 5;
   -ms-flex: 1;
       flex: 1;
+}
+
+.opening-hours .canvas {
+  top: 1.5rem;
+  left: 1.8rem;
 }
 
 .tags {
@@ -708,12 +729,120 @@ h3.user-name {
       justify-content: center;
   -ms-flex-align: center;
       align-items: center;
+  position: relative;
+  z-index: 5;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.hour {
+  font-size: 1.8rem;
+}
+
+.today-opened {
+  font-weight: 300;
+  opacity: 0.3;
+}
+
+.opened {
+  font-weight: 500;
 }
 
 .next-days p {
   font-weight: 500;
   font-size: 1.1rem;
   margin-top: 1rem;
+}
+
+.products {
+  color: #56472f;
+  font-size: 1rem;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  -ms-flex-align: start;
+      align-items: flex-start;
+  line-height: 1.3rem;
+  padding-right: 5rem;
+  margin-top: 1.5rem;
+  line-height: 2rem;
+}
+
+.products h1 {
+  color: #98845b;
+  opacity: 0.5;
+  font-size: 4rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 4rem;
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+
+.products h2 {
+  font-size: 2.3rem;
+  color: #98845b;
+  opacity: 1;
+}
+
+.product-mood {
+  -ms-flex: 1;
+      flex: 1;
+  -ms-flex-item-align: end;
+      align-self: flex-end;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  margin-left: -3rem;
+  transform: translateY(2rem);
+}
+
+.product-mood figure {
+  width: 19rem;
+}
+
+.product-details {
+  -ms-flex: 1.5;
+      flex: 1.5;
+  margin: 0 4rem 0 5rem;
+}
+
+.product-nav {
+  margin-left: -5.5rem;
+}
+
+.product-nav .pointer {
+  width: 1rem;
+  height: 1rem;
+  display: block;
+  background: #ffffff;
+  margin-bottom: 3rem;
+}
+
+.product-nav .pointer:before {
+  width: 22px;
+  width: 2.2rem;
+  height: 22px;
+  height: 2.2rem;
+  top: -6px;
+  top: -0.6rem;
+  left: -6px;
+  left: -0.6rem;
+}
+
+.product-nav .pointer:nth-child(2) {
+  margin-left: 0.4rem;
+}
+
+.product-nav .pointer:nth-child(3) {
+  margin-left: 0.4rem;
+}
+
+.product-nav .pointer:nth-child(4) {
+  margin-left: 0.8rem;
 }
 
 .tweets {
@@ -754,11 +883,18 @@ h3.user-name {
   margin-bottom: 0.5rem;
 }
 
+.user .icon {
+  display: inline-block;
+  width: 1rem;
+  margin-right: 0.3rem;
+}
+
 .user-handler {
   text-transform: lowercase;
   display: inline-block;
   color: #cbc8c8;
   font-weight: 300;
+  margin-left: 0.5rem;
 }
 
 .created-at {

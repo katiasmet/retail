@@ -98,13 +98,9 @@ class MadeForMe extends Component {
     let {active} = this.state;
     let {creationSteps} = this.props;
 
-
-
     //let $creationStep = document.querySelector('.creation-step');
     //creationStep.style.animationPlayState='paused';
     //creationStep.style.animationPlayState='running';
-
-
 
     if(isEmpty(creationSteps)) {
       return false;

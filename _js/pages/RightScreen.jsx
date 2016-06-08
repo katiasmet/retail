@@ -2,11 +2,13 @@ export default RightScreen;
 
 import React, {Component} from 'react';
 
-import {Tweets} from '../components';
-import {selectByLocation, selectOpeningHoursByStoreId} from '../api/stores';
+import {WaitingLine, Events, MorphingBg, Products, Tweets} from '../components';
+import {selectByLocation, selectItemsByStoreId} from '../api/stores';
 import {selectByUser} from '../api/tweets';
 
 import moment from 'moment';
+import paper from 'paper';
+import {isEmpty} from 'lodash';
 
 class RightScreen extends Component {
 
@@ -15,15 +17,34 @@ class RightScreen extends Component {
     super(props, context);
 
     this.state = {
+      active: 0, //render first product detail
+      events: [],
       openingHours: {},
       timeToClose: [],
+      products: [],
       tweets: []
     };
 
+    this.clickHandler = ::this.clickHandler;
+
+  }
+
+  componentWillMount() {
+    paper.install(window);
   }
 
   componentDidMount() {
     this.getCurrentStore();
+  }
+
+  getCurrentStore() {
+    selectByLocation(51.9152698, 4.3963989)
+      .then(store => {
+        this.getTweets(store.twitter_handler);
+        return store.id;
+      })
+      .then(id => this.getStoreDetails(id));
+
   }
 
   getTweets(twitterHandler) {
@@ -33,14 +54,17 @@ class RightScreen extends Component {
 
   }
 
-  getCurrentStore() {
-    selectByLocation(51.9152698, 4.3963989)
-      .then(store => {
-        this.getTweets(store.twitter_handler);
-        return store.id;
-      })
-      .then(id => selectOpeningHoursByStoreId(id))
+  getStoreDetails(id) {
+
+    selectItemsByStoreId(id, 'opening_hours')
       .then(openingHours => this.handleOpeningHours(openingHours));
+
+    selectItemsByStoreId(id, 'products')
+      .then(products => this.setState({products: products}));
+
+    selectItemsByStoreId(id, 'events')
+      .then(events => this.setState({events: events}));
+
   }
 
   handleOpeningHours(openingHours) {
@@ -71,13 +95,20 @@ class RightScreen extends Component {
         if(moment().isBetween(start, end)) { //store opened at this moment
           this.timer = setInterval(() => this.isOpened(), 60000); //rerender every minute
           let isOpened = this.isOpened();
-          return <p>{isOpened[0]}u {isOpened[1]}min vandaag geopened</p>;
+          return (
+            <p>
+              <span className='hour'>{isOpened[0]}u</span>
+              {isOpened[1]}min
+              <span className='today-opened'>
+                vandaag <span className='opened'>geopened</span>
+              </span>
+            </p>
+          );
         }
-
-      } else {
-        return <p>Gesloten</p>;
       }
     }
+
+    return <p>Gesloten</p>;
   }
 
   isOpened() {
@@ -90,6 +121,10 @@ class RightScreen extends Component {
     }
 
     return [toClose.hours(), toClose.minutes()];
+  }
+
+  clickHandler(i) {
+    this.setState({active: i});
   }
 
   renderNext() { //get next 3 opening hours
@@ -127,9 +162,19 @@ class RightScreen extends Component {
 
   }
 
+  renderProducts() {
+    let {products, active} = this.state;
+
+    if(isEmpty(products)) {
+      return false;
+    } else {
+      return <Products product={products[active]} productsLength={Object.keys(products).length} clickHandler={this.clickHandler}/>;
+    }
+  }
+
   render() {
 
-    let {tweets} = this.state;
+    let {events, tweets} = this.state;
 
     return (
       <section className='right-screen'>
@@ -138,43 +183,24 @@ class RightScreen extends Component {
 
             <div className='store-info'>
 
-              <div className='waiting-line'>
-                <h3>Babita's Projecten</h3>
-                <p className='tags'>#madeforme #workinprogress</p>
-                <p>nieuwe fruitige parfum</p>
-              </div>
-
-              <div className='upcoming-events'>
-                <h3>Komende evenementen</h3>
-                <div className='tags'>#madebyme</div>
-
-                <dl className='event-list'>
-                  <span className='event'>
-                    <dt>woe 5 jun</dt>
-                    <dd>samenstellen geuren</dd>
-                  </span>
-
-                  <span className='event'>
-                    <dt>vr 23 jun</dt>
-                    <dd>geurenquiz</dd>
-                  </span>
-
-                </dl>
-              </div>
+              <WaitingLine />
+              <Events events={events} />
 
             </div>
 
-
             <div className='opening-hours'>
 
+              <MorphingBg radius={0.06} fillColors={['#531339', '#531339']} amount={2} />
               <className className='today'>
                 { this.renderToday() }
               </className>
-              
+
               { this.renderNext() }
             </div>
 
           </section>
+
+          { this.renderProducts() }
 
           <Tweets tweets={tweets}/>
       </section>

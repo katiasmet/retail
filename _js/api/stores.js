@@ -18,26 +18,15 @@ export const selectByLocation = (latitude, longitude) => {
     .then(checkStatus);
 };
 
-export const selectOpeningHoursByStoreId = (id) => {
-  return fetch(`${base}/${id}?opening_hours=true`)
+export const selectItemsByStoreId = (id, items) => {
+  return fetch(`${base}/${id}?${items}=true`)
     .then(checkStatus);
 };
 
-export const selectTagsByStoreId = (id) => {
-  return fetch(`${base}/${id}?tags=true`)
-    .then(checkStatus);
-};
-
-export const selectCreationStepsByStoreId = (id) => {
-  return fetch(`${base}/${id}?creation_steps=true`)
-    .then(checkStatus);
-};
 
 export default {
   selectAllExceptCurrent,
   selectById,
   selectByLocation,
-  selectOpeningHoursByStoreId,
-  selectTagsByStoreId,
-  selectCreationStepsByStoreId
+  selectItemsByStoreId
 };

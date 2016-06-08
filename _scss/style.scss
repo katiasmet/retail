@@ -71,21 +71,29 @@ h2 {
   align-items: stretch;
 
   color: $main-color-about;
-  background: url('/assets/img/bg_bv_about.jpg');
-  background-blend-mode: multiply;
   position: relative;
+  overflow:hidden;
 
-  &:before {
+  &:before, &:after { //background with before/after to prevent zindex click issues
     @include before-after;
 
     width: 100%;
     height: 100%;
+  }
 
+  &:before {
     background: $yellow;
     mix-blend-mode: color-burn;
     opacity: 0.2;
 
     transform: skewX(45deg) translate(-40rem, 32rem);
+    z-index:-5;
+  }
+
+  &:after {
+    background: url('/assets/img/bg_bv_about.jpg');
+    background-blend-mode: multiply;
+    z-index:-10;
   }
 }
 
@@ -275,7 +283,7 @@ h2 {
 /* ----------------------------------
   ABOUT ME
 ---------------------------------- */
-.about-me-container {
+.about-me-container:after {
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(148, 91, 159, 0.70) 150%),
               url('/assets/img/bg_bv_about.jpg');
 }
@@ -287,12 +295,11 @@ h2 {
   color: $white;
   line-height: 2rem;
 
-  margin-top: -10vh;
-
+  margin-top: -15vh;
 }
 
 .portrait {
-  width: 30rem;
+  width: 40rem;
   display:block;
   margin-bottom: 0.5rem;
 }
@@ -305,12 +312,15 @@ h2 {
   MADE FOR ME
 ---------------------------------- */
 .made-for-me-container {
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(28, 226, 218, 0.70) 150%),
-              url('/assets/img/bg_bv_about.jpg');
   color: $main-color-forme;
+
+  &:after {
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(28, 226, 218, 0.70) 150%),
+                url('/assets/img/bg_bv_about.jpg');
+  }
 }
 
-h1, h2 {
+.made-for-me h1, .made-for-me h2 {
   color: $accent-color-forme;
 }
 
@@ -339,11 +349,13 @@ h1, h2 {
 
 .canvas {
   width: 100%;
-  height: 100%;
+  padding-bottom: 100%;
 
   position: absolute;
   top: 0;
-  left:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .step-circle {
@@ -432,7 +444,7 @@ h1, h2 {
 /* ----------------------------------
   MADE BY ME
 ---------------------------------- */
-.made-by-me-container {
+.made-by-me-container:after {
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(229, 216, 164, 0.70) 150%),
               url('/assets/img/bg_bv_about.jpg');
 }
@@ -524,7 +536,16 @@ h3.user-name {
   align-items: center;
   flex-direction: column;
 
+  position: relative; //to position canvas
+  z-index: 5;
+
   flex: 1;
+
+  .canvas {
+    top: 1.5rem;
+    left: 1.8rem;
+    //height: 40%;
+  }
 }
 
 .tags {
@@ -553,6 +574,25 @@ h3.user-name {
   height: 8rem;
 
   @include center;
+
+  position: relative;
+  z-index: 5;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.hour {
+  font-size: 1.8rem;
+}
+
+.today-opened {
+  font-weight: 300;
+  opacity: 0.3;
+}
+
+.opened {
+  font-weight: 500;
 }
 
 .next-days p {
@@ -562,6 +602,90 @@ h3.user-name {
 }
 
 //products
+.products {
+  color: $main-color-byme;
+  font-size: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  line-height: 1.3rem;
+
+  padding-right: 5rem;
+  margin-top: 1.5rem;
+  line-height: 2rem;
+}
+
+.products h1 {
+  color: $accent-color-byme;
+  opacity: 0.5;
+
+  font-size: 4rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 4rem;
+
+  margin-left: 2rem;
+  margin-top: 2rem;
+}
+
+.products h2 {
+  font-size: 2.3rem;
+  color: $h2-color-byme;
+  opacity: 1;
+}
+
+.product-mood {
+  flex: 1;
+  align-self: flex-end;
+  display:flex;
+  align-items: center;
+
+  margin-left: -3rem;
+  transform: translateY(2rem);
+
+  figure {
+    width: 19rem;
+  }
+}
+
+.product-details {
+  flex: 1.5;
+  margin: 0 4rem 0 5rem;
+}
+
+.product-nav {
+  margin-left: -5.5rem;
+}
+
+.product-nav .pointer {
+  width: 1rem;
+  height: 1rem;
+
+  display: block;
+  background: $white;
+  margin-bottom: 3rem;
+
+  &:before {
+    width: 2.2rem;
+    height: 2.2rem;
+    top: -0.6rem;
+    left: -0.6rem;
+  }
+}
+
+.product-nav .pointer:nth-child(2) {
+  margin-left: 0.4rem;
+}
+
+.product-nav .pointer:nth-child(3) {
+  margin-left: 0.4rem;
+}
+
+.product-nav .pointer:nth-child(4) {
+  margin-left: 0.8rem;
+}
+
 
 //tweets
 .tweets {
@@ -592,6 +716,13 @@ h3.user-name {
   display: flex;
   justify-content: space-between;
   margin-bottom: 0.5rem;
+
+
+  .icon {
+    display: inline-block;
+    width: 1rem;
+    margin-right: 0.3rem;
+  }
 }
 
 .user-handler {
@@ -599,6 +730,7 @@ h3.user-name {
   display: inline-block;
   color: $grey;
   font-weight: 300;
+  margin-left: 0.5rem;
 }
 
 .created-at {

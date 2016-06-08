@@ -2,8 +2,6 @@ import React, {PropTypes} from 'react';
 
 const StepButtons = ({creationSteps, clickHandler, active}) =>  {
 
-  console.log(active);
-
   return (
     <section className='step-btns'>
 
