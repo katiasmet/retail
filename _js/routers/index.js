@@ -12,6 +12,7 @@ export default () => (
     <Route path='/' component={App}>
 
       <IndexRedirect to='aboutme' />
+
       <Route path='aboutme' component={AboutMe} />
       <Route path='madeforme' component={MadeForMe} />
       <Route path='madebyme' component={MadeByMe} />

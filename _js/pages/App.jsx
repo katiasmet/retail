@@ -3,6 +3,7 @@ import React, {PropTypes, Component, cloneElement} from 'react';
 import {selectAllExceptCurrent, selectByLocation, selectItemsByStoreId} from '../api/stores';
 import {getDistance} from '../api/locations';
 import {RightScreen} from './';
+import {StoreHeader, Navigation, RelatedStores} from '../components';
 
 import {getCardinalDirection} from '../util';
 
@@ -30,15 +31,7 @@ class App extends Component {
 
   getCurrentStore() {
     selectByLocation(51.9152698, 4.3963989)
-      .then(store => this.setState({
-        id: store.id,
-        name: store.name,
-        craft: store.craft,
-        twitterHanlder: store.twitter_handler,
-        icon: store.icon,
-        portrait: store.portrait,
-        quote: store.quote
-      }))
+      .then(store => this.setState({...store}))
       .then(() => this.getCurrentStoreDetails())
       .then(() => this.getStores());
   }
@@ -70,19 +63,12 @@ class App extends Component {
 
     let {stores} = this.state;
 
-    let northStores = [];
-    let southStores =[];
+    let northStores = stores.filter(store => {
+      return getCardinalDirection( 51.9152698, store.latitude) === 'north';
+    });
 
-    stores.forEach(store => {
-
-      let position = getCardinalDirection( 51.9152698, store.latitude);
-
-      if(position === 'north') {
-        northStores.push(store);
-      } else {
-        southStores.push(store);
-      }
-
+    let southStores = stores.filter(store => {
+      return getCardinalDirection( 51.9152698, store.latitude) === 'south';
     });
 
     let randomStores = this.getRandomStores(northStores, southStores);
@@ -121,28 +107,48 @@ class App extends Component {
 
   }
 
+  getContainerClass() {
+    let {pathname} = this.props.location;
+
+    if(pathname === '/aboutme') {
+      return 'about-me-container';
+    } else if (pathname === 'madeforme') {
+      return 'made-for-me-container';
+    } else if (pathname === 'madebyme') {
+      return 'made-by-me-container';
+    }
+
+  }
+
   render() {
 
     let {id, name, craft, icon, twitterHandler, tags, portrait, quote, stores} = this.state;
     let {children} = this.props;
     let {pathname} = this.props.location;
 
+    this.getContainerClass();
     return (
       <main className='window'>
-        {
-          cloneElement(children, {
-            id: parseInt(id),
-            name: name,
-            craft: craft,
-            tags: tags,
-            icon: icon,
-            portrait: portrait,
-            quote: quote,
-            pathname: pathname,
-            stores: stores
-          })
-        }
+
+        <section className={`left-screen ${this.getContainerClass}`}>
+
+          <StoreHeader name={name} craft={craft} tags={tags} icon={icon} />
+          <Navigation pathname={pathname} />
+
+          {
+            cloneElement(children, {
+              id: parseInt(id),
+              portrait: portrait,
+              quote: quote
+            })
+          }
+
+          <RelatedStores stores={stores} />
+
+        </ section>
+
         <RightScreen id={id} twitterHandler={twitterHandler} />
+
       </main>
     );
   }

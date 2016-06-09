@@ -383,6 +383,7 @@ h2 {
   margin-right: 0.5rem;
   margin-top: -0.3rem;
   position: relative;
+  cursor: pointer;
 }
 
 .pointer:before {
@@ -763,6 +764,46 @@ h2 {
   font-size: 0.7rem;
 }
 
+.close-button {
+  background: #56472f;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
+  display: none;
+}
+
+.close-cross {
+  position: relative;
+}
+
+.close-cross:before, .close-cross:after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  top: 8.5px;
+  top: 0.85rem;
+  left: 2.1px;
+  left: 0.21rem;
+  width: 15px;
+  width: 1.5rem;
+  height: 2px;
+  height: 0.2rem;
+  background: #fbf1cd;
+  border-radius: 2px;
+  border-radius: 0.2rem;
+  transform: rotate(45deg);
+}
+
+.close-cross:after {
+  transform: rotate(-45deg);
+  left: 3.1px;
+  left: 0.31rem;
+}
+
 .photo-container .user {
   display: none;
   font-size: 1rem;
@@ -775,7 +816,8 @@ h2 {
   opacity: 0.8;
 }
 
-.photo-container.active .user {
+.photo-container.active .user,
+.photo-container.active .close-button {
   display: block;
 }
 

@@ -2,7 +2,7 @@ import React, {PropTypes, Component} from 'react';
 import paper from 'paper';
 import {isEmpty} from 'lodash';
 
-import {StoreHeader, Navigation, RelatedStores, CreationStep, CreationSteps} from '../components';
+import {CreationStep, CreationSteps} from '../components';
 import {selectItemsByStoreId} from '../api/stores';
 
 class MadeForMe extends Component {
@@ -94,42 +94,24 @@ class MadeForMe extends Component {
 
     console.log('render');
 
-    let {name, craft, tags, icon, pathname, stores} = this.props;
-
     return (
-      <section className='left-screen made-for-me-container'>
+      <section className='made-for-me'>
 
-        <StoreHeader name={name} craft={craft} tags={tags} icon={icon} />
-        <Navigation pathname={pathname} />
+        <h2>#madeforme</h2>
 
-        <section className='made-for-me'>
+        { this.renderCreationSteps() }
 
-          <h2>#madeforme</h2>
-
-          { this.renderCreationSteps() }
-
-          { this.renderCreationStep() }
-
-        </section>
-
-        <RelatedStores stores={stores} />
+        { this.renderCreationStep() }
 
       </section>
-
     );
   }
 }
 
 MadeForMe.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
-  craft: PropTypes.string,
-  tags: PropTypes.array,
-  icon: PropTypes.string,
-  pathname: PropTypes.string,
-  portrait: PropTypes.string,
-  quote: PropTypes.string,
-  stores: PropTypes.array
+  id: PropTypes.number
 };
+
+
 
 export default MadeForMe;

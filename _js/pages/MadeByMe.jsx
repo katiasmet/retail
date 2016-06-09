@@ -1,7 +1,7 @@
 import React, {Component, PropTypes} from 'react';
 
 import {selectBySearch} from '../api/tweets';
-import {StoreHeader, Navigation, RelatedStores, Photo} from '../components';
+import {Photo} from '../components';
 
 class MadeByMe extends Component {
 
@@ -10,10 +10,12 @@ class MadeByMe extends Component {
     super(props, context);
 
     this.state = {
-      photos: []
+      photos: [],
+      active: ''
     };
 
-    this.active = false;
+    this.clickHandler = ::this.clickHandler;
+    this.closeHandler = ::this.closeHandler;
 
   }
 
@@ -58,8 +60,6 @@ class MadeByMe extends Component {
 
   initHandler() {
 
-    console.log('init handler');
-
     for (let ref in this.refs) {
 
       if( ref !== 'photo-container') { //parent container ref needed to calculate width / height of it
@@ -90,11 +90,13 @@ class MadeByMe extends Component {
 
   floatHandler() {
 
+    let {active} = this.state;
+
     for (let ref in this.refs) {
       if( ref !== 'photo-container') {
         let photo = this.refs[ref].refs.figure;
 
-        if(photo !== this.active) { //alle elementen waar niet op geklikt is, zweven verder.
+        if(photo !== active) { //alle elementen waar niet op geklikt is, zweven verder.
           let size = photo.getBoundingClientRect().width / photo.offsetWidth ;
           let rndPos = this.rndPos(photo);
 
@@ -107,15 +109,15 @@ class MadeByMe extends Component {
   }
 
   clickHandler(e, id) {
-    if(this.active) {
 
-      this.activeHandler(true, id);
-      this.closeHandler(this.active);
-      this.active = false;
+    let {active} = this.state;
 
+    if(active) {
+      this.closeHandler();
     } else {
 
-      this.active = e.currentTarget;
+      this.activeId = id;
+      this.setState({active: e.currentTarget});
       this.activeHandler(false, id);
       this.openHandler(e.currentTarget);
 
@@ -123,6 +125,7 @@ class MadeByMe extends Component {
   }
 
   openHandler(photo) {
+
     let container = this.refs['photo-container'];
 
     let centerX = (container.getBoundingClientRect().width / 2) - (160 / 2); //containerwidth / 2 - imagesize /2
@@ -134,6 +137,7 @@ class MadeByMe extends Component {
   }
 
   activeHandler(close, id) {
+
     let {photos} = this.state;
     let activePhotos = photos; //change state of one photo
 
@@ -150,35 +154,40 @@ class MadeByMe extends Component {
     this.setState({photos: activePhotos});
   }
 
-  closeHandler(photo){
+  closeHandler(){
 
-    photo.style.zIndex = '0';
+    let {active} = this.state;
 
-    let rndSize = Math.random() + 0.25;
-    photo.style.width = '10rem';
-    photo.style.transform = `scale(${rndSize}, ${rndSize})`;
+    if(active) {
+      let photo = active;
 
-    let rndPos = this.rndPos(photo);
-    photo.style.transform = `translate(${rndPos[0]}px, ${rndPos[1]}px) scale(${rndSize}, ${rndSize})`;
+      this.activeHandler(true, this.activeId);
+      photo.style.zIndex = '0';
 
-    setTimeout(() => {this.floatHandler();}, 500);
+      let rndSize = Math.random() + 0.25;
+      photo.style.width = '10rem';
+      photo.style.transform = `scale(${rndSize}, ${rndSize})`;
+
+      let rndPos = this.rndPos(photo);
+      photo.style.transform = `translate(${rndPos[0]}px, ${rndPos[1]}px) scale(${rndSize}, ${rndSize})`;
+
+      this.setState({active: false});
+
+      setTimeout(() => {this.floatHandler();}, 500);
+    }
   }
 
 
   render() {
 
-    let {name, craft, tags, icon, pathname, stores} = this.props;
+    //let {name, craft, tags, icon, pathname, stores} = this.props;
     let {photos} = this.state;
 
     console.log('render');
 
     return (
-      <section className='left-screen made-by-me-container'>
 
-        <StoreHeader name={name} craft={craft} tags={tags} icon={icon} />
-        <Navigation pathname={pathname} />
-
-        <section className='photos' ref='photo-container'>
+        <section className='photos' ref='photo-container' onClick={this.closeHandler}>
 
           {
             photos.map((photo, i) => {
@@ -195,11 +204,6 @@ class MadeByMe extends Component {
 
         </section>
 
-        <RelatedStores stores={stores} />
-
-      </section>
-
-
     );
 
   }
@@ -207,15 +211,8 @@ class MadeByMe extends Component {
 }
 
 MadeByMe.propTypes = {
-  id: PropTypes.number,
-  name: PropTypes.string,
-  craft: PropTypes.string,
-  tags: PropTypes.array,
-  icon: PropTypes.string,
-  pathname: PropTypes.string,
   portrait: PropTypes.string,
-  quote: PropTypes.string,
-  stores: PropTypes.array
+  quote: PropTypes.string
 };
 
 export default MadeByMe;
