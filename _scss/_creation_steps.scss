@@ -13,8 +13,6 @@
   //chrome overflow hidden fix
   mask-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAA5JREFUeNpiYGBgAAgwAAAEAAGbA+oJAAAAAElFTkSuQmCC);
   z-index: -1;
-
-  animation: scaleAnimation 1s ease-in;
 }
 
 .step-image {
@@ -48,11 +46,12 @@
 
 .bv-s1-items, .bv-s1-hand {
   bottom: -2rem;
+  animation: flowInBT 0.5s ease-in;
 }
 
 .bv-s1-items {
   left: -3.5rem;
-  //animation: flowInBT 0.5s ease-in;
+  animation: flowInBT 0.5s ease-in;
 }
 
 .bv-s1-hand {
@@ -62,7 +61,7 @@
   bottom: 6rem;
   width: 70%;
 
-  //animation: flowInRL 0.5s ease-in;
+  animation: flowInRL 0.5s ease-in, floatInLR 2s linear 0.5s infinite;
 }
 
 //step 2
@@ -78,12 +77,12 @@
 
 .bv-s2-hand {
   bottom: -1rem;
-  //animation: flowInRL 0.5s ease-in;
+  animation: flowInRL 0.5s ease-in, writing 2s linear 0.5s infinite;
 }
 
 .bv-s2-notes {
   width: 14rem;
-  //animation: flowInRL 0.5s ease-in;
+  animation: flowInRL 0.5s ease-in;
 }
 
 .bv-s2-item {
@@ -91,21 +90,21 @@
   left: 1rem;
   width: 10rem;
 
-  //animation: flowInBT 0.5s ease-in;
+  animation: flowInBT 0.5s ease-in;
 }
 
 //step 3
 .bv-s3-items {
   bottom: -1rem;
 
-  //animation: flowInBT 0.5s ease-in;
+  animation: flowInBT 0.5s ease-in;
 }
 
 .bv-s3-hand {
   width: 10rem;
   bottom: 7rem;
 
-  //animation: flowInLR 0.5s ease-in;
+  animation: flowInLR 0.5s ease-in, filling 0.5s linear 0.5s infinite;
 }
 
 //step 4
@@ -119,7 +118,7 @@
 
 .bv-s4-items {
   left: -2rem;
-  //animation: flowInBT 0.5s ease-in;
+  animation: flowInBT 0.5s ease-in;
 }
 
 .bv-s4-hands {
@@ -129,5 +128,5 @@
   left: auto;
   right: -2rem;
   bottom: -1rem;
-  //animation: flowInRL 0.5s ease-in;
+  animation: flowInRL 0.5s ease-in, science 1s linear 0.5s infinite;
 }

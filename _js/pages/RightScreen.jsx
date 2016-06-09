@@ -39,8 +39,10 @@ class RightScreen extends Component {
 
     let {twitterHandler} = this.props;
 
-    selectByUser(twitterHandler, 2)
-      .then(tweets => this.setState({tweets: tweets}));
+    if(twitterHandler) {
+      selectByUser(twitterHandler, 2)
+        .then(tweets => this.setState({tweets: tweets}));
+    }
 
   }
 

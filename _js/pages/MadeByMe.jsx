@@ -174,14 +174,12 @@ class MadeByMe extends Component {
 
   render() {
 
-    //let {name, craft, tags, icon, pathname, stores} = this.props;
     let {photos} = this.state;
-
-    console.log('render');
 
     return (
 
         <section className='photos' ref='photo-container' onClick={this.closeHandler}>
+          <h2>#madebyme</h2>
 
           {
             photos.map((photo, i) => {

@@ -11,7 +11,7 @@ class MadeForMe extends Component {
     super(props, context);
 
     this.state = {
-      active: 2,
+      active: 1,
       activeStepImages: []
     };
 
@@ -23,7 +23,11 @@ class MadeForMe extends Component {
   }
 
   clickHandler(i) {
-    this.setState({active: i});
+
+    this.setState({
+      active: i,
+      trigger: false
+    });
     this.getActiveStepImages(i);
   }
 
@@ -47,7 +51,8 @@ class MadeForMe extends Component {
       }
     });
 
-    this.setState({activeStepImages: activeStepImages});
+    this.setState({
+      activeStepImages: activeStepImages});
   }
 
   renderCreationSteps() {

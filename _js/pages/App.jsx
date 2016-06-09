@@ -109,7 +109,7 @@ class App extends Component {
     return (
       <main className='window'>
 
-        <section className={`left-screen ${this.getActiveClass()}`}>;
+        <section className={`left-screen ${this.getActiveClass()}`}>
 
           <StoreHeader name={name} craft={craft} tags={tags} icon={icon} />
           <Navigation pathname={pathname} />
