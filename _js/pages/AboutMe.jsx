@@ -4,9 +4,7 @@ import {Portrait} from '../components';
 
 const AboutMe = ({portrait, quote}) => {
 
-  return (
-      <Portrait portrait={portrait} quote={quote}/>
-  );
+  return <Portrait portrait={portrait} quote={quote}/>;
 
 };
 

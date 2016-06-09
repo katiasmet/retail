@@ -1,9 +1,9 @@
 export default RightScreen;
 
-import React, {Component} from 'react';
+import React, {PropTypes, Component} from 'react';
 
 import {WaitingLine, Events, MorphingBg, Products, Tweets} from '../components';
-import {selectByLocation, selectItemsByStoreId} from '../api/stores';
+import {selectItemsByStoreId} from '../api/stores';
 import {selectByUser} from '../api/tweets';
 
 import moment from 'moment';
@@ -19,9 +19,9 @@ class RightScreen extends Component {
     this.state = {
       active: 0, //render first product detail
       events: [],
-      openingHours: {},
-      timeToClose: [],
+      openingHours: [],
       products: [],
+      timeToClose: [],
       tweets: []
     };
 
@@ -31,45 +31,36 @@ class RightScreen extends Component {
 
   componentWillMount() {
     paper.install(window);
-    this.getCurrentStore();
+    this.getStoreDetails();
+    this.getTweets();
   }
 
-  getCurrentStore() {
-    selectByLocation(51.9152698, 4.3963989)
-      .then(store => {
-        this.getTweets(store.twitter_handler);
-        return store.id;
-      })
-      .then(id => this.getStoreDetails(id));
+  getTweets() {
 
-  }
-
-  getTweets(twitterHandler) {
+    let {twitterHandler} = this.props;
 
     selectByUser(twitterHandler, 2)
       .then(tweets => this.setState({tweets: tweets}));
 
   }
 
-  getStoreDetails(id) {
+  getStoreDetails() {
 
-    selectItemsByStoreId(id, 'opening_hours')
-      .then(openingHours => this.handleOpeningHours(openingHours));
+    let {id} = this.props;
 
-    selectItemsByStoreId(id, 'products')
-      .then(products => this.setState({products: products}));
-
-    selectItemsByStoreId(id, 'events')
-      .then(events => this.setState({events: events}));
+    selectItemsByStoreId(id, 'details')
+      .then(details => this.setState({...details}))
+      .then(() => this.handleOpeningHours());
 
   }
 
-  handleOpeningHours(openingHours) {
+  handleOpeningHours() {
 
+    let {openingHours} = this.state;
     let setOpeningHours = {};
 
-    openingHours.forEach(openingHour => {
-      setOpeningHours[openingHour.day] = [openingHour.opening_time, openingHour.closing_time];
+    openingHours.forEach(day => { //change structure
+      setOpeningHours[day.day] = [day.opening_time, day.closing_time];
     });
 
     this.setState({
@@ -82,6 +73,11 @@ class RightScreen extends Component {
 
     let {openingHours} = this.state;
 
+    if(isEmpty(openingHours)) {
+      this.getStoreDetails();
+      this.getTweets();
+    }
+
     for(let openingHour in openingHours) {
       if(openingHour === moment().format('dddd')) { //today's openingshours
 
@@ -91,7 +87,9 @@ class RightScreen extends Component {
 
         if(moment().isBetween(start, end)) { //store opened at this moment
           this.timer = setInterval(() => this.isOpened(), 60000); //rerender every minute
+
           let isOpened = this.isOpened();
+
           return (
             <p>
               <span className='hour'>{isOpened[0]}u</span>
@@ -102,6 +100,7 @@ class RightScreen extends Component {
             </p>
           );
         }
+
       }
     }
 
@@ -113,11 +112,10 @@ class RightScreen extends Component {
     let end = moment(this.day[1], 'HH:mm');
     let toClose = moment.duration(end.diff(moment(), 'milliseconds')); //time to close
 
-    if(toClose.hours() === '0' && toClose.minutes() === '0') {
-      clearInterval(this.timer);
-    }
+    if(toClose.hours() === '0' && toClose.minutes() === '0') clearInterval(this.timer);
 
     return [toClose.hours(), toClose.minutes()];
+
   }
 
   clickHandler(i) {
@@ -163,6 +161,7 @@ class RightScreen extends Component {
     let {products, active} = this.state;
 
     if(isEmpty(products)) {
+
       return false;
     } else {
       return <Products product={products[active]} productsLength={Object.keys(products).length} clickHandler={this.clickHandler}/>;
@@ -200,11 +199,17 @@ class RightScreen extends Component {
           { this.renderProducts() }
 
           <Tweets tweets={tweets}/>
+
       </section>
     );
 
   }
 
 }
+
+RightScreen.propTypes = {
+  id: PropTypes.number,
+  twitterHandler: PropTypes.string
+};
 
 export default RightScreen;

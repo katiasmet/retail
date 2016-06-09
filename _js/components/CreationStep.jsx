@@ -19,7 +19,7 @@ const setStep = i => {
 const CreationStep = ({id, info}) =>  {
 
   return (
-    <section className='creation-step'>
+    <section className='creation-step active'>
       <h3>{setStep(id)} <span className='step-count'>stap</span></h3>
       <p className='creation-info'>{info}</p>
     </section>

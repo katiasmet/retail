@@ -1,7 +1,10 @@
 import React, {PropTypes} from 'react';
 
 import {basename} from '../globals';
+
 const AboutMe = ({portrait, quote}) => {
+
+  //alternatief voor GIF: PNG sequence laten loopen. Lukte niet meer met react dus moet in canvas (?)
 
   return (
     <section className='about-me'>

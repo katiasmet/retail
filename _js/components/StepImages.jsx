@@ -1,14 +1,14 @@
 import React, {PropTypes} from 'react';
 import {basename} from '../globals';
 
-const StepImages = ({creationStepImages}) =>  {
+const StepImages = ({images}) =>  {
 
   return (
     <section className='step-images'>
 
       {
-        creationStepImages.map((step, i) => {
-          return <img key={i} className={`step-image ${step.class}`} src={`${basename}/assets/img/steps/${step.img}`} alt={step.class}/>;
+        images.map((image, i) => {
+          return <img key={i} className={`step-image ${image.class}`} src={`${basename}/assets/img/steps/${image.img}`} alt={image.class}/>;
         })
       }
 
@@ -18,7 +18,7 @@ const StepImages = ({creationStepImages}) =>  {
 };
 
 StepImages.propTypes = {
-  creationStepImages: PropTypes.array
+  images: PropTypes.array
 };
 
 export default StepImages;

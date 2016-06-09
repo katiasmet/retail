@@ -26,17 +26,12 @@ class MadeByMe extends Component {
 
   getPhotos() {
 
-    selectBySearch('perfume filter:images', 10, 'popular') //normally you get most recent ones, but popular ones are nicer to present to client.
+    selectBySearch('#MadeByMeInSchie filter:images', 10, 'recent') //normally you get most recent ones, but popular ones are nicer to present to client.
       .then(tweets => this.filterPhotos(tweets.statuses));
 
-    /*selectByPhotos(['#perfume','#diy'], 10, 'popular') //normally you get most recent ones, but popular ones are nicer to present to client.
-      .then(tweets => this.filterPhotos(tweets.statuses))
-      .then(() => this.initHandler());*/
   }
 
   filterPhotos(tweets) {
-
-    console.log('filter fotos');
 
     let photos = [];
 
@@ -75,14 +70,13 @@ class MadeByMe extends Component {
 
   }
 
-  rndPos(el) {
+  rndPos() {
 
     //let container = this.refs['photo-container'];
-
     //let containerWidth = container.getBoundingClientRect().width - el.getBoundingClientRect().width + 50;
     //let containerHeight = container.getBoundingClientRect().height - el.getBoundingClientRect().height + 50;
 
-    let rndX = Math.floor(Math.random() * 20 - 10);
+    let rndX = Math.floor(Math.random() * 16 - 8);
     let rndY = Math.floor(Math.random() * 10 - 5);
 
     return [rndX, rndY];
@@ -126,14 +120,14 @@ class MadeByMe extends Component {
 
   openHandler(photo) {
 
-    let container = this.refs['photo-container'];
+    //let container = this.refs['photo-container'];
+    //let centerX = (container.getBoundingClientRect().width / 2) - (200 / 2); //containerwidth / 2 - imagesize /2
+    //let centerY = (container.getBoundingClientRect().height / 2) - (200 / 2);
 
-    let centerX = (container.getBoundingClientRect().width / 2) - (160 / 2); //containerwidth / 2 - imagesize /2
-    let centerY = (container.getBoundingClientRect().height / 2) - (160 / 2);
-
+    photo.style.width = '20rem';
     photo.style.zIndex = '100';
     photo.style.transition = 'transform 0.5s ease-in';
-    photo.style.transform = 'translate(0, 0) scale(1, 1)';
+    photo.style.transform = 'translate(-2rem, -4.5rem) scale(1, 1)';
   }
 
   activeHandler(close, id) {

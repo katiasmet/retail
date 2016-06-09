@@ -21,7 +21,12 @@ $app->get($base, function($request, $response, $args){
     $data = $storeDAO->selectAll();
   } else {
     if(empty($query['current'])) {
+
       $data = $storeDAO->selectByLocation($query['latitude'], $query['longitude']);
+
+      $TagDAO = new TagDAO();
+      $data['tags'] = $TagDAO->selectByStoreId($data['id']);
+
     } else {
       $data = $storeDAO->selectAllExceptCurrent($query['current']);
     }
@@ -42,36 +47,28 @@ $app->get($base.'/{id}', function($request, $response, $args){
     $storeDAO = new StoreDAO();
     $data = $storeDAO->selectById($args['id']);
 
-  }else if(!empty($query['opening_hours'])) {
+    $TagDAO = new TagDAO();
+    $data['tags'] = $TagDAO->selectByStoreId($args['id']);
+
+  }else if(!empty($query['details'])) {
 
     $OpeningHourDAO = new OpeningHourDAO();
-    $data = $OpeningHourDAO->selectByStoreId($args['id']);
-
-  } else if (!empty($query['tags'])) {
-
-    $TagDAO = new TagDAO();
-    $data = $TagDAO->selectByStoreId($args['id']);
-
-  } else if (!empty($query['creation_steps'])) {
-
-    $CreationStepDAO = new CreationStepDAO();
-    $data = $CreationStepDAO->selectByStoreId($args['id']);
-
-  } else if (!empty($query['creation_step_images'])) {
-
-    $CreationStepImageDAO = new CreationStepImageDAO();
-    $data = $CreationStepImageDAO->selectByStoreId($args['id']);
-
-  } else if(!empty($query['events'])) {
+    $data['openingHours'] = $OpeningHourDAO->selectByStoreId($args['id']);
 
     $EventDAO = new EventDAO();
-    $data = $EventDAO->selectByStoreId($args['id']);
-
-  } else if(!empty($query['products'])) {
+    $data['events'] = $EventDAO->selectByStoreId($args['id']);
 
     $ProductDetailDAO = new ProductDetailDAO();
-    $data = $ProductDetailDAO->selectByStoreId($args['id']);
-    
+    $data['products'] = $ProductDetailDAO->selectByStoreId($args['id']);
+
+  }  else if (!empty($query['creation_steps'])) {
+
+    $CreationStepDAO = new CreationStepDAO();
+    $data['steps'] = $CreationStepDAO->selectByStoreId($args['id']);
+
+    $CreationStepImageDAO = new CreationStepImageDAO();
+    $data['images'] = $CreationStepImageDAO->selectByStoreId($args['id']);
+
   }
 
   $response->getBody()->write(json_encode($data));

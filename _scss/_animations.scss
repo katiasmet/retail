@@ -28,3 +28,39 @@
     opacity: 1;
   }
 }
+
+@keyframes flowInBT {
+  0% {
+    transform: translateY(10rem);
+  }
+  100%   {
+    transform: translateY(0);
+  }
+}
+
+@keyframes flowInRL {
+  0% {
+    transform: translateX(10rem);
+  }
+  100%   {
+    transform: translateX(0);
+  }
+}
+
+@keyframes flowInLR {
+  0% {
+    transform: translateX(-10rem);
+  }
+  100%   {
+    transform: translateX(0);
+  }
+}
+
+@keyframes scaleAnimation {
+  0% {
+    transform: scale(0);
+  }
+  100%   {
+    transform: scale(1);
+  }
+}

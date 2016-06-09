@@ -13,7 +13,7 @@ const StoreHeader = ({name, craft, tags, icon}) =>  {
       <p className='tags'>
         {
           tags.map(tag => {
-            return `#${tag} `;
+            return `#${tag.tag} `;
           })
         }
       </p>

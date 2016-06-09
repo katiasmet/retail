@@ -1,6 +1,6 @@
 import React, {PropTypes, Component, cloneElement} from 'react';
 
-import {selectAllExceptCurrent, selectByLocation, selectItemsByStoreId} from '../api/stores';
+import {selectAllExceptCurrent, selectByLocation} from '../api/stores';
 import {getDistance} from '../api/locations';
 import {RightScreen} from './';
 import {StoreHeader, Navigation, RelatedStores} from '../components';
@@ -13,16 +13,10 @@ class App extends Component {
     super(props, context);
 
     this.state = {
-      id: '',
-      name: '',
-      craft: '',
-      icon: '',
-      twitterHandler: '',
       tags: [],
-      portrait: '',
-      quote: '',
       stores: []
     };
+
   }
 
   componentWillMount() {
@@ -32,22 +26,7 @@ class App extends Component {
   getCurrentStore() {
     selectByLocation(51.9152698, 4.3963989)
       .then(store => this.setState({...store}))
-      .then(() => this.getCurrentStoreDetails())
       .then(() => this.getStores());
-  }
-
-  getCurrentStoreDetails() {
-
-    let {id} = this.state;
-
-    selectItemsByStoreId(id, 'tags')
-      .then(storeTags => {
-        let tags = [];
-        storeTags.forEach(storeTag => {
-          tags.push(storeTag.content);
-        });
-        this.setState({tags: tags});
-      });
   }
 
   getStores() {
@@ -107,14 +86,14 @@ class App extends Component {
 
   }
 
-  getContainerClass() {
+  getActiveClass() {
     let {pathname} = this.props.location;
 
     if(pathname === '/aboutme') {
       return 'about-me-container';
-    } else if (pathname === 'madeforme') {
+    } else if (pathname === '/madeforme') {
       return 'made-for-me-container';
-    } else if (pathname === 'madebyme') {
+    } else if (pathname === '/madebyme') {
       return 'made-by-me-container';
     }
 
@@ -123,14 +102,14 @@ class App extends Component {
   render() {
 
     let {id, name, craft, icon, twitterHandler, tags, portrait, quote, stores} = this.state;
+
     let {children} = this.props;
     let {pathname} = this.props.location;
 
-    this.getContainerClass();
     return (
       <main className='window'>
 
-        <section className={`left-screen ${this.getContainerClass}`}>
+        <section className={`left-screen ${this.getActiveClass()}`}>;
 
           <StoreHeader name={name} craft={craft} tags={tags} icon={icon} />
           <Navigation pathname={pathname} />
