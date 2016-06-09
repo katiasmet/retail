@@ -6,10 +6,11 @@ export RelatedStore from './RelatedStore';
 
 export Portrait from './Portrait';
 
-export MorphingBg from './MorphingBg';
-export StepButtons from './StepButtons';
 export CreationStep from './CreationStep';
 export CreationSteps from './CreationSteps';
+export MorphingBg from './MorphingBg';
+export StepButtons from './StepButtons';
+export StepImages from './StepImages';
 
 export Photo from './Photo';
 

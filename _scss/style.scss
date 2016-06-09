@@ -2,6 +2,7 @@
 @import 'variables';
 @import 'mixins';
 @import 'animations';
+@import 'creation_steps';
 
 body, html, .react-app, .window {
   width: 100%;
@@ -360,6 +361,13 @@ h2 {
   @include center;
   flex-direction: column;
   justify-content: space-between;
+
+  .canvas {
+    top: 0.5rem;
+    left: 0.2rem;
+
+    z-index: -2;
+  }
 }
 
 .step-container {
@@ -429,16 +437,6 @@ h2 {
   top: 9.2rem
 }
 
-/*.creation-step {
-  @include center;
-  flex-direction: column;
-  text-align: center;
-
-  width: 30rem;
-  height: 30rem;
-  border-radius: 50%;
-}*/
-
 .creation-step {
   @include center;
   flex-direction: column;
@@ -446,6 +444,7 @@ h2 {
   text-align: center;
   color: $white;
   width: 30rem;
+  line-height: 2rem;
 }
 
 .creation-step h3, .step-count {
@@ -459,12 +458,12 @@ h2 {
 }
 
 .creation-step h3 {
-  color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 0.3);
   font-size: 3rem;
 }
 
 .step-count {
-  color: rgba(255, 255, 255, 0.1);
+  color: rgba(255, 255, 255, 0.2);
   font-size: 2.5rem;
 }
 
@@ -487,41 +486,69 @@ h2 {
     background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(229, 216, 164, 0.70) 150%),
                 url('/assets/img/bg_bv_about.jpg');
   }
+
+  .left-nav {
+    z-index: 5;
+  }
 }
 
 .photos {
-  width: 100%;
+  width: 90%;
+  margin-left: 2.5rem;
   height: 60vh;
 
-  border: 1px solid red;
   position: relative;
 }
 
 .photo-container {
-  width: 20rem;
+  width: 16rem;
 
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 10rem;
+  left: 15rem;
 
-  transform-origin: top left;
+  margin: auto;
+
+  transform-origin: center center;
   display:block;
 
   background: $broken-white;
   border: 0.5rem solid $broken-white;
+  border-bottom: 1rem solid $broken-white;
+
+  border-radius: 0.2rem;
+  backface-visibility: hidden;
+
+  font-size: 0.7rem;
 }
 
-.photo-container .photo-info {
+.photo-container .user {
   display: none;
+  font-size: 1rem;
 }
 
 .photo-container.inactive {
-  filter: blur(0.25rem);
+  filter: blur(0.35rem);
   opacity: 0.8;
 }
 
-.photo-container.active .photo-info {
+.photo-container.active .user {
   display: block;
+}
+
+.photo-container .user {
+  flex-direction: column;
+  padding: 1rem 0;
+
+  .user-name {
+    margin-bottom: 0.7rem;
+  }
+
+  .user-handler {
+    color: $main-color-byme;
+    opacity: 0.8;
+  }
+
 }
 
 /* ----------------------------------
@@ -584,7 +611,6 @@ h3.user-name {
   .canvas {
     top: 1.5rem;
     left: 1.8rem;
-    //height: 40%;
   }
 }
 

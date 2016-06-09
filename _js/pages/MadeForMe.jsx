@@ -12,7 +12,9 @@ class MadeForMe extends Component {
 
     this.state = {
       active: 1,
-      creationSteps: []
+      creationSteps: [],
+      creationStepImages: [],
+      activeStepImages: []
     };
 
     this.clickHandler = ::this.clickHandler;
@@ -26,6 +28,7 @@ class MadeForMe extends Component {
 
     console.log('clickhandler');
     this.setState({active: i});
+    this.getActiveStepImages(i);
 
   }
 
@@ -36,13 +39,37 @@ class MadeForMe extends Component {
       .then(creationSteps => this.setState({creationSteps: creationSteps}));
   }
 
+  getCreationStepsImages() {
+    let {id} = this.props;
+    let {active} = this.state;
+
+    selectItemsByStoreId(id, 'creation_step_images')
+      .then(creationStepImages => this.setState({creationStepImages: creationStepImages}))
+      .then(() => this.getActiveStepImages(active));
+  }
+
+  getActiveStepImages(active) {
+
+    let {creationStepImages} = this.state;
+    let activeStepImages = [];
+
+    creationStepImages.forEach(creationStep => {
+      if(creationStep.step === active) {
+        activeStepImages.push(creationStep);
+      }
+    });
+
+    this.setState({activeStepImages: activeStepImages});
+  }
+
   renderCreationSteps() {
-    let {creationSteps, active} = this.state;
+    let {creationSteps, activeStepImages, active} = this.state;
 
     if(isEmpty(creationSteps)) { //after receiving props
       this.getCreationSteps();
+      this.getCreationStepsImages();
     } else {
-      return <CreationSteps creationSteps={creationSteps} active={active} clickHandler={this.clickHandler} />;
+      return <CreationSteps creationSteps={creationSteps} creationStepImages={activeStepImages} active={active} clickHandler={this.clickHandler} />;
     }
 
   }
@@ -58,18 +85,19 @@ class MadeForMe extends Component {
     if(isEmpty(creationSteps)) {
       return false;
     } else {
-      return <CreationStep id={active} info={creationSteps[active].content} />;
+      return <CreationStep id={active} info={creationSteps[active - 1].content} />;
     }
 
   }
 
   render() {
 
+    console.log('render');
+
     let {name, craft, tags, icon, pathname, stores} = this.props;
-    let {active} = this.state;
 
     return (
-      <section className='left-screen about-me-container'>
+      <section className='left-screen made-for-me-container'>
 
         <StoreHeader name={name} craft={craft} tags={tags} icon={icon} />
         <Navigation pathname={pathname} />
