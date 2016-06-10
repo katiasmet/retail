@@ -32,6 +32,12 @@ $app->get($base, function($request, $response, $args){
     }
   }
 
+  if(empty($data)){
+    $data = $response->withStatus(400);
+    return $response;
+  }
+
+
   $response->getBody()->write(json_encode($data));
   return $response->withHeader('Content-Type','application/json');
 
@@ -69,6 +75,11 @@ $app->get($base.'/{id}', function($request, $response, $args){
     $CreationStepImageDAO = new CreationStepImageDAO();
     $data['images'] = $CreationStepImageDAO->selectByStoreId($args['id']);
 
+  }
+
+  if(empty($data)){
+    $response = $response->withStatus(400);
+    return $response;
   }
 
   $response->getBody()->write(json_encode($data));

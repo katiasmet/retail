@@ -18,6 +18,11 @@ $app->get($base, function($request, $response, $args){
      . $key);
   }
 
+  if(empty($data)){
+    $data = $response->withStatus(400);
+    return $response;
+  }
+
   $response->getBody()->write($data);
   return $response->withHeader('Content-Type','application/json');
 

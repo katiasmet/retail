@@ -1502,7 +1502,7 @@
 /* 243 */
 /***/ function(module, exports) {
 
-	eval("'use strict';\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar basename = exports.basename = function () {\n  return window.app.basename;\n}();\n\nvar clientId = exports.clientId = 'retail-web';\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/globals/index.js\n ** module id = 243\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/globals/index.js?");
+	eval("\"use strict\";\n\nObject.defineProperty(exports, \"__esModule\", {\n  value: true\n});\nvar basename = exports.basename = function () {\n  return window.app.basename;\n}();\n\n/*****************\n ** WEBPACK FOOTER\n ** ./_js/globals/index.js\n ** module id = 243\n ** module chunks = 0\n **/\n//# sourceURL=webpack:///./_js/globals/index.js?");
 
 /***/ },
 /* 244 */

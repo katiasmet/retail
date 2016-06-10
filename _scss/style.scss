@@ -472,7 +472,8 @@ h2 {
 }
 
 .creation-step.active h3,
-.creation-step.active .step-count {
+.creation-step.active .step-count
+ {
   animation: flowIn 0.6s ease-in forwards;
 }
 
