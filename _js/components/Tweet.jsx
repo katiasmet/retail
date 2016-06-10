@@ -1,5 +1,6 @@
 import React, {PropTypes} from 'react';
 import moment from 'moment';
+import {basename} from '../globals';
 
 const Tweet = ({text, image, name, screenname, created}) =>  {
 
@@ -15,11 +16,15 @@ const Tweet = ({text, image, name, screenname, created}) =>  {
       <div className='tweet-info'>
 
         <div className='user'>
-          <h3 className='user-name'>{name} <span className='user-handler'>@{screenname}</span></h3>
+          <h3 className='user-name'>
+            <span className='icon'><img src={`${basename}/assets/img/twitter.png`} alt='twitter'/></span>
+            {name}
+            <span className='user-handler'>@{screenname}</span>
+          </h3>
           <span className='created-at'>{createdAt}</span>
         </div>
 
-        <p className='tweet'>
+        <p>
           {text}
         </p>
       </div>

@@ -19,9 +19,10 @@ const setStep = i => {
 const CreationStep = ({id, info}) =>  {
 
   return (
-    <section className='creation-step'>
+
+    <section className={'creation-step active'}>
       <h3>{setStep(id)} <span className='step-count'>stap</span></h3>
-      <p>{info}</p>
+      <p className='creation-info'>{info}</p>
     </section>
   );
 
@@ -29,7 +30,8 @@ const CreationStep = ({id, info}) =>  {
 
 CreationStep.propTypes = {
   id: PropTypes.number,
-  info: PropTypes.string
+  info: PropTypes.string,
+  trigger: PropTypes.bool
 };
 
 export default CreationStep;

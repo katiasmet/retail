@@ -2,7 +2,6 @@
   "require": {
     "slim/slim": "^3.0",
     "slim/php-view": "^2.0",
-    "abraham/twitteroauth": "^0.6.4",
-    "cosenary/instagram": "^2.3"
+    "abraham/twitteroauth": "^0.6.4"
   }
 }

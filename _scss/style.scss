@@ -2,6 +2,7 @@
 @import 'variables';
 @import 'mixins';
 @import 'animations';
+@import 'creation_steps';
 
 body, html, .react-app, .window {
   width: 100%;
@@ -58,7 +59,20 @@ h2 {
 
 .window {
   display: flex;
-  justify-content:space-between;
+  justify-content: space-between;
+  position: relative;
+
+  &:after {
+    @include before-after;
+    width: 40vw;
+    height: 100%;
+    left: 0;
+    right: 0;
+    margin: auto;
+    background: url('/assets/img/bg.jpg') no-repeat center center;
+    background-size: cover;
+    z-index: -100;
+  }
 }
 
 .left-screen, .right-screen{
@@ -70,32 +84,61 @@ h2 {
   justify-content: space-between;
   align-items: stretch;
 
-  position: relative;
-}
-
-/* ----------------------------------
-  LEFTSCREEN GENERAL
----------------------------------- */
-.left-screen {
   color: $main-color-about;
-  background: url('/assets/img/bg_bv_about.jpg');
-  background-blend-mode: multiply;
   position: relative;
+  overflow:hidden;
 
-  &:before {
+  &:before, &:after { //background with before/after to prevent zindex click issues
     @include before-after;
 
     width: 100%;
     height: 100%;
+  }
 
+  &:before {
     background: $yellow;
     mix-blend-mode: color-burn;
     opacity: 0.2;
 
     transform: skewX(45deg) translate(-40rem, 32rem);
+    z-index:-5;
+  }
+
+  &:after {
+    background: url('/assets/img/bg_bv_about.jpg');
+    background-blend-mode: multiply;
+    z-index:-10;
   }
 }
 
+/* ----------------------------------
+  ICONS
+---------------------------------- */
+.icon {
+  overflow:hidden;
+  width: 2.5rem;
+
+  img {
+    width: 300%;
+    transition: transform 0.3s ease-in;
+  }
+}
+
+.made-for-me-container {
+  .icon img, .arrow img {
+    transform: translateX(-33.5%);
+  }
+}
+
+.made-by-me-container {
+  .icon img, .arrow img {
+    transform: translateX(-67.5%);
+  }
+}
+
+/* ----------------------------------
+  LEFTSCREEN GENERAL
+---------------------------------- */
 //header
 .left-screen header {
   @include center;
@@ -108,17 +151,14 @@ h2 {
   margin: 0.5rem 0 0.5rem 0;
 }
 
-.icon {
-  width: 3rem;
-}
-
 //navigation
 .left-nav {
-  font-size: 1rem;
+  font-size: 1.2rem;
   font-weight: 500;
   margin-left: 1.5rem;
 
   position: absolute;
+  z-index: 100;
   top: 0;
   left: 0;
   height: 100vh;
@@ -127,8 +167,9 @@ h2 {
 }
 
 .nav-item {
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
   transition: all 0.3s ease-in;
+  color: $main-color-about;
 
   @include center;
   justify-content: flex-start;
@@ -138,12 +179,16 @@ h2 {
   width: 0.5rem;
   height: 0.5rem;
   border-radius: 50%;
+  background: $main-color-about;
 
   display: inline-block;
   margin-right: 0.5rem;
   margin-top: -0.3rem;
 
   position: relative;
+  cursor: pointer;
+
+  transition: all 0.3s ease-in;
 
   &:before {
     @include before-after;
@@ -154,58 +199,19 @@ h2 {
     top: -0.3rem;
     left: -0.3rem;
 
-    border: 0.1rem solid $white;
+    border: 0.1rem solid $main-color-about;
 
     animation: navPointer 1.5s ease-in infinite;
   }
 }
 
 .nav-item.active {
-  opacity: 0;
-  transform: scale(0) translateY(0rem);
-
-  /*.pointer {
-    opacity: 0;
-    transform: translateY(-100rem);
-  }*/
-}
-
-.nav-byme {
-  color: $nav-color-byme;
+  color: $accent-color-about;
 
   .pointer {
-    background: $nav-color-byme;
-
+      background: $accent-color-about;
     &:before {
-      border-color: $nav-color-byme;
-    }
-  }
-}
-
-.nav-forme {
-  color: $main-color-forme;
-
-  .pointer {
-    background: $main-color-forme;
-
-    &:before {
-      border-color: $main-color-forme;
-    }
-  }
-}
-
-.nav-about {
-  color: $main-color-about;
-
-  &.transform {
-    transform: translateY(-1.6rem);
-  }
-
-  .pointer {
-    background: $main-color-about;
-
-    &:before {
-      border-color: $main-color-about;
+      display: none;
     }
   }
 }
@@ -248,6 +254,11 @@ h2 {
   width: 1rem;
   margin-left: 0.5rem;
   order: 0;
+  overflow:hidden;
+
+  img {
+    width: 300%;
+  }
 }
 
 .related-store:first-child {
@@ -284,7 +295,7 @@ h2 {
 /* ----------------------------------
   ABOUT ME
 ---------------------------------- */
-.about-me-container {
+.about-me-container:after {
   background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(148, 91, 159, 0.70) 150%),
               url('/assets/img/bg_bv_about.jpg');
 }
@@ -297,11 +308,10 @@ h2 {
   line-height: 2rem;
 
   margin-top: -10vh;
-
 }
 
 .portrait {
-  width: 30rem;
+  width: 33rem;
   display:block;
   margin-bottom: 0.5rem;
 }
@@ -314,12 +324,39 @@ h2 {
   MADE FOR ME
 ---------------------------------- */
 .made-for-me-container {
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(28, 226, 218, 0.70) 150%),
-              url('/assets/img/bg_bv_about.jpg');
   color: $main-color-forme;
+
+  h1 {
+    color: $accent-color-forme;
+  }
+
+  .nav-item {
+    color: $main-color-forme;
+
+    .pointer {
+      background: $main-color-forme;
+
+      &:before {
+        border-color: $main-color-forme;
+      }
+    }
+
+    &.active {
+      color: $accent-color-forme;
+
+      .pointer {
+        background: $accent-color-forme;
+      }
+    }
+  }
+
+  &:after {
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(28, 226, 218, 0.70) 150%),
+                url('/assets/img/bg_bv_about.jpg');
+  }
 }
 
-h1, h2 {
+.made-for-me h1, .made-for-me h2 {
   color: $accent-color-forme;
 }
 
@@ -327,12 +364,25 @@ h1, h2 {
   @include center;
   flex-direction: column;
   justify-content: space-between;
+  transform: translateY(-3rem);
+
+  h2 {
+    margin-bottom: 0;
+  }
+
+  .canvas {
+    top: 0.8rem;
+    left: 0.5rem;
+
+    z-index: -2;
+  }
 }
 
 .step-container {
   position: relative;
   width: 27rem;
   height: 27rem;
+  margin-bottom: 2rem;
 
   @include center;
 }
@@ -348,11 +398,13 @@ h1, h2 {
 
 .canvas {
   width: 100%;
-  height: 100%;
+  padding-bottom: 100%;
 
   position: absolute;
   top: 0;
-  left:0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
 .step-circle {
@@ -394,16 +446,6 @@ h1, h2 {
   top: 9.2rem
 }
 
-/*.creation-step {
-  @include center;
-  flex-direction: column;
-  text-align: center;
-
-  width: 30rem;
-  height: 30rem;
-  border-radius: 50%;
-}*/
-
 .creation-step {
   @include center;
   flex-direction: column;
@@ -411,68 +453,178 @@ h1, h2 {
   text-align: center;
   color: $white;
   width: 30rem;
+  line-height: 2rem;
 }
 
-.creation-step {
-
-  h3, .step-count {
+.creation-step h3, .step-count {
     text-transform: uppercase;
     font-weight: 500;
     line-height: 2.1rem;
-  }
 
-  h3 {
-    color: rgba(255, 255, 255, 0.2);
-    font-size: 3rem;
-  }
+    opacity: 0;
+    transform: translateY(2rem);
 
-  .step-count {
-    color: rgba(255, 255, 255, 0.1);
-    font-size: 2.5rem;
-  }
+}
+
+.creation-step h3 {
+  color: rgba(255, 255, 255, 0.3);
+  font-size: 3rem;
+}
+
+.creation-step.active h3,
+.creation-step.active .step-count {
+  animation: flowIn 0.6s ease-in forwards;
+}
+
+.step-count {
+  color: rgba(255, 255, 255, 0.2);
+  font-size: 2.5rem;
+}
+
+.creation-info {
+  opacity: 0;
+  animation: flowIn 0.6s 0.2s ease-in forwards;
 }
 
 /* ----------------------------------
   MADE BY ME
 ---------------------------------- */
 .made-by-me-container {
-  background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(229, 216, 164, 0.70) 150%),
-              url('/assets/img/bg_bv_about.jpg');
+  color: $main-color-byme;
+
+  .nav-item {
+    color: $main-color-byme;
+
+    .pointer {
+      background: $main-color-byme;
+
+      &:before {
+        border-color: $main-color-byme;
+      }
+    }
+
+    &.active {
+      color: $accent-color-byme;
+
+      .pointer {
+        background: $accent-color-byme;
+      }
+    }
+  }
+
+  h1 {
+    color: $accent-color-byme;
+  }
+
+  h2 {
+    text-align: center;
+    transform: translateY(-1rem);
+  }
+
+  &:after {
+    background: radial-gradient(ellipse at center, rgba(255, 255, 255, 0.70) 0%, rgba(229, 216, 164, 0.70) 150%),
+                url('/assets/img/bg_bv_about.jpg');
+  }
+
+  .left-nav {
+    z-index: 5;
+  }
 }
 
 .photos {
-  width: 100%;
+  width: 90%;
+  margin-left: 2.5rem;
   height: 60vh;
 
-  border: 1px solid red;
   position: relative;
+
 }
 
 .photo-container {
-  width: 20rem;
+  width: 16rem;
 
   position: absolute;
-  top: 0;
-  left: 0;
+  top: 7rem;
+  left: 15rem;
 
-  transform-origin: top left;
-  display:block;
+  margin: auto;
+
+  transform-origin: center center;
 
   background: $broken-white;
   border: 0.5rem solid $broken-white;
+  border-bottom: 1rem solid $broken-white;
+
+  border-radius: 0.2rem;
+  backface-visibility: hidden;
+
+  font-size: 0.7rem;
 }
 
-.photo-container .photo-info {
+.photo-container.active {
+  border-bottom: 0.5rem solid $broken-white;
+}
+
+.close-button {
+  background: $main-color-byme;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  position: absolute;
+  top: -1rem;
+  right: -1rem;
   display: none;
 }
 
+.close-cross {
+  position: relative;
+
+  &:before, &:after {
+    @include before-after;
+    top: 0.85rem;
+    left: 0.21rem;
+    width: 1.5rem;
+    height: 0.2rem;
+    background: $broken-white;
+    border-radius: 0.2rem;
+    transform: rotate(45deg);
+  }
+
+  &:after {
+    transform: rotate(-45deg);
+    left: 0.31rem;
+  }
+}
+
+.photo-container .user {
+  display: none;
+  font-size: 1rem;
+  margin-bottom: 0;
+}
+
 .photo-container.inactive {
-  filter: blur(0.25rem);
+  filter: blur(0.35rem);
   opacity: 0.8;
 }
 
-.photo-container.active .photo-info {
+.photo-container.active .user,
+.photo-container.active .close-button {
   display: block;
+}
+
+.photo-container .user {
+  flex-direction: column;
+  padding: 1rem 0;
+
+  .user-name {
+    margin-bottom: 0.7rem;
+  }
+
+  .user-handler {
+    color: $main-color-byme;
+    opacity: 0.8;
+  }
+
 }
 
 /* ----------------------------------
@@ -480,32 +632,245 @@ h1, h2 {
 ---------------------------------- */
 .right-screen {
   color: $white;
-  background: $background-color-about;
 }
+
+h3, .user-name {
+  text-transform: uppercase;
+  font-weight: 500;
+  font-size: 1.2rem;
+  opacity: 0.7;
+}
+
+h3.user-name {
+  opacity: 1;
+}
+
+//header
+.right-screen .header {
+  display: flex;
+  align-items: stretch;
+  align-content: stretch;
+}
+
+.store-info {
+  flex: 3;
+}
+
+.waiting-line {
+  background: rgba(55, 121, 90, 0.5);
+  padding: 2rem 3rem;
+  font-size: 1rem;
+}
+
+.upcoming-events {
+  background: rgba(191, 171, 120, 0.8);
+  padding: 2rem 3rem;
+  font-size: 1rem;
+}
+
+.opening-hours {
+  background: rgba(148, 43, 101, 0.5);
+  padding: 2rem 1rem;
+
+  font-size: 1.2rem;
+
+  display:flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-direction: column;
+
+  position: relative; //to position canvas
+  z-index: 5;
+
+  flex: 1;
+
+  .canvas {
+    top: 1.5rem;
+    left: 1.8rem;
+  }
+}
+
+.tags {
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.event {
+  display: flex;
+
+  dt {
+    flex: 1;
+  }
+
+  dd {
+    flex: 2;
+  }
+}
+
+.event:first-child {
+  margin-bottom: 0.7rem;
+}
+
+.today {
+  width: 8rem;
+  height: 8rem;
+
+  @include center;
+
+  position: relative;
+  z-index: 5;
+  font-weight: 500;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.hour {
+  font-size: 1.8rem;
+}
+
+.today-opened {
+  font-weight: 300;
+  opacity: 0.3;
+}
+
+.opened {
+  font-weight: 500;
+}
+
+.next-days p {
+  font-weight: 500;
+  font-size: 1.1rem;
+  margin-top: 1rem;
+}
+
+//products
+.products {
+  color: $main-color-byme;
+  font-size: 1rem;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  line-height: 1.3rem;
+
+  padding-right: 5rem;
+  margin-top: 1.5rem;
+  line-height: 2rem;
+}
+
+.products h1 {
+  color: $accent-color-byme;
+  opacity: 0.5;
+
+  font-size: 4rem;
+  text-transform: uppercase;
+  font-weight: 500;
+  line-height: 4rem;
+
+  margin-left: 2rem;
+}
+
+.products h2 {
+  font-size: 2.3rem;
+  color: $h2-color-byme;
+  opacity: 1;
+}
+
+.product-mood {
+  flex: 1;
+  align-self: flex-end;
+  display:flex;
+  align-items: center;
+
+  margin-left: -3rem;
+  transform: translateY(3.5rem);
+
+  figure {
+    width: 19rem;
+  }
+}
+
+.product-details {
+  flex: 1.5;
+  margin: 0 4rem 0 5rem;
+}
+
+.product-nav {
+  margin-left: -5.5rem;
+}
+
+.product-nav .pointer {
+  width: 1rem;
+  height: 1rem;
+
+  display: block;
+  background: $white;
+  margin-bottom: 3rem;
+
+  &:before {
+    width: 2.2rem;
+    height: 2.2rem;
+    top: -0.6rem;
+    left: -0.6rem;
+
+    border-color: $white;
+  }
+}
+
+.product-nav .pointer:nth-child(2) {
+  margin-left: 0.4rem;
+}
+
+.product-nav .pointer:nth-child(3) {
+  margin-left: 0.4rem;
+}
+
+.product-nav .pointer:nth-child(4) {
+  margin-left: 0.8rem;
+}
+
+
+//tweets
 .tweets {
   background: #819F8C;
+  padding: 1.5rem 3rem;
+}
+
+.tweet:first-child {
+  margin-bottom: 1.5rem;
 }
 
 .tweet {
-  display: flex;
-
+  @include center;
+  justify-content: space-between;
+  font-size: 1rem;
+  line-height: 1.3rem;
 }
 
 .profile-pic img {
-  width: 5rem;
-  height: 5rem;
+  width: 4rem;
+  height: 4rem;
   border-radius: 50%;
   overflow: hidden;
+  margin-right: 1rem;
 }
 
 .user {
   display: flex;
   justify-content: space-between;
-}
+  margin-bottom: 0.5rem;
 
-.user-name {
-  text-transform: uppercase;
-  font-weight: 500;
+
+  .icon {
+    display: inline-block;
+    width: 1rem;
+    margin-right: 0.3rem;
+    transform: translateY(0.35rem);
+
+    img {
+      width: 100%;
+    }
+  }
 }
 
 .user-handler {
@@ -513,6 +878,7 @@ h1, h2 {
   display: inline-block;
   color: $grey;
   font-weight: 300;
+  margin-left: 0.5rem;
 }
 
 .created-at {

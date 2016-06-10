@@ -11,11 +11,16 @@ class Photo extends Component { //statecomponent om ref te kunnen leggen voor vi
 
     return (
       <div className={`photo-container ${ activeClass ? activeClass : ''}`} ref={'figure'} onClick={clickHandler}>
+        <div className='close-button'>
+          <div className='close-cross'></div>
+        </div>
+
         <figure className='photo'>
             <img src={image} alt={caption}/>
         </figure>
-        <div className='photo-info'>
-          <h4 className='name'>{name}<span className='screen-name'>@{screenName}</span></h4>
+        
+        <div className='user'>
+          <h4 className='user-name'>{name}<span className='user-handler'>@{screenName}</span></h4>
           <p>{caption}</p>
         </div>
       </div>
