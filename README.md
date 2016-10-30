@@ -1,6 +1,8 @@
 # retail
 School Assignment of Devine Howest in collaboration with Hogeschool Rotterdam.
 
+Tijd: 3 weken waarvan 1 week concept
+
 ## 1. Project ophalen
 Open je terminal.
 
